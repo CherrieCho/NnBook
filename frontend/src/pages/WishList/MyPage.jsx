@@ -1,32 +1,34 @@
-import React, { useState } from 'react'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React, { useState } from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import "../../styles/MyPage.style.css";
-import { Alert, Button } from 'react-bootstrap';
+import { Alert, Button } from "react-bootstrap";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useMyInfoQuery } from '../../hooks/useMyInfoQuery';
-import { useLocationMutation } from '../../hooks/useLocationMutation';
-import SingleLineCarousel from '../../common/react-multi-carousel/SingleLineCarousel';
-import { useReadingBooksQuery } from '../../hooks/useReadingBooks';
-import { useNavigate } from 'react-router';
-import { useLikedBooksQuery } from '../../hooks/useLikedBooks';
-import { useBorrowingBooksQuery } from '../../hooks/useBorrowingBooks';
+import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import { useLocationMutation } from "../../hooks/useLocationMutation";
+import SingleLineCarousel from "../../common/react-multi-carousel/SingleLineCarousel";
+import { useReadingBooksQuery } from "../../hooks/useReadingBooks";
+import { useNavigate } from "react-router";
+import { useLikedBooksQuery } from "../../hooks/useLikedBooks";
+import { useBorrowingBooksQuery } from "../../hooks/useBorrowingBooks";
+import useUserGenres from "../../hooks/useUserGenres";
 
 const MyPage = () => {
   const [form, setForm] = useState({ location: "" });
-  const { data:mydata, isLoading, isError, error } = useMyInfoQuery();
-  const { data:readingdata } = useReadingBooksQuery();
-  const { data:borrowdata } = useBorrowingBooksQuery();
-  const { data:likedata } = useLikedBooksQuery();
+  const { data: mydata, isLoading, isError, error } = useMyInfoQuery();
+  const { data: readingdata } = useReadingBooksQuery();
+  const { data: borrowdata } = useBorrowingBooksQuery();
+  const { data: likedata } = useLikedBooksQuery();
+  const { data: genres } = useUserGenres(mydata?.email);
   const { mutate: updateLocation } = useLocationMutation();
   const navigate = useNavigate();
 
   //내서재 더보기
   const moveToLibrary = () => {
     navigate(`/library`);
-  }
+  };
 
   //위치정보
   const getLocation = () => {
@@ -56,6 +58,8 @@ const MyPage = () => {
     }
   };
 
+  console.log(genres);
+
   if (isLoading) return <div>Loading...</div>;
 
   if (isError)
@@ -63,18 +67,38 @@ const MyPage = () => {
 
   return (
     <div>
-      <Container className='mypage-container'>
+      <Container className="mypage-container">
         <Row>
           <Col lg={12}>
-            <div className='info-area'>
-              <h1 className='mypage-title'>내 정보</h1>
-              <div className='my-info'>
+            <div className="info-area">
+              <h1 className="mypage-title">내 정보</h1>
+              <div className="my-info">
                 <h2>{mydata.nickname}님</h2>
                 <div>이름: {mydata.name}</div>
                 <div>이메일: {mydata.email}</div>
-                <div className='my-location'>
-                  <div><FontAwesomeIcon icon={faLocationDot} style={{color: "#4B4B4B",}} /><span>{mydata.location}</span></div>
-                  <Button variant="primary" onClick={getLocation}>지역 변경</Button>
+                <div className="mypage-category">
+                  취향 카테고리:
+                  {genres && genres.length > 0 ? (
+                    <ul>
+                      {genres.map((genre, index) => (
+                        <li key={index}>{genre.genre}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div>등록된 카테고리가 없습니다.</div>
+                  )}
+                </div>
+                <div className="my-location">
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faLocationDot}
+                      style={{ color: "#4B4B4B" }}
+                    />
+                    <span>{mydata.location}</span>
+                  </div>
+                  <Button variant="primary" onClick={getLocation}>
+                    지역 변경
+                  </Button>
                 </div>
               </div>
             </div>
@@ -82,34 +106,40 @@ const MyPage = () => {
         </Row>
         <Row>
           <Col lg={12}>
-            <div className='go-library'>
-              <h1 className='mypage-title'>내 서재</h1>
-              <button onClick={moveToLibrary} className='my-lib'>더보기</button>
+            <div className="go-library">
+              <h1 className="mypage-title">내 서재</h1>
+              <button onClick={moveToLibrary} className="my-lib">
+                더보기
+              </button>
             </div>
             <div>
-            {readingdata?.length > 0 && (<SingleLineCarousel books={readingdata} />)}
+              {readingdata?.length > 0 && (
+                <SingleLineCarousel books={readingdata} />
+              )}
             </div>
           </Col>
         </Row>
         <Row className="rental-book">
           <Col lg={12}>
-            <h1 className='mypage-title'>대여중인 책</h1>
+            <h1 className="mypage-title">대여중인 책</h1>
             <div>
-            {borrowdata?.length > 0 && (<SingleLineCarousel books={borrowdata} />)}
+              {borrowdata?.length > 0 && (
+                <SingleLineCarousel books={borrowdata} />
+              )}
             </div>
           </Col>
         </Row>
         <Row>
           <Col lg={12}>
-            <h1 className='mypage-title'>좋아요 한 책</h1>
+            <h1 className="mypage-title">좋아요 한 책</h1>
             <div>
-            {likedata?.length > 0 && (<SingleLineCarousel books={likedata} />)}
+              {likedata?.length > 0 && <SingleLineCarousel books={likedata} />}
             </div>
           </Col>
         </Row>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default MyPage
+export default MyPage;

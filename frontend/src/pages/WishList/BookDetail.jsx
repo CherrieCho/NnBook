@@ -56,8 +56,6 @@ const BookDetail = () => {
     canBorrowBook();
   }, [canBorrow]);
 
-  console.log(canBorrow)
-
   if (isLoading) return <div>Loading...</div>;
 
   if (error)

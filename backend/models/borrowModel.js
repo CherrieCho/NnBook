@@ -16,24 +16,27 @@ export const changeLendStatus = async (bookID) => {
   return result;
 };
 
-export const changeLendStatusFalse = async (bookId) => {
+export const changeLendStatusFalse = async (bookId, email) => {
   const [result] = await db.query(
-    "UPDATE userlibrary SET isLendable = false WHERE bookId = ?",
-    [bookId]
+    "UPDATE userlibrary SET isLendable = false, isBorrowed = true WHERE bookId = ? && holderEmail != ?",
+    [bookId, email]
   );
   return result;
 };
 
-export const fetchAllBookLend = async () => {
-  const [rows] = await db.query("SELECT * FROM registerbooklend");
+export const fetchAllBookLend = async (email) => {
+  const [rows] = await db.query(
+    "SELECT * FROM registerbooklend WHERE ownerEmail != ?",
+    [email]
+  );
   return rows;
 };
 
 //도서대출
-export const FetchBorrowReq = async (email, bookId) => {
+export const FetchBorrowReq = async (bookId, owner, email) => {
   const [result] = await db.query(
-    "UPDATE userlibrary SET isBorrowed = true, holderEmail = ? WHERE bookId = ? AND isLendable = true",
-    [email, bookId]
+    "INSERT INTO userlibrary (bookId, ownerEmail, holderEmail) VALUES (?, ?, ?)",
+    [bookId, owner, email]
   );
   return result;
 };
@@ -49,7 +52,7 @@ export const deleteBookLend = async (bookId) => {
 
 export const findBorrowingBook = async (email) => {
   const [rows] = await db.query(
-    `SELECT id, bookID FROM noonalibrary.userlibrary WHERE holderEmail = ? && ownerEmail != ?`,
+    `SELECT id, bookID FROM userlibrary WHERE holderEmail = ? && ownerEmail != ?`,
     [email, email]
   );
   return rows;

@@ -6,7 +6,7 @@ export const useBorrowMutation = () => {
 
   return useMutation({
     mutationFn: ({ bookId }) =>
-      authApi.patch("/borrow/borrowreq", {
+      authApi.post("/borrow/borrowreq", {
         bookId,
       }),
     onSuccess: () => {

@@ -66,14 +66,7 @@ function App() {
           <Route path="meeting">
             <Route index element={<MeetingList />} />
             <Route path=":id" element={<MeetingDetail />} />
-            <Route
-              path="create"
-              element={
-                <PrivateRoute>
-                  <CreateMeeting />
-                </PrivateRoute>
-              }
-            />
+            <Route path="create" element={<CreateMeeting />} />
           </Route>
           <Route path="rental">
             <Route index element={<RentalList />} />

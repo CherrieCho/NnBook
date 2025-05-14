@@ -25,6 +25,8 @@ function SignIn() {
 
       const decoded = jwtDecode(res.data.token);
       localStorage.setItem("user", JSON.stringify(decoded));
+
+      alert("로그인 성공!");
       navigate("/");
     } catch (err) {
       alert("로그인 실패: " + (err.response?.data?.message || err.message));

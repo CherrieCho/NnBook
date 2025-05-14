@@ -1,50 +1,70 @@
 import React, { useState } from "react";
-import { Alert, Container, Row } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Form,
+  InputGroup,
+  Row,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../../common/BookCard/BookCard";
 import useBooks from "../../hooks/useBooks";
 import useSearchBook from "../../hooks/useSearchBook";
-import SearchBar, { categories } from "../../components/SearchBar/SearchBar";
 import "../../styles/BookList.style.css";
 
 const BookList = () => {
   const [query, setQuery] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
-  const {
-    data: bestsellerBooks = [],
-    isLoading: isBestLoading,
-    error: bestError,
-  } = useBooks("", page);
+  //도서목록
+  const { data: books = [], isLoading, error } = useBooks("", page);
 
-  const {
-    data: searchedBooks = [],
-    isLoading: isSearchLoading,
-    error: searchError,
-  } = useSearchBook(query, categoryId, page);
+  //도서검색
+  const { data: searchBook = [], isLoading: searchloading } = useSearchBook(
+    searchTerm,
+    page
+  );
+  //.log("서치",searchBook)
 
-  const handleSearch = (q, c) => {
+  const handleSearch = () => {
     setPage(1);
-    setQuery(q);
-    setCategoryId(c);
+    setSearchTerm(query);
   };
 
-  const isSearching = !!query;
-  const booksToDisplay = isSearching ? searchedBooks : bestsellerBooks;
-  const isLoading = isSearching ? isSearchLoading : isBestLoading;
-  const error = isSearching ? searchError : bestError;
+  const isSearching = !!searchTerm;
+  const displayBooks = isSearching ? searchBook : books;
+
+  if (isLoading || searchloading) return <p>로딩 중…</p>;
+  if (error) return <Alert variant="danger">에러 발생: {error.message}</Alert>;
 
   return (
     <Container className="book-list-container py-4">
-      <div className="book-list-title-area">
-        <h3 className="book-list-title">전체 도서 목록</h3>
-        <SearchBar onSearch={handleSearch} />
-      </div>
-
-      {isLoading && <p>로딩 중…</p>}
-      {error && <Alert variant="danger">에러 발생: {error.message}</Alert>}
+      <Row className="align-items-center mb-4">
+        <Col xs={12} md="auto">
+          <strong className="book-list-title">전체 도서 목록</strong>
+        </Col>
+        <Col xs={12} md="auto" className="mt-2 mt-md-0 ms-md-auto">
+          <InputGroup className="book-search-group">
+            <Form.Control
+              className="book-search-input"
+              type="text"
+              placeholder="검색어를 입력하세요"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSearch();
+              }}
+            />
+            <Button className="book-search-button" onClick={handleSearch}>
+              검색
+            </Button>
+          </InputGroup>
+        </Col>
+      </Row>
 
       <Row
         xs={1}
@@ -52,20 +72,17 @@ const BookList = () => {
         md={5}
         className="gx-1 gy-1 justify-content-center justify-content-sm-start"
       >
-        {booksToDisplay.map((book) => (
+        {displayBooks.map((book) => (
           <BookCard
             key={book.itemId || book.id}
             book={book}
             onClick={() =>
-              navigate(`/rental/${book.itemId || book.id}`, {
-                state: { book },
-              })
+              navigate(`/rental/${book.itemId || book.id}`, { state: { book } })
             }
           />
         ))}
       </Row>
-
-      {booksToDisplay.length === 0 && !isLoading && (
+      {displayBooks.length === 0 && (
         <p className="text-center mt-5">검색 결과가 없습니다.</p>
       )}
     </Container>

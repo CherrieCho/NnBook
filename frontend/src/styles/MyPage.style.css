@@ -27,6 +27,15 @@
   padding: 2em;
 }
 
+.mypage-category{
+  display: flex;
+}
+
+.mypage-category ul{
+  list-style: none;
+  padding: 0;
+}
+
 h2{
   font-size: 23px;
   font-weight: bold;

@@ -80,6 +80,7 @@ body {
   font-size: 26px;
   font-weight: 600;
   color: #4b4b4b;
+  cursor: pointer;
 }
 
 .meeting-table {

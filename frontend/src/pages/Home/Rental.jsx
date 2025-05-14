@@ -12,44 +12,39 @@ export default function Rental() {
   // 대여 가능 도서 ID 목록 불러오기
   const { data: lendabledata } = useLendableBooksQuery();
   //id만 뽑아오기
-  const bookIds = lendabledata?.map(item => item.bookId) || [];
+  const bookIds = lendabledata?.map((item) => item.bookId) || [];
 
   // 각 ID에 해당하는 도서 정보 요청
   const bookQueries = useBookByIDs(bookIds);
-  const isLoading = bookQueries.some(q => q.isLoading);
-  const isError = bookQueries.some(q => q.isError);
+  const isLoading = bookQueries.some((q) => q.isLoading);
+  const isError = bookQueries.some((q) => q.isError);
 
   const books = bookQueries
-    .filter(q => q.isSuccess && q.data)
-    .map(q => q.data)
+    .filter((q) => q.isSuccess && q.data)
+    .map((q) => q.data)
     .slice(0, 5); // 홈에서는 5개만 표시
 
   if (isLoading) return <p>로딩 중…</p>;
   if (isError) {
-    const firstError = bookQueries.find(q => q.isError)?.error;
+    const firstError = bookQueries.find((q) => q.isError)?.error;
     return <p>에러 발생: {firstError?.message}</p>;
   }
 
   return (
     <Container className="py-4 rental-container">
       <div className="rental-home-title">
-        <h4 className="mb-3 rental-list">
-          대여 가능 도서 목록{" "}
-        </h4>
-        <div
-            className="more-link"
-            onClick={() => navigate('/rental')}
-          >
-            more
-        </div>
+        <h1 className="mb-3 rental-list">대여 가능 도서 목록</h1>
       </div>
 
-      <Row xs={1} sm={3} md={5} className="gx-1 gy-1 justify-content-center justify-content-sm-start">
+      <Row
+        xs={1}
+        sm={3}
+        md={5}
+        className="gx-1 gy-1 justify-content-center justify-content-sm-start"
+      >
         {books.map((book) => (
           <Col key={book.itemId || book.id}>
-            <BookCard
-              book={book}
-            />
+            <BookCard book={book} />
           </Col>
         ))}
 

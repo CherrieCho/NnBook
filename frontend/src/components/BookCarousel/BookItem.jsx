@@ -7,9 +7,9 @@ const BookItem = ({ book }) => {
   return (
     <div className="book-card">
       <Link to={`/books/${book.itemId}`}>
-        <img src={imageUrl} alt={book.title} />
-        <p className="book-title">{book.title}</p>
-        <small className="book-author">{book.author}</small>
+        <img src={imageUrl} alt={book.title?.split(" - ")[0].split(" (")[0]} />
+        <p className="book-title">{book.title?.split(" - ")[0]}</p>
+        <small className="book-author">{book.author?.split(" (")[0]}</small>
       </Link>
     </div>
   );

@@ -19,7 +19,7 @@ const BookCarousel = ({ books }) => {
   const bottomChunks = groupedBooks.filter((_, i) => i % 2 === 1);
 
   return (
-    <div className="book-carousel-wrapper mt-5">
+    <div className="book-carousel-wrapper mt-4">
       {/* 위쪽 캐러셀 */}
       <Carousel interval={null} indicators={false} controls>
         {topChunks.map((group, idx) => (
@@ -33,8 +33,8 @@ const BookCarousel = ({ books }) => {
                       alt={book.title}
                     />
                     <div className="book-info">
-                      <p className="book-title">{book.title}</p>
-                      <small className="book-author">{book.author}</small>
+                      <p className="book-title">{book.title?.split(" - ")[0].split(" (")[0]}</p>
+                      <small className="book-author">{book.author?.split(" (")[0]}</small>
                     </div>
                   </Link>
                 </div>
@@ -45,7 +45,7 @@ const BookCarousel = ({ books }) => {
       </Carousel>
 
       {/* 아래쪽 캐러셀 */}
-      <Carousel interval={null} indicators={false} controls className="mt-4">
+      <Carousel interval={null} indicators={false} controls className="mt-4 bottom-carousel">
         {bottomChunks.map((group, idx) => (
           <Carousel.Item key={`bottom-${idx}`}>
             <div className="book-row">

@@ -2,8 +2,12 @@ import React from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import useBooks from "../../hooks/useBooks";
 import "../../styles/Recommend.style.css";
+import { useNavigate } from "react-router-dom";
+
 
 const Recommend = ({ previewCount }) => {
+    const navigate = useNavigate();
+  
   const { data: books, isLoading, error } = useBooks();
 
   if (isLoading)
@@ -22,7 +26,7 @@ const Recommend = ({ previewCount }) => {
 
   return (
     <div className="recommend-section">
-      <h2>취향 기반 추천 도서</h2>
+      <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
       <div className="recommend-grid">
         {recommended.map((book, idx) => (
           <div key={idx} className="recommend-card">
@@ -30,7 +34,7 @@ const Recommend = ({ previewCount }) => {
               src={book.cover?.replace("/api/image-proxy?url=", "")}
               alt={book.title}
             />
-            <div className="recommend-card-title">{book.title}</div>
+            <div className="recommend-card-title">{book.title?.split(" - ")[0].split(" (")[0]}</div>
           </div>
         ))}
       </div>

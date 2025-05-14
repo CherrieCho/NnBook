@@ -66,14 +66,18 @@
 .book-list-container {
   padding: 2rem 1rem;
   min-height: 60vh;
-  background-color: #ffffff;
   margin-bottom: 200px;
+}
+
+.book-list-title-area{
+  flex-wrap: wrap;
 }
 
 .book-list-title {
   font-family: "MaruBuriBold", serif;
   font-size: 26px;
   color: #4b4b4b;
+  margin-bottom: 2rem;
 }
 
 .book-list-row {

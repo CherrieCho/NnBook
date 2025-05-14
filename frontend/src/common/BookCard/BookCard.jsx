@@ -19,7 +19,7 @@ export default function BookCard({ book, onClick }) {
   const goToDetail = () => {
     navigate(`/books/${book.itemId}`);
   }
-
+ 
   return (
     <Col onClick={goToDetail} className="card-col">
       <img
@@ -34,10 +34,10 @@ export default function BookCard({ book, onClick }) {
       />
 
       <h6 className="mt-2 truncate" title={book.title}>
-        {book.title}
+        {book.title?.split(" - ")[0].split(" (")[0]}
       </h6>
       
-      <p className="text-muted truncate">{book.author}</p>
+      <p className="text-muted truncate">{book.author?.split(" (")[0]}</p>
     </Col>
   );
 }

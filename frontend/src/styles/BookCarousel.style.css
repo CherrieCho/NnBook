@@ -11,12 +11,13 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .book-card {
   position: relative;
-  flex: 1;
-  max-width: 24%;
+  flex: 0 0 calc(25% - 12px);
+  max-width: calc(25% - 12px);
   background-color: transparent;
   border-radius: 10px;
   padding: 0.5rem;
@@ -25,6 +26,18 @@
   transition: transform 0.2s ease;
   overflow: hidden;
   border: none;
+}
+
+@media (max-width: 768px) {
+  .book-card {
+    flex: 0 0 calc(50% - 12px);
+    max-width: calc(50% - 12px);
+  }
+
+  .bottom-carousel {
+    display: none;
+  }
+
 }
 
 .book-card:hover {

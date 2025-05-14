@@ -32,18 +32,18 @@ export const addNewBook = async (bookID, ownerEmail, holderEmail) => {
   return result;
 };
 
-export const changeStatus = async (bookID, email) => {
-  const [result] = await db.query(
-    `
-    UPDATE userlibrary
-    SET status = 'finished'
-    WHERE bookId = ?
-      AND (holderEmail = ? OR ownerEmail = ?)
-    `,
-    [bookID, email, email]
-  );
-  return result;
-};
+// export const changeStatus = async (bookID, email) => {
+//   const [result] = await db.query(
+//     `
+//     UPDATE userlibrary
+//     SET status = 'finished'
+//     WHERE bookId = ?
+//       AND (holderEmail = ? OR ownerEmail = ?)
+//     `,
+//     [bookID, email, email]
+//   );
+//   return result;
+// };
 
 export const changeLike = async (bookID, email) => {
   const [result] = await db.query(

@@ -1,8 +1,8 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-const PORT = process.env.PORT || 8080;
-// const PORT = process.env.PORT || 5050;
+// const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5050;
 
 export default defineConfig({
   plugins: [react()],

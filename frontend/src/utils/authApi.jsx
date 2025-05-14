@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const authApi = axios.create({
-  /// baseURL: "https://nnbook-production-863f.up.railway.app/api",
-  baseURL: "http://localhost:5050/api",
+  baseURL: "https://nnbook-production-863f.up.railway.app/api",
+  // baseURL: "http://localhost:5050/api",
   timeout: 5000,
 });
 
@@ -17,6 +17,9 @@ authApi.interceptors.request.use((config) => {
 authApi.interceptors.response.use(
   (response) => response,
   (error) => {
+    if (error.response?.status === 401) {
+      alert("로그인이 필요합니다.");
+    }
     return Promise.reject(error);
   }
 );

@@ -3,7 +3,7 @@ import {
   findFinishedBooks,
   findLendedBooks,
   addNewBook,
-  // changeStatus,
+  changeStatus,
   changeLike,
   findLiked,
 } from "../models/libraryModel.js";
@@ -63,17 +63,17 @@ export const addReading = async (req, res) => {
 };
 
 //읽는중 -> 다읽음으로 바꾸기
-// export const changeToFinished = async (req, res) => {
-//   const { bookID } = req.body;
-//   const { email } = req.user; //토큰에서 가져오기
-//   try {
-//     await changeStatus(bookID, email);
-//     res.status(201).json({ message: "변경 완료" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "서버 에러" });
-//   }
-// };
+export const changeToFinished = async (req, res) => {
+  const { bookID } = req.body;
+  const { email } = req.user; //토큰에서 가져오기
+  try {
+    await changeStatus(bookID, email);
+    res.status(201).json({ message: "변경 완료" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "서버 에러" });
+  }
+};
 
 //좋아요하기
 export const changeToLiked = async (req, res) => {

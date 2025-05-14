@@ -1,30 +1,18 @@
 .truncate {
-  display: block;
-  width: 18ch;
-  white-space: nowrap;
-  overflow: hidden;
+  display: block;        
+  width: 18ch;            
+  white-space: nowrap;   
+  overflow: hidden;      
   text-overflow: ellipsis;
-  text-align: center;
 }
 
-.book-cover-img {
-  width: 150px;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  transition: 0.5s ease;
-}
-
-.book-cover-img:hover {
-  box-shadow: 0 0 10px rgba(75, 75, 75, 0.3);
-}
-
-.card-col {
+.card-col{
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: 0.5s ease;
 }
-
-.card-col:hover {
-  transform: scale(1.05);
+.book-cover-img{
+  width: 150px;
+  aspect-ratio: 2 / 3; 
+  object-fit: contain;
 }

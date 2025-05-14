@@ -7,24 +7,16 @@ import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router";
 import { useMeetingQuery } from "../../hooks/useMeetingQuery";
 import "../../styles/MeetingList.style.css";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 
 const MeetingList = () => {
   const [page, setPage] = useState(1);
   const pageSize = 10;
   const { data, isLoading, isError, error } = useMeetingQuery(page, pageSize);
-  const { data: mydata } = useMyInfoQuery();
 
   const navigate = useNavigate();
 
   const goToCreateMeeting = () => {
-    if (!mydata?.email) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-    }else{
-      navigate("/meeting/create");
-    }
-
+    navigate("/meeting/create");
   };
 
   const goToMeetingDetail = (id) => {
@@ -87,7 +79,7 @@ const MeetingList = () => {
     <Container className="home-meeting-list">
       <Row>
         <Col lg={12}>
-          <h1 className="meeting-title" onClick={() => navigate("/meeting")}>모임 게시판</h1>
+          <h1 className="meeting-title">모임 게시판</h1>
         </Col>
         <Col lg={12}>
           <table className="meeting-table">
@@ -123,7 +115,7 @@ const MeetingList = () => {
             onPageChange={handlePageClick}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
-            pageCount={Math.ceil(data?.data.length / 3)}
+            pageCount={data?.total}
             previousLabel="<"
             pageClassName="page-item"
             pageLinkClassName="page-link"

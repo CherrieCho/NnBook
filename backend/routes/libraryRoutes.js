@@ -21,7 +21,7 @@ const router = express.Router();
 router.get("/reading", verifyToken, getReading);
 router.post("/reading", addReading);
 router.get("/finished", verifyToken, getFinished);
-// router.patch("/finished", changeToFinished);
+// router.patch("/finished", verifyToken, changeToFinished);
 router.get("/lended", verifyToken, getLendedBooks);
 router.get("/liked", verifyToken, getLikedBooks);
 router.patch("/liked", verifyToken, changeToLiked);
@@ -41,10 +41,10 @@ router.get("/finished", (req, res) => {
   res.json({ message: "조회 성공", email });
 });
 
-router.patch("/finished", (req, res) => {
-  const { bookID } = req.body;
-  res.status(201).json({ message: "다 읽은 책으로 변경됨", bookID });
-});
+// router.patch("/finished", (req, res) => {
+//   const { bookID } = req.body;
+//   res.status(201).json({ message: "다 읽은 책으로 변경됨", bookID });
+// });
 
 router.get("/lended", (req, res) => {
   const { ownerEmail } = req.query;
@@ -56,9 +56,9 @@ router.patch("/liked", (req, res) => {
   res.status(201).json({ message: "좋아요 표시됨", bookID });
 });
 
-router.get("/liked", (req, res) => {
-  const { ownerEmail, holderEmail } = req.query;
-  res.json({ message: "조회 성공" });
-});
+// router.get("/liked", (req, res) => {
+//   const { ownerEmail, holderEmail } = req.query;
+//   res.json({ message: "조회 성공" });
+// });
 
 export default router;

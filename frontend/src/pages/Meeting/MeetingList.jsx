@@ -7,16 +7,24 @@ import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router";
 import { useMeetingQuery } from "../../hooks/useMeetingQuery";
 import "../../styles/MeetingList.style.css";
+import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 
 const MeetingList = () => {
   const [page, setPage] = useState(1);
   const pageSize = 10;
   const { data, isLoading, isError, error } = useMeetingQuery(page, pageSize);
+  const { data: mydata } = useMyInfoQuery();
 
   const navigate = useNavigate();
 
   const goToCreateMeeting = () => {
-    navigate("/meeting/create");
+    if (!mydata?.email) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    }else{
+      navigate("/meeting/create");
+    }
+
   };
 
   const goToMeetingDetail = (id) => {

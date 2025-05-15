@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../utils/api";
 
-const fetchSearchBook = (query, categoryId, page = 1, size = 20) => {
+const fetchSearchBook = async (query, categoryId, page, size = 40) => {
   const params = {
     Query: query,
     QueryType: "Keyword",
     MaxResults: size,
-    start: (page - 1) * size + 1,
+    start: page,
     SearchTarget: "Book",
     Cover: "MidBig",
   };
@@ -18,7 +18,7 @@ const fetchSearchBook = (query, categoryId, page = 1, size = 20) => {
   return api.get("/ItemSearch.aspx", { params });
 };
 
-export default function useSearchBook(query, categoryId, page = 1, size = 20) {
+export default function useSearchBook(query, categoryId, page, size = 40) {
   return useQuery({
     queryKey: ["book-search", query, categoryId, page, size],
     queryFn: () => fetchSearchBook(query, categoryId, page, size),

@@ -6,6 +6,7 @@ import useBooks from "../../hooks/useBooks";
 import useSearchBook from "../../hooks/useSearchBook";
 import SearchBar, { categories } from "../../components/SearchBar/SearchBar";
 import "../../styles/BookList.style.css";
+import ReactPaginate from "react-paginate";
 
 const BookList = () => {
   const [query, setQuery] = useState("");
@@ -13,22 +14,38 @@ const BookList = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
+  //페이지 계산
+  const PAGE_SIZE = 40;
+  const MAX_TOTAL = 200;
+
+  const maxPage = Math.ceil(MAX_TOTAL / PAGE_SIZE); // 5
+
   const {
     data: bestsellerBooks = [],
     isLoading: isBestLoading,
     error: bestError,
-  } = useBooks("", page);
+  } = useBooks(page, PAGE_SIZE);
 
   const {
     data: searchedBooks = [],
     isLoading: isSearchLoading,
     error: searchError,
-  } = useSearchBook(query, categoryId, page);
+  } = useSearchBook(query, categoryId, page, PAGE_SIZE);
 
+  console.log("베스트", bestsellerBooks)
+  console.log("검색", searchedBooks)
+  console.log("페이지", page)
+
+  //검색
   const handleSearch = (q, c) => {
     setPage(1);
     setQuery(q);
     setCategoryId(c);
+  };
+
+  //페이지 이동
+  const handlePageClick = ({ selected }) => {
+    setPage(selected + 1);
   };
 
   const isSearching = !!query;
@@ -54,7 +71,7 @@ const BookList = () => {
       >
         {booksToDisplay.map((book) => (
           <BookCard
-            key={book.itemId || book.id}
+            key={`${book.itemId}-${page}`}
             book={book}
             onClick={() =>
               navigate(`/rental/${book.itemId || book.id}`, {
@@ -68,6 +85,28 @@ const BookList = () => {
       {booksToDisplay.length === 0 && !isLoading && (
         <p className="text-center mt-5">검색 결과가 없습니다.</p>
       )}
+
+      <ReactPaginate
+        nextLabel=">"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={maxPage}
+        previousLabel="<"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={null}
+        forcePage={page - 1}
+      />
     </Container>
   );
 };

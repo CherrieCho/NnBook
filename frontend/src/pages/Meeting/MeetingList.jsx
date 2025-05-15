@@ -123,7 +123,7 @@ const MeetingList = () => {
             onPageChange={handlePageClick}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
-            pageCount={Math.ceil(data?.data.length / 3)}
+            pageCount={Math.ceil(data?.data.length / 10)}
             previousLabel="<"
             pageClassName="page-item"
             pageLinkClassName="page-link"

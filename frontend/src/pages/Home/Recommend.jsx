@@ -99,8 +99,8 @@ const Recommend = ({ previewCount }) => {
           </div>
         ))}
       </div>
-      {recommended.length === 0 && (
-        <p className="text-center mt-5">취향 기반 도서가 없습니다.</p>
+      {!mydata?.email && (
+        <p className="text-center mt-5">누나네 책방에 가입하시고 취향에 맞는 도서를 추천받아보세요.</p>
       )}
     </div>
   );

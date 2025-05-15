@@ -5,10 +5,12 @@ import BookCard from "../../common/BookCard/BookCard";
 import "../../styles/RentalList.style.css";
 import { useLendableBooksQuery } from "../../hooks/uselendable";
 import useBookByIDs from "../../hooks/useBookbyIDArray";
+import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 
 export default function Rental() {
   const navigate = useNavigate();
 
+  const { data: mydata, isLoading: userLoading } = useMyInfoQuery();
   // 대여 가능 도서 ID 목록 불러오기
   const { data: lendabledata } = useLendableBooksQuery();
   //id만 뽑아오기
@@ -47,10 +49,15 @@ export default function Rental() {
             <BookCard book={book} />
           </Col>
         ))}
-
       </Row>
-      {books.length === 0 && (
-        <p className="text-center mt-5">아직 등록된 대여 도서가 없습니다.</p>
+      {!mydata?.email ? (
+        <p className="text-center mt-5">
+          누나네 책방에 가입하시고 책을 대여해보세요.
+        </p>
+      ) : (
+        books.length === 0 && (
+          <p className="text-center mt-5">아직 등록된 대여 도서가 없습니다.</p>
+        )
       )}
     </Container>
   );

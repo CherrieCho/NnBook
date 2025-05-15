@@ -8,10 +8,12 @@ import { useMeetingQuery } from "../../hooks/useMeetingQuery";
 import { useNavigate, useParams } from "react-router";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import { useDeleteMeeting } from "../../hooks/useDeleteMeeting";
+import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
 
 const MeetingDetail = () => {
   const { data, isLoading, isError, error } = useMeetingQuery();
   const { data: userData } = useMyInfoQuery();
+  const { data: allUsers } = useAllUsersQuery();
   const deleteMutation = useDeleteMeeting();
   const navigate = useNavigate();
   let { id } = useParams();
@@ -105,6 +107,18 @@ const MeetingDetail = () => {
                 {data?.data.map((meeting) => {
                   if (meeting.id == id) {
                     return meeting.time;
+                  }
+                })}
+              </p>
+              <p>
+                작성자:{" "}
+                {data?.data.map((meeting) => {
+                  if (meeting.id == id) {
+                    return allUsers?.map((users) => {
+                      if (users.email == meeting.leaderEmail) {
+                        return users.nickname;
+                      }
+                    });
                   }
                 })}
               </p>

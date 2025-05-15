@@ -21,10 +21,9 @@ const MeetingList = () => {
     if (!mydata?.email) {
       alert("로그인이 필요합니다.");
       navigate("/login");
-    }else{
+    } else {
       navigate("/meeting/create");
     }
-
   };
 
   const goToMeetingDetail = (id) => {
@@ -87,7 +86,9 @@ const MeetingList = () => {
     <Container className="home-meeting-list">
       <Row>
         <Col lg={12}>
-          <h1 className="meeting-title" onClick={() => navigate("/meeting")}>모임 게시판</h1>
+          <h1 className="meeting-title" onClick={() => navigate("/meeting")}>
+            모임 게시판
+          </h1>
         </Col>
         <Col lg={12}>
           <table className="meeting-table">
@@ -95,6 +96,7 @@ const MeetingList = () => {
               <tr>
                 <th scope="col">제목</th>
                 <th scope="col">지역</th>
+                <th scope="col">글쓴이</th>
                 <th scope="col">모임 날짜</th>
               </tr>
             </thead>

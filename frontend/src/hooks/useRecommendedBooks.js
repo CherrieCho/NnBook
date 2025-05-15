@@ -5,7 +5,7 @@ const fetchRecommendedBooks = (categoryId) => {
   return api.get("/ItemList.aspx", {
     params: {
       CategoryId: categoryId,
-      MaxResults: 10,
+      MaxResults: 200,
       QueryType: "ItemEditorChoice",
       SearchTarget: "Book",
       Cover: "MidBig",

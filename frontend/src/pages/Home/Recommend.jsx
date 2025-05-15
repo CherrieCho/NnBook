@@ -42,10 +42,9 @@ const Recommend = ({ previewCount }) => {
   const navigate = useNavigate();
 
   const { data: mydata, isLoading: userLoading } = useMyInfoQuery();
-  const {
-    data: genres,
-    isLoading: genresLoading,
-  } = useUserGenres(mydata?.email);
+  const { data: genres, isLoading: genresLoading } = useUserGenres(
+    mydata?.email
+  );
 
   const genreName = genres?.[0]?.genre || null;
   const matchedGenre = genreOptions.find((option) => option.name === genreName);
@@ -95,6 +94,9 @@ const Recommend = ({ previewCount }) => {
           </div>
         ))}
       </div>
+        {recommended.length === 0 && (
+          <p className="text-center mt-5">아직 등록된 대여 도서가 없습니다.</p>
+        )}
     </div>
   );
 };

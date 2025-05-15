@@ -48,10 +48,10 @@ export default function Rental() {
           </Col>
         ))}
 
-        {books.length === 0 && (
-          <p className="text-center mt-5">아직 등록된 대여 도서가 없습니다.</p>
-        )}
       </Row>
+      {books.length === 0 && (
+        <p className="text-center mt-5">아직 등록된 대여 도서가 없습니다.</p>
+      )}
     </Container>
   );
 }

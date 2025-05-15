@@ -63,7 +63,7 @@ const HomePage = () => {
       </div>
       <Rental />
       <div className="text-end mt-3">
-        <button className="btn-custom" onClick={() => navigate("/recommend")}>
+        <button className="btn-custom" onClick={() => navigate("/rental")}>
           더보기
         </button>
       </div>

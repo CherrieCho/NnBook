@@ -119,6 +119,11 @@ function SignUp() {
       return;
     }
 
+    if (genres.length === 0) {
+      alert("관심 카테고리를 선택해주세요.");
+      return;
+    }
+
     try {
       await authApi.post("/auth/register", {
         email: form.email,

@@ -23,7 +23,7 @@ const AppLayout = () => {
     localStorage.removeItem("user");
     alert("로그아웃 되었습니다.");
     setIsLoggedIn(false);
-    navigate("/");
+    window.location.href = '/';
   };
 
   return (

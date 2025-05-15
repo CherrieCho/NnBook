@@ -8,33 +8,9 @@ import { useNavigate } from "react-router";
 import { useMeetingQuery } from "../../hooks/useMeetingQuery";
 import "../../styles/MeetingList.style.css";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
 
 const MeetingList = () => {
-  const [page, setPage] = useState(1);
-  const pageSize = 10;
-  const { data, isLoading, isError, error } = useMeetingQuery(page, pageSize);
-  const { data: mydata } = useMyInfoQuery();
-
-  const navigate = useNavigate();
-
-  const goToCreateMeeting = () => {
-    if (!mydata?.email) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-    }else{
-      navigate("/meeting/create");
-    }
-
-  };
-
-  const goToMeetingDetail = (id) => {
-    navigate(`/meeting/${id}`);
-  };
-
-  const handlePageClick = ({ selected }) => {
-    setPage(selected + 1);
-  };
-
   const translateKorean = (location) => {
     switch (location) {
       case "seoul":
@@ -79,6 +55,32 @@ const MeetingList = () => {
     }
   };
 
+  const navigate = useNavigate();
+  const pageSize = 10;
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isError, error } = useMeetingQuery(page, pageSize);
+  const { data: mydata } = useMyInfoQuery();
+  const { data: allUsers } = useAllUsersQuery();
+
+
+  const goToCreateMeeting = () => {
+    if (!mydata?.email) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else {
+      navigate("/meeting/create");
+    }
+  };
+
+  const goToMeetingDetail = (id) => {
+    navigate(`/meeting/${id}`);
+  };
+
+  const handlePageClick = ({ selected }) => {
+    setPage(selected + 1);
+  };
+
+
   if (isLoading) {
     return <div>로딩 중...</div>;
   }
@@ -87,7 +89,9 @@ const MeetingList = () => {
     <Container className="home-meeting-list">
       <Row>
         <Col lg={12}>
-          <h1 className="meeting-title" onClick={() => navigate("/meeting")}>모임 게시판</h1>
+          <h1 className="meeting-title" onClick={() => navigate("/meeting")}>
+            모임 게시판
+          </h1>
         </Col>
         <Col lg={12}>
           <table className="meeting-table">
@@ -95,6 +99,7 @@ const MeetingList = () => {
               <tr>
                 <th scope="col">제목</th>
                 <th scope="col">지역</th>
+                <th scope="col">작성자</th>
                 <th scope="col">모임 날짜</th>
               </tr>
             </thead>
@@ -112,6 +117,13 @@ const MeetingList = () => {
                   >
                     <td>{meeting.title}</td>
                     <td>{translateKorean(meeting.location)}</td>
+                    <td>
+                      {allUsers?.map((users) => {
+                        if (users.email == meeting.leaderEmail) {
+                          return users.nickname;
+                        }
+                      })}
+                    </td>
                     <td>{meeting.date.slice(0, 10)}</td>
                   </tr>
                 ))

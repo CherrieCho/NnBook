@@ -28,7 +28,7 @@ export const addBookLend = async (req, res) => {
 
 //대여가능 도서 조회
 export const getAllBookLend = async (req, res) => {
-  const { email } = req.user; //토큰에서 가져오기
+  const email = req.user?.email; //토큰에서 가져오기
   try {
     const rows = await fetchAllBookLend(email);
     res.status(200).json(rows);

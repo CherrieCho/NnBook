@@ -29,7 +29,7 @@ const SingleLineCarousel = ({ books, libraryBookStatus }) => {
     <div>
       <div>
         <Carousel
-          infinite={true}
+          infinite={false}
           centerMode={true}
           itemClass="book-slider p-1"
           containerClass="carousel-container"

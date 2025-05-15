@@ -24,12 +24,20 @@ export const changeLendStatusFalse = async (bookId, email) => {
   return result;
 };
 
+//현재 대여 가능한 도서 조회
 export const fetchAllBookLend = async (email) => {
-  const [rows] = await db.query(
-    "SELECT * FROM registerbooklend WHERE ownerEmail != ?",
-    [email]
-  );
-  return rows;
+  if (email) {
+    // 로그인 상태: 내가 등록한 책 제외
+    const [rows] = await db.query(
+      "SELECT * FROM registerbooklend WHERE ownerEmail != ?",
+      [email]
+    );
+    return rows;
+  } else {
+    // 비로그인 상태: 전체 목록 조회
+    const [rows] = await db.query("SELECT * FROM registerbooklend");
+    return rows;
+  }
 };
 
 //도서대출

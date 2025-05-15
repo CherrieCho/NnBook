@@ -94,9 +94,9 @@ const Recommend = ({ previewCount }) => {
           </div>
         ))}
       </div>
-        {recommended.length === 0 && (
-          <p className="text-center mt-5">취향 기반 도서가 없습니다.</p>
-        )}
+      {recommended.length === 0 && (
+        <p className="text-center mt-5">취향 기반 도서가 없습니다.</p>
+      )}
     </div>
   );
 };

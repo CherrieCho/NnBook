@@ -56,12 +56,11 @@ const Recommend = ({ previewCount }) => {
     error,
   } = useRecommendedBooks(categoryId);
 
-  const isLoading = userLoading || genresLoading || booksLoading;
+  const goToDetail = (id) => {
+    navigate(`/books/${id}`);
+  };
 
-  console.log("genres:", genres);
-  console.log("genreName:", genreName);
-  console.log("categoryId:", categoryId);
-  console.log("books:", books);
+  const isLoading = userLoading || genresLoading || booksLoading;
 
   if (isLoading) {
     return (
@@ -78,12 +77,18 @@ const Recommend = ({ previewCount }) => {
     ? books.slice(0, previewCount || books.length)
     : [];
 
+  console.log(recommended);
+
   return (
     <div className="recommend-section">
       <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
       <div className="recommend-grid">
         {recommended.map((book, idx) => (
-          <div key={idx} className="recommend-card">
+          <div
+            key={idx}
+            className="recommend-card"
+            onClick={() => goToDetail(book.itemId)}
+          >
             <img
               src={book.cover?.replace("/api/image-proxy?url=", "")}
               alt={book.title}

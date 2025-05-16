@@ -73,11 +73,6 @@ const BookList = () => {
           <BookCard
             key={`${book.itemId}-${page}`}
             book={book}
-            onClick={() =>
-              navigate(`/rental/${book.itemId || book.id}`, {
-                state: { book },
-              })
-            }
           />
         ))}
       </Row>

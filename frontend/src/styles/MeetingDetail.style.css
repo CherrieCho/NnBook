@@ -70,7 +70,7 @@ body {
 
 .meeting-detail {
   width: 100%;
-  height: 80vh;
+  height: 60vh;
   border: 1px solid #e3dcd2;
   border-radius: 4px;
   margin-top: 30px;
@@ -107,4 +107,14 @@ body {
 .join-button-box button:focus {
   background-color: #d8f69e !important;
   color: #4b4b4b !important;
+}
+
+@media (max-width: 768px) {
+  .meeting-detail h1 {
+    font-size: 23px;
+  }
+
+  .meeting-desc {
+    font-size: 18px;
+  }
 }

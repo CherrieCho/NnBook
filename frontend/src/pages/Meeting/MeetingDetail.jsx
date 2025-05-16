@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,14 +9,23 @@ import { useNavigate, useParams } from "react-router";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import { useDeleteMeeting } from "../../hooks/useDeleteMeeting";
 import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
+import axiosMeetingDB from "../../utils/axiosMeetingDB";
+import { useMeetingMemberQuery } from "../../hooks/useMeetingMembers";
+import { useLeaveMeeting } from "../../hooks/useLeaveMeeting";
+import { useJoinMeeting } from "../../hooks/useJoinMeeting";
 
 const MeetingDetail = () => {
+  let { id } = useParams();
   const { data, isLoading, isError, error } = useMeetingQuery();
+  //글 작성자 이메일 추출
+  const leader = data?.data.find((meeting) => meeting.id == id)?.leaderEmail;
+  const { data:memberData } = useMeetingMemberQuery(leader, !!leader);
   const { data: userData } = useMyInfoQuery();
   const { data: allUsers } = useAllUsersQuery();
   const deleteMutation = useDeleteMeeting();
+  const { mutate: leaveMeeting } = useLeaveMeeting();
+  const { mutate: joinMeeting } = useJoinMeeting();
   const navigate = useNavigate();
-  let { id } = useParams();
 
   const translateKorean = (location) => {
     switch (location) {
@@ -62,10 +71,30 @@ const MeetingDetail = () => {
     }
   };
 
+  //게시글 삭제
   const handleDelete = (deleteId) => {
     if (window.confirm("정말 삭제 하시겠습니까?")) {
       deleteMutation.mutate(deleteId);
-      navigate("/meeting");
+    }
+  };
+
+  //모입 가입
+const handleJoin = () => {
+  if (window.confirm("모임에 가입하시겠습니까?")) {
+    joinMeeting({
+      leaderEmail: leader,
+      memberEmail: userData?.email,
+    });
+  }
+};
+
+  //가입 여부 확인
+  const isMember = memberData?.find((member) => member.memberEmail == userData?.email);
+
+  //모임 탈퇴
+  const handleLeave = () => {
+    if (window.confirm("정말 탈퇴 하시겠습니까?")) {
+      leaveMeeting({leaderEmail: leader, memberEmail: userData?.email});
     }
   };
 
@@ -134,6 +163,7 @@ const MeetingDetail = () => {
           </div>
           <div className="join-button-box">
             {data?.data.map((meeting) => {
+              //해당 게시글 작성자일 경우
               if (meeting.id == id && meeting.leaderEmail === userData?.email) {
                 return (
                   <Button
@@ -145,6 +175,33 @@ const MeetingDetail = () => {
                     삭제
                   </Button>
                 );
+              }
+
+              //해당 게시글 작성자가 아닐 경우
+              if(meeting.id == id && meeting.leaderEmail !== userData?.email) {
+                if(!isMember){
+                  return (
+                    <Button
+                      type="button"
+                      key={meeting.id}
+                      size="lg"
+                      onClick={handleJoin}
+                    >
+                      가입
+                    </Button>
+                  );
+                } else{
+                  return (
+                    <Button
+                      type="button"
+                      key={meeting.id}
+                      size="lg"
+                      onClick={handleLeave}
+                    >
+                      탈퇴
+                    </Button>
+                  );
+                }
               }
             })}
           </div>

@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Rating from "@mui/material/Rating";
 import useBookByID from "../../hooks/useBookbyID";
 import "../../styles/BookDetail.style.css";
-import { Button } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import { useAddToLibraryMutation } from "../../hooks/useAddToLibraryMutation";
@@ -27,7 +27,7 @@ const BookDetail = () => {
     if (!mydata?.email) {
       alert("로그인이 필요합니다.");
       navigate("/login");
-    }else{
+    } else {
       addBook({ bookID: Number(bookID), email: mydata.email });
     }
   };
@@ -37,20 +37,37 @@ const BookDetail = () => {
     if (!mydata?.email) {
       alert("로그인이 필요합니다.");
       navigate("/login");
-    }else{
+    } else {
       navigate(`/rental/${bookID}`);
     }
   };
 
+  const goToAladin = () => {
+    if (!mydata?.email) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else {
+      window.open(bookinfo.link, "_blank");
+    }
+  };
+
+  console.log(bookinfo);
+
   //책 대여가능 여부
   const canBorrowBook = () => {
     const lendableBook = lendabledata?.filter((item) => item.bookId == bookID);
-    if(lendableBook?.length === 0){
+    if (lendableBook?.length === 0) {
       setCanBorrow(true);
-    } else{
+    } else {
       setCanBorrow("");
     }
-  }
+  };
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      현재 대여 불가합니다. 구매 페이지로 이동합니다.
+    </Tooltip>
+  );
 
   useEffect(() => {
     canBorrowBook();
@@ -85,9 +102,23 @@ const BookDetail = () => {
               <Button variant="primary" size="lg" onClick={addToLibrary}>
                 내 서재 추가
               </Button>
-              <Button variant="primary" size="lg" onClick={goToRental} disabled = {canBorrow}>
-                대여 신청
-              </Button>
+              {canBorrow ? (
+                <OverlayTrigger
+                  placement="bottom"
+                  delay={{ show: 100, hide: 100 }}
+                  overlay={renderTooltip}
+                >
+                  <span className="d-inline-block">
+                    <Button className="detail-purchase" variant="primary" size="lg" onClick={goToAladin}>
+                      대여 불가
+                    </Button>
+                  </span>
+                </OverlayTrigger>
+              ) : (
+                <Button variant="primary" size="lg" onClick={goToRental}>
+                  대여 신청
+                </Button>
+              )}
             </div>
           </Col>
         </Row>
@@ -100,9 +131,6 @@ const BookDetail = () => {
               <li>{`출판일:  ${bookinfo.pubDate}`}</li>
               <li>{`쪽수:  ${bookinfo?.subInfo?.itemPage} 페이지`}</li>
               <li>{`ISBN:  ${bookinfo.isbn13}`}</li>
-              <li>
-                <a href={bookinfo.link}>도서 구매 링크(클릭)</a>
-              </li>
             </ul>
           </Col>
         </Row>

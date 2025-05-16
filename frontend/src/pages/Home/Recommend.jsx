@@ -42,10 +42,9 @@ const Recommend = ({ previewCount }) => {
   const navigate = useNavigate();
 
   const { data: mydata, isLoading: userLoading } = useMyInfoQuery();
-  const {
-    data: genres,
-    isLoading: genresLoading,
-  } = useUserGenres(mydata?.email);
+  const { data: genres, isLoading: genresLoading } = useUserGenres(
+    mydata?.email
+  );
 
   const genreName = genres?.[0]?.genre || null;
   const matchedGenre = genreOptions.find((option) => option.name === genreName);
@@ -57,12 +56,11 @@ const Recommend = ({ previewCount }) => {
     error,
   } = useRecommendedBooks(categoryId);
 
-  const isLoading = userLoading || genresLoading || booksLoading;
+  const goToDetail = (id) => {
+    navigate(`/books/${id}`);
+  };
 
-  console.log("genres:", genres);
-  console.log("genreName:", genreName);
-  console.log("categoryId:", categoryId);
-  console.log("books:", books);
+  const isLoading = userLoading || genresLoading || booksLoading;
 
   if (isLoading) {
     return (
@@ -79,12 +77,18 @@ const Recommend = ({ previewCount }) => {
     ? books.slice(0, previewCount || books.length)
     : [];
 
+  console.log(recommended);
+
   return (
     <div className="recommend-section">
       <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
       <div className="recommend-grid">
         {recommended.map((book, idx) => (
-          <div key={idx} className="recommend-card">
+          <div
+            key={idx}
+            className="recommend-card"
+            onClick={() => goToDetail(book.itemId)}
+          >
             <img
               src={book.cover?.replace("/api/image-proxy?url=", "")}
               alt={book.title}
@@ -95,6 +99,9 @@ const Recommend = ({ previewCount }) => {
           </div>
         ))}
       </div>
+      {!mydata?.email && (
+        <p className="text-center mt-5">누나네 책방에 가입하시고 취향에 맞는 도서를 추천받아보세요.</p>
+      )}
     </div>
   );
 };

@@ -6,6 +6,7 @@ export const findUserByEmail = async (email) => {
   ]);
   return rows[0];
 };
+
 export const createUser = async (
   email,
   name,
@@ -19,8 +20,11 @@ export const createUser = async (
   );
   return result;
 };
+
 export const findAllUsers = async () => {
-  const [rows] = await db.query("SELECT email, name, location FROM userinfo");
+  const [rows] = await db.query(
+    "SELECT email, name, nickname, location FROM userinfo"
+  );
   return rows;
 };
 

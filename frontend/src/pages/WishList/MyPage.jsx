@@ -41,16 +41,24 @@ const MyPage = () => {
           );
           const data = await response.json();
           const address = data.address;
-          const city = address.city || address.town || address.state || "";
-          const district =
-            address.suburb || address.village || address.neighbourhood || "";
-          const location = `${city} ${district}`;
-          setForm({ location });
+          console.log(address);
+          const province = address.province || "";
+          const city = address.city || address.county || address.state || "";
+          const borough = address.borough || address.suburb || address.city_district || "";
+            
+          //주소유형에 따라 다른 값 표시
+          const locationValue = province ? `${province}` : `${city}`;
+          const cityValue = province ? `${city}` : `${borough}`;
+
+          setForm({
+            location: locationValue,
+            city: cityValue,
+          });
 
           // 백엔드에 전송
-          updateLocation(location);
+          updateLocation({location: locationValue, city: cityValue});
         } catch {
-          setForm({ location: "위치 정보 불러오기 실패" });
+          setForm({ location: "위치 정보 불러오기 실패", city: "위치 상세정보 불러오기 실패" });
         }
       });
     } else {

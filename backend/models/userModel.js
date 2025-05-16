@@ -7,16 +7,18 @@ export const findUserByEmail = async (email) => {
   return rows[0];
 };
 
+//회원가입
 export const createUser = async (
   email,
   name,
   nickname,
   hashedPassword,
-  location
+  location,
+  city
 ) => {
   const [result] = await db.query(
-    "INSERT INTO userinfo (email, name, nickname, password, location) VALUES (?, ?, ?, ?, ?)",
-    [email, name, nickname, hashedPassword, location]
+    "INSERT INTO userinfo (email, name, nickname, password, location, city) VALUES (?, ?, ?, ?, ?, ?)",
+    [email, name, nickname, hashedPassword, location, city]
   );
   return result;
 };
@@ -38,7 +40,7 @@ export const createFavGenre = async (email, genre) => {
 
 export const fetchMyInfo = async (email) => {
   const [rows] = await db.query(
-    "SELECT email, name, nickname, location FROM userinfo WHERE email=?",
+    "SELECT email, name, nickname, location, city FROM userinfo WHERE email=?",
     [email]
   );
   return rows[0];

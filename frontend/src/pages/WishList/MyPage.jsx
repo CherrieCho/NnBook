@@ -58,8 +58,6 @@ const MyPage = () => {
     }
   };
 
-  console.log(genres);
-
   if (isLoading) return <div>Loading...</div>;
 
   if (isError)
@@ -79,11 +77,11 @@ const MyPage = () => {
                 <div className="mypage-category">
                   취향 카테고리:
                   {genres && genres.length > 0 ? (
-                    <ul>
+                    <div className="my-genre">
                       {genres.map((genre, index) => (
-                        <li key={index}>{genre.genre}</li>
+                        <div key={index}>{genre.genre}</div>
                       ))}
-                    </ul>
+                    </div>
                   ) : (
                     <div>등록된 카테고리가 없습니다.</div>
                   )}
@@ -95,6 +93,7 @@ const MyPage = () => {
                       style={{ color: "#4B4B4B" }}
                     />
                     <span>{mydata.location}</span>
+                    <span>{mydata.city}</span>
                   </div>
                   <Button variant="primary" onClick={getLocation}>
                     지역 변경

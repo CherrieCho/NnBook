@@ -1,23 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../utils/api";
 
-const fetchBookList = () => {
+const fetchBookList = (page, size) => {
   return api.get("/ItemList.aspx", {
     params: {
       QueryType: "Bestseller",
-      MaxResults: 100,
-      start: 1,
+      MaxResults: size,
+      start: page,
       SearchTarget: "Book",
       Cover: "MidBig",
     },
   });
 };
 
-export default function useBooks() {
+export default function useBooks(page = 1, size = 40) {
   return useQuery({
-    queryKey: ["bookList"],
-    queryFn: fetchBookList,
+    queryKey: ["bookList", page, size],
+    queryFn: () => fetchBookList(page, size),
     select: (result) =>
       Array.isArray(result?.data?.item) ? result.data.item : [],
+    keepPreviousData: true,
   });
 }

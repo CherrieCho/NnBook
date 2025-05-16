@@ -27,7 +27,7 @@ export default function RentalDetail() {
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
-  //대여신청청
+  //대여신청
   const startBorrowing = () => {
     borrowBook({ bookId: Number(bookId) });
     navigate('/mypage');

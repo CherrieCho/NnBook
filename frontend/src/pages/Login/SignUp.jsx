@@ -69,23 +69,33 @@ function SignUp() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords;
+
         try {
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
           );
           const data = await response.json();
           const address = data.address;
-          const city = address.city || address.town || address.state || "";
-          const district =
-            address.suburb || address.village || address.neighbourhood || "";
+          // console.log(address);
+          const province = address.province || "";
+          const city = address.city || address.county || address.state || "";
+          const borough =
+            address.borough || address.suburb || "";
+
+          //주소유형에 따라 다른 값 표시
+          const locationValue = province ? `${province}` : `${city}`;
+          const cityValue = province ? `${city}` : `${borough}`;
+
           setForm({
             ...form,
-            location: `${city} ${district}`,
+            location: locationValue,
+            city: cityValue,
           });
         } catch {
           setForm({
             ...form,
             location: "위치 정보 불러오기 실패",
+            city: "위치 상세정보 불러오기 실패"
           });
         }
       });
@@ -128,10 +138,11 @@ function SignUp() {
       await authApi.post("/auth/register", {
         email: form.email,
         name: form.name,
-        password: form.password,
         nickname: form.nickname,
-        genres: genres,
+        password: form.password,
         location: form.location,
+        city: form.city,
+        genres: genres,
       });
       alert("회원가입 성공");
       navigate("/login");
@@ -247,6 +258,15 @@ function SignUp() {
             name="location"
             placeholder="위치"
             value={form.location}
+            onChange={handleChange}
+            readOnly
+          />
+          <input
+            className="input-underline location-input"
+            type="text"
+            name="location"
+            placeholder="상세위치"
+            value={form.city}
             onChange={handleChange}
             readOnly
           />

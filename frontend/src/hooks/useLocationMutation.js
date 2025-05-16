@@ -5,10 +5,13 @@ export const useLocationMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (newLocation) =>
-      authApi.patch("/auth/location", { location: newLocation }),
+    mutationFn: ({ location, city }) =>
+      authApi.patch("/auth/location", { location, city }),
     onSuccess: () => {
       queryClient.invalidateQueries(["myInfo"]); // 내 정보 다시 불러오기
+    },
+    onError: (err) => {
+      alert(err.response?.data?.message || "변경 중 오류 발생");
     },
   });
 };

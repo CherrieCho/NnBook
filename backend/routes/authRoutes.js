@@ -22,7 +22,7 @@ router.patch("/location", verifyToken, changeLocation);
 
 router.patch("/location", (req, res) => {
   const { email } = req.user;
-  const { location } = req.body;
+  const { location, city } = req.body;
   res.status(201).json({ message: "위치정보 변경됨" });
 });
 /**

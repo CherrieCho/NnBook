@@ -46,10 +46,11 @@ export const fetchMyInfo = async (email) => {
   return rows[0];
 };
 
-export const changeLocationInfo = async (email, location) => {
+//위치 변경
+export const changeLocationInfo = async (location, city, email) => {
   const [result] = await db.query(
-    "UPDATE userinfo SET location = ? WHERE email = ?",
-    [email, location]
+    "UPDATE userinfo SET location = ?, city = ? WHERE email = ?",
+    [location, city, email]
   );
   return result;
 };

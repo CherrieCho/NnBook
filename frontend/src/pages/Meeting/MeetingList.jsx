@@ -152,7 +152,7 @@ const MeetingList = () => {
             forcePage={page - 1}
           />
           <div className="add-button-area">
-            <Button type="button" size="lg" onClick={goToCreateMeeting}>
+            <Button type="button" size="md" onClick={goToCreateMeeting}>
               글쓰기
             </Button>
           </div>

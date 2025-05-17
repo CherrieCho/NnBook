@@ -13,6 +13,8 @@ import axiosMeetingDB from "../../utils/axiosMeetingDB";
 import { useMeetingMemberQuery } from "../../hooks/useMeetingMembers";
 import { useLeaveMeeting } from "../../hooks/useLeaveMeeting";
 import { useJoinMeeting } from "../../hooks/useJoinMeeting";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
 const MeetingDetail = () => {
   let { id } = useParams();
@@ -107,13 +109,22 @@ const handleJoin = () => {
       <Row>
         <Col lg={12}>
           <div className="meeting-detail">
-            <h1>
-              {data?.data.map((meeting) => {
-                if (meeting.id == id) {
-                  return meeting.title;
-                }
-              })}
-            </h1>
+            <div className="meeting-title-detail">
+              <div className="meeting-join-status">
+                <h1>
+                {data?.data.map((meeting) => {
+                  if (meeting.id == id) {
+                    return meeting.title;
+                  }
+                })}
+              </h1>
+              {isMember ? <div>참여중</div> : ""}
+              </div>
+              <div className="meeting-members">
+                <FontAwesomeIcon icon={faUsers} />
+                <div>{`참여자 ${memberData?.length}명`}</div>
+              </div>
+            </div>
             <div className="meeting-desc">
               <p>
                 지역:{" "}
@@ -192,14 +203,14 @@ const handleJoin = () => {
                   );
                 } else{
                   return (
-                    <Button
-                      type="button"
-                      key={meeting.id}
-                      size="lg"
-                      onClick={handleLeave}
-                    >
-                      탈퇴
-                    </Button>
+                      <Button
+                        type="button"
+                        key={meeting.id}
+                        size="lg"
+                        onClick={handleLeave}
+                      >
+                        탈퇴
+                      </Button>
                   );
                 }
               }

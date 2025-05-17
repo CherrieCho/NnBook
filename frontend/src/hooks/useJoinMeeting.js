@@ -13,7 +13,7 @@ export const useJoinMeeting = () => {
         memberEmail,
       }),
     onSuccess: () => {
-      alert("가입 성공");
+      alert("모임에 성공적으로 가입되었습니다.");
       queryClient.invalidateQueries(["members"]);
       navigate("/meeting");
     },

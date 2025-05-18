@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
+import Map from "../../components/Map/Map";
 
 const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
   if (!book) return null;
@@ -28,6 +29,7 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
             <input></input>
             <p>대여 날짜:</p>
             <input></input>
+            <Map lat={37.5666103} lng={126.9783882} />
           </Col>
         </Row>
       </Modal.Body>

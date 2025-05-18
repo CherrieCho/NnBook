@@ -94,8 +94,31 @@
   max-width: 100%;
 }
 
-.distance-text{
+.distance-text {
   text-align: center;
+}
+
+.rental-title-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rental-distance-button {
+  font-family: "MaruBuriSemiBold";
+  background-color: #f6a89e;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  margin-right: 12px;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.rental-distance-button:hover {
+  background-color: #d8f69e;
+  color: #4b4b4b;
 }
 
 /* more 링크 */
@@ -106,12 +129,12 @@
   cursor: pointer;
 }
 
-.rental-home-title{
+.rental-home-title {
   display: flex;
   gap: 3em;
 }
 
-.rental-auth{
+.rental-auth {
   display: block;
 }
 

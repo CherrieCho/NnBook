@@ -52,8 +52,16 @@ export const addNewMember = async (leaderEmail, memberEmail) => {
 
 export const fetchAllMembers = async (leaderEmail) => {
   const [rows] = await db.query(
-    "SELECT * FROM bookclubmember WHERE leaderEmail = ?",
+    "SELECT memberEmail FROM bookclubmember WHERE leaderEmail = ?",
     [leaderEmail]
   );
   return rows;
+};
+
+export const deleteMember = async (leaderEmail, memberEmail) => {
+  const [result] = await db.query(
+    "DELETE FROM bookclubmember WHERE leaderEmail = ? AND memberEmail = ?",
+    [leaderEmail, memberEmail]
+  );
+  return result;
 };

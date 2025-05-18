@@ -6,6 +6,8 @@ import { useParams } from "react-router";
 import { useLikeBookMutation } from "../../hooks/useLikeBookMutation";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import { useLikedBooksQuery } from "../../hooks/useLikedBooks"; 
+import { useProgressMutation } from "../../hooks/useProgressMutation";
+import { useProgressDataQuery } from "../../hooks/useProgressData";
 
 const MyLibraryDetail = () => {
   const [entries, setEntries] = useState([]);
@@ -31,6 +33,8 @@ const MyLibraryDetail = () => {
   const { data: book, isLoading, error } = useBookByID(bookID);
   const { data: mydata } = useMyInfoQuery();
   const { data: likedBooks } = useLikedBooksQuery(); // ✅ 좋아요 목록 가져오기
+  const { mutate: addProgress } = useProgressMutation();
+  const { data: progressData } = useProgressDataQuery({bookID: Number(bookID), holderEmail: mydata?.email});
 
   const isLiked = likedBooks?.some(book => Number(book.bookID) === numericBookID); // ✅ 서버 기반 판단
 
@@ -59,6 +63,7 @@ const MyLibraryDetail = () => {
     return date.toLocaleString("ko-KR", options);
   };
 
+  //진척도 추가하기
   const handleAddEntry = () => {
     const readPages = parseInt(inputPages, 10);
     const total = totalPages > 0 ? totalPages : parseInt(inputTotal, 10);
@@ -88,6 +93,9 @@ const MyLibraryDetail = () => {
     if (totalPages === 0) setTotalPages(total);
     setProgress(percent);
 
+    //서버에 전송
+    addProgress({ bookID: Number(bookID), pageNow: readPages, progressPercent: percent, readAt: inputDateTime });
+
     if (newSum === total) {
       setShowCompleteModal(true);
       setShowCompleteProgressBar(true);
@@ -108,6 +116,10 @@ const MyLibraryDetail = () => {
     setLikeStatus(status);
     likeBook({ bookID: numericBookID });
   };
+
+  console.log(entries)
+  console.log("겟해온거", progressData)
+  console.log(mydata)
 
   return (
     <div className="libraryDetailContainer">

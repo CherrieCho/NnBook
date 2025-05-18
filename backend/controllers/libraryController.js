@@ -6,6 +6,8 @@ import {
   // changeStatus,
   changeLike,
   findLiked,
+  addPages,
+  getPages,
 } from "../models/libraryModel.js";
 
 //읽는중인 책
@@ -94,6 +96,32 @@ export const getLikedBooks = async (req, res) => {
   try {
     const reading = await findLiked(email);
     res.status(200).json(reading);
+  } catch (error) {
+    console.error("조회 실패:", error);
+    res.status(500).json({ message: "조회 중 오류 발생" });
+  }
+};
+
+//진척도 기록하기
+export const addProgress = async (req, res) => {
+  const { email } = req.user; //토큰에서 가져오기
+  const { bookID, pageNow, progressPercent, readAt } = req.body;
+  try {
+    await addPages(bookID, email, pageNow, progressPercent, readAt);
+
+    res.status(201).json({ message: "진척도 추가 완료!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "서버 에러" });
+  }
+};
+
+//진척도 불러오기
+export const getProgress = async (req, res) => {
+  const { bookID, holderEmail } = req.query;
+  try {
+    const progressData = await getPages(bookID, holderEmail);
+    res.status(200).json(progressData);
   } catch (error) {
     console.error("조회 실패:", error);
     res.status(500).json({ message: "조회 중 오류 발생" });

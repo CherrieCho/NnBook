@@ -10,10 +10,14 @@ import { useNavigate, useParams } from "react-router";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import { useAddToLibraryMutation } from "../../hooks/useAddToLibraryMutation";
 import { useLendableBooksQuery } from "../../hooks/uselendable";
+import BookRentalModal from "../Rental/BookRentalModal";
 
 const BookDetail = () => {
-  const [canBorrow, setCanBorrow] = useState("");
   const navigate = useNavigate();
+
+  const [canBorrow, setCanBorrow] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
   const { bookID } = useParams();
   const { data: lendabledata } = useLendableBooksQuery();
   const { data: bookinfo, isLoading, error } = useBookByID(bookID);
@@ -69,6 +73,20 @@ const BookDetail = () => {
     </Tooltip>
   );
 
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleSubmitRental = (book) => {
+    // 대여 신청 로직
+    console.log("대여 신청된 도서:", book);
+    // 여기에 실제 대여 처리 API 호출 추가 가능
+  };
+
   useEffect(() => {
     canBorrowBook();
   }, [canBorrow]);
@@ -109,13 +127,18 @@ const BookDetail = () => {
                   overlay={renderTooltip}
                 >
                   <span className="d-inline-block">
-                    <Button className="detail-purchase" variant="primary" size="lg" onClick={goToAladin}>
+                    <Button
+                      className="detail-purchase"
+                      variant="primary"
+                      size="lg"
+                      onClick={goToAladin}
+                    >
                       대여 불가
                     </Button>
                   </span>
                 </OverlayTrigger>
               ) : (
-                <Button variant="primary" size="lg" onClick={goToRental}>
+                <Button variant="primary" size="lg" onClick={handleOpenModal}>
                   대여 신청
                 </Button>
               )}
@@ -143,6 +166,13 @@ const BookDetail = () => {
           </Col>
         </Row>
       </Container>
+
+      <BookRentalModal
+        show={showModal}
+        book={bookinfo}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmitRental}
+      />
     </div>
   );
 };

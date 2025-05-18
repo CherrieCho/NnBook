@@ -1,31 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Alert } from "react-bootstrap";
 import "/src/styles/CarouselCard.style.css";
 import useBookByID from "../../hooks/useBookbyID";
 import { useNavigate } from "react-router";
-import { useAddToLibraryMutation } from "../../hooks/useAddToLibraryMutation"; // 추가된 훅
-import { useRegisterBookLendMutation } from "../../hooks/useRegisterBookLendMutation"; // 추가된 훅
+import { useAddToLibraryMutation } from "../../hooks/useAddToLibraryMutation";
+import { useRegisterBookLendMutation } from "../../hooks/useRegisterBookLendMutation";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
-import { useBorrowingBooksQuery } from "../../hooks/useBorrowingBooks";
+import BookRentalRegistrationModal from "../../pages/Library/BookRentalRegistrationModal";
 
 export default function BookCard({ bookID, libraryBookStatus, email }) {
-  const { data: bookinfo, isLoading, isError, error } = useBookByID(bookID);
-  const {data: borrowdata} = useBorrowingBooksQuery();
   const navigate = useNavigate();
 
-  const {data: mydata} = useMyInfoQuery();
+  const { data: bookinfo, isLoading, isError, error } = useBookByID(bookID);
+  const { data: mydata } = useMyInfoQuery();
   const { mutate: registerBookLend } = useRegisterBookLendMutation();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  const location = mydata?.location;
+  const handleSubmit = (book) => {
+    registerBookLend({ bookID, location });
+  };
 
   const moveToDetail = (bookID) => {
     navigate(`/library/${bookID}`);
   };
-
-  const location = mydata?.location;
-  const handleRegisterLend = () => {
-    registerBookLend({ bookID, location });
-  };
-
-  // console.log(bookinfo)
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -33,7 +35,13 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
     return <Alert variant="danger">불러오기 실패: {error.message}</Alert>;
 
   return (
-    <div className="bookcard-contents" onClick={() => moveToDetail(bookID)}>
+    <div
+      className="bookcard-contents"
+      onClick={(e) => {
+        if (showModal) return;
+        moveToDetail(bookID);
+      }}
+    >
       <img
         src={bookinfo?.cover?.replace("/api/image-proxy?url=", "")}
         alt={bookinfo?.title}
@@ -42,9 +50,27 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
           e.target.src = "/fallback-image.png";
         }}
       />
-      {libraryBookStatus === "finished" && !borrowdata?.find((book) => book?.bookID === bookID) && (
-        <button className="lend-btn " onClick={handleRegisterLend}>대여 등록</button>
+      {libraryBookStatus === "finished" && (
+        <button
+          className="lend-btn "
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOpenModal();
+          }}
+        >
+          대여 등록
+        </button>
       )}
+
+      <BookRentalRegistrationModal
+        show={showModal}
+        book={{
+          ...bookinfo,
+          id: bookID,
+        }}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 }

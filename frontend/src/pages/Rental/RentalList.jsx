@@ -11,10 +11,13 @@ import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 
 const RentalList = () => {
   const navigate = useNavigate();
+
+  const pageSize = 15;
+  const [page, setPage] = useState(1);
+  const [sortByDistance, setSortByDistance] = useState(false);
+
   const { data: mydata } = useMyInfoQuery();
   const { data: allUsers } = useAllUsersQuery();
-  const [page, setPage] = useState(1);
-  const pageSize = 15;
 
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
@@ -31,7 +34,7 @@ const RentalList = () => {
     .filter((q) => q.isSuccess && q.data)
     .map((q) => q.data);
 
-  const displayBooks = books.map((book, index) => {
+  let displayBooks = books.map((book, index) => {
     const ownerEmail = lendabledata[index]?.ownerEmail;
     const ownerInfo = allUsers?.find((user) => user.email === ownerEmail);
 
@@ -43,21 +46,31 @@ const RentalList = () => {
       ownerInfo?.longitude
     ) {
       distance = getDistanceFromLatLonInKm(
-        mydata.latitude,
-        mydata.longitude,
-        ownerInfo.latitude,
-        ownerInfo.longitude
+        parseFloat(mydata.latitude),
+        parseFloat(mydata.longitude),
+        parseFloat(ownerInfo.latitude),
+        parseFloat(ownerInfo.longitude)
       );
     }
 
     return {
       ...book,
-      distance: distance ? `${distance} km` : "거리 정보 없음",
+      distance: distance ? parseFloat(distance) : null,
     };
   });
 
+  if (sortByDistance) {
+    displayBooks = [...displayBooks].sort((a, b) => {
+      // 거리 정보 없으면 뒤로 보냄
+      if (a.distance === null) return 1;
+      if (b.distance === null) return -1;
+
+      return a.distance - b.distance;
+    });
+  }
+
   function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-    const R = 6371; // 지구 반지름 km
+    const R = 6371;
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
     const dLon = ((lon2 - lon1) * Math.PI) / 180;
     const a =
@@ -67,7 +80,7 @@ const RentalList = () => {
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const d = R * c; // 거리(km)
+    const d = R * c;
     return d.toFixed(2);
   }
 
@@ -84,9 +97,17 @@ const RentalList = () => {
   return (
     <>
       <Container className="py-4 rental-container">
-        <Row className="align-items-center mb-5">
+        <Row className="rental-title-area mb-5 justify-content-between align-items-center">
           <Col xs={12} md="auto">
             <strong className="rental-list">대여 가능 도서 목록</strong>
+          </Col>
+          <Col xs="auto">
+            <button
+              className="rental-distance-button"
+              onClick={() => setSortByDistance((prev) => !prev)}
+            >
+              {sortByDistance ? "등록순" : "가까운순"}
+            </button>
           </Col>
         </Row>
 
@@ -99,7 +120,11 @@ const RentalList = () => {
           {displayBooks.map((book) => (
             <div key={book.itemId || book.id} className="mb-3 text-center">
               <BookCard book={book} />
-              <p>거리: {book.distance}</p>
+              <p>
+                {book.distance !== null
+                  ? `${book.distance}km`
+                  : "거리 정보가 없습니다."}
+              </p>
             </div>
           ))}
         </Row>

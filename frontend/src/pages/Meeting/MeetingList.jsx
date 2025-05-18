@@ -10,7 +10,7 @@ import "../../styles/MeetingList.style.css";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
 
-const MeetingList = () => {
+const MeetingList = ({ showWriteButton = true }) => {
   const translateKorean = (location) => {
     switch (location) {
       case "seoul":
@@ -62,7 +62,6 @@ const MeetingList = () => {
   const { data: mydata } = useMyInfoQuery();
   const { data: allUsers } = useAllUsersQuery();
 
-
   const goToCreateMeeting = () => {
     if (!mydata?.email) {
       alert("로그인이 필요합니다.");
@@ -79,7 +78,6 @@ const MeetingList = () => {
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
-
 
   if (isLoading) {
     return <div>로딩 중...</div>;
@@ -130,32 +128,37 @@ const MeetingList = () => {
               )}
             </tbody>
           </table>
-          <ReactPaginate
-            nextLabel=">"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            pageCount={Math.ceil(data?.data.length / 10)}
-            previousLabel="<"
-            pageClassName="page-item"
-            pageLinkClassName="page-link"
-            previousClassName="page-item"
-            previousLinkClassName="page-link"
-            nextClassName="page-item"
-            nextLinkClassName="page-link"
-            breakLabel="..."
-            breakClassName="page-item"
-            breakLinkClassName="page-link"
-            containerClassName="pagination"
-            activeClassName="active"
-            renderOnZeroPageCount={null}
-            forcePage={page - 1}
-          />
-          <div className="add-button-area">
-            <Button type="button" size="md" onClick={goToCreateMeeting}>
-              글쓰기
-            </Button>
-          </div>
+
+          {showWriteButton && (
+            <>
+              <ReactPaginate
+                nextLabel=">"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                pageCount={Math.ceil(data?.data.length / 10)}
+                previousLabel="<"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakLabel="..."
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+                renderOnZeroPageCount={null}
+                forcePage={page - 1}
+              />
+              <div className="add-button-area">
+                <Button type="button" size="md" onClick={goToCreateMeeting}>
+                  글쓰기
+                </Button>
+              </div>
+            </>
+          )}
         </Col>
       </Row>
     </Container>

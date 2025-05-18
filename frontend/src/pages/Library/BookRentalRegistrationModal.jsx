@@ -1,14 +1,14 @@
-// src/library/components/BookRentalModal.jsx
 import React from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
+import Map from "../../components/Map/Map";
 
-export default function BookRentalModal({ show, book, onClose, onSubmit }) {
+const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
   if (!book) return null;
 
   return (
     <Modal show={show} onHide={onClose} centered size="lg">
       <Modal.Header closeButton>
-        <Modal.Title>도서 대여 신청</Modal.Title>
+        <Modal.Title>도서 대여 등록</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -19,18 +19,17 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
             </Card>
           </Col>
           <Col md={8}>
-            <h2 className="book-detail-title">{book.title}</h2>
-            <p>
-              <strong>대여자 : </strong> {}
-            </p>
-            <p>
-              <strong>대여 장소 : </strong> {}
-            </p>
-            <p>
-              <strong>대여 날짜 : </strong> {}
-            </p>
+            <h2 className="book-detail-title">
+              {book.title?.split(" - ")[0].split(" (")[0]}
+            </h2>
             <hr />
-            <p className="book-detail-desc">{book.description}</p>
+            <p>대여자:</p>
+            <input></input>
+            <p>대여 장소:</p>
+            <input></input>
+            <p>대여 날짜:</p>
+            <input></input>
+            <Map lat={37.5666103} lng={126.9783882} />
           </Col>
         </Row>
       </Modal.Body>
@@ -40,15 +39,17 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
           취소
         </Button>
         <Button
-          className="rental-detail"
+          className="rental-register-detail"
           onClick={() => {
             onSubmit(book);
             onClose();
           }}
         >
-          대여 신청
+          대여 등록
         </Button>
       </Modal.Footer>
     </Modal>
   );
-}
+};
+
+export default BookRentalRegistrationModal;

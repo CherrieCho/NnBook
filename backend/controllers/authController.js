@@ -26,7 +26,17 @@ export const checkEmail = async (req, res) => {
 };
 //회원가입
 export const register = async (req, res) => {
-  const { email, name, nickname, password, location, city, genres } = req.body;
+  const {
+    email,
+    name,
+    nickname,
+    password,
+    location,
+    city,
+    genres,
+    latitude,
+    longitude,
+  } = req.body;
   console.log("회원가입 요청", {
     email,
     name,
@@ -46,7 +56,16 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("🔐 비밀번호 해시 완료");
-    await createUser(email, name, nickname, hashedPassword, location, city);
+    await createUser(
+      email,
+      name,
+      nickname,
+      hashedPassword,
+      location,
+      city,
+      latitude,
+      longitude
+    );
 
     //관심장르 설정
     await Promise.all(

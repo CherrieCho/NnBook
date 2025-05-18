@@ -14,11 +14,13 @@ export const createUser = async (
   nickname,
   hashedPassword,
   location,
-  city
+  city,
+  latitude,
+  longitude
 ) => {
   const [result] = await db.query(
-    "INSERT INTO userinfo (email, name, nickname, password, location, city) VALUES (?, ?, ?, ?, ?, ?)",
-    [email, name, nickname, hashedPassword, location, city]
+    "INSERT INTO userinfo (email, name, nickname, password, location, city, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    [email, name, nickname, hashedPassword, location, city, latitude, longitude]
   );
   return result;
 };

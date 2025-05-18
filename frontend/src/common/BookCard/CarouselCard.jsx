@@ -6,9 +6,11 @@ import { useNavigate } from "react-router";
 import { useAddToLibraryMutation } from "../../hooks/useAddToLibraryMutation"; // 추가된 훅
 import { useRegisterBookLendMutation } from "../../hooks/useRegisterBookLendMutation"; // 추가된 훅
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import { useBorrowingBooksQuery } from "../../hooks/useBorrowingBooks";
 
 export default function BookCard({ bookID, libraryBookStatus, email }) {
   const { data: bookinfo, isLoading, isError, error } = useBookByID(bookID);
+  const {data: borrowdata} = useBorrowingBooksQuery();
   const navigate = useNavigate();
 
   const {data: mydata} = useMyInfoQuery();
@@ -38,7 +40,7 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
           e.target.src = "/fallback-image.png";
         }}
       />
-      {libraryBookStatus === "finished" && (
+      {libraryBookStatus === "finished" && !borrowdata?.find((book) => book?.bookID === bookID) && (
         <button className="lend-btn " onClick={handleRegisterLend}>대여 등록</button>
       )}
     </div>

@@ -2,7 +2,6 @@
 import React from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
 
-
 export default function BookRentalModal({ show, book, onClose, onSubmit }) {
   if (!book) return null;
 
@@ -16,17 +15,20 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
         <Row className="gy-4">
           <Col md={4}>
             <Card>
-              <Card.Img
-                variant="top"
-                src={book.cover}
-                className="book-cover"
-              />
+              <Card.Img variant="top" src={book.cover} className="book-cover" />
             </Card>
           </Col>
           <Col md={8}>
             <h2 className="book-detail-title">{book.title}</h2>
-            <p><strong>대여 장소 : </strong> {}</p>
-            <p><strong>대여 날짜 :</strong> {}</p>
+            <p>
+              <strong>대여자 : </strong> {}
+            </p>
+            <p>
+              <strong>대여 장소 : </strong> {}
+            </p>
+            <p>
+              <strong>대여 날짜 : </strong> {}
+            </p>
             <hr />
             <p className="book-detail-desc">{book.description}</p>
           </Col>

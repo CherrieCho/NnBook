@@ -128,34 +128,36 @@ const MeetingList = ({ showWriteButton = true }) => {
               )}
             </tbody>
           </table>
-          <ReactPaginate
-            nextLabel=">"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            pageCount={Math.ceil(data?.data.length / 10)}
-            previousLabel="<"
-            pageClassName="page-item"
-            pageLinkClassName="page-link"
-            previousClassName="page-item"
-            previousLinkClassName="page-link"
-            nextClassName="page-item"
-            nextLinkClassName="page-link"
-            breakLabel="..."
-            breakClassName="page-item"
-            breakLinkClassName="page-link"
-            containerClassName="pagination"
-            activeClassName="active"
-            renderOnZeroPageCount={null}
-            forcePage={page - 1}
-          />
 
           {showWriteButton && (
-            <div className="add-button-area">
-              <Button type="button" size="md" onClick={goToCreateMeeting}>
-                글쓰기
-              </Button>
-            </div>
+            <>
+              <ReactPaginate
+                nextLabel=">"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                pageCount={Math.ceil(data?.data.length / 10)}
+                previousLabel="<"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakLabel="..."
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+                renderOnZeroPageCount={null}
+                forcePage={page - 1}
+              />
+              <div className="add-button-area">
+                <Button type="button" size="md" onClick={goToCreateMeeting}>
+                  글쓰기
+                </Button>
+              </div>
+            </>
           )}
         </Col>
       </Row>

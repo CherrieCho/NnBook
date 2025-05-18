@@ -94,6 +94,10 @@
   max-width: 100%;
 }
 
+.distance-text{
+  text-align: center;
+}
+
 /* more 링크 */
 .more-link {
   font-size: 17px;

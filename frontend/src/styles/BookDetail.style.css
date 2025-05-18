@@ -54,6 +54,14 @@
   color: #4b4b4b !important;
 }
 
+.detail-purchase{
+  background-color: grey !important;
+}
+
+.detail-purchase:hover{
+  background-color: #d8f69e !important;
+}
+
 .bookdetail-bottom{
   margin: 2em 0;
 }

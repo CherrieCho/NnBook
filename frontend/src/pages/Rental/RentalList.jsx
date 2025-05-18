@@ -1,95 +1,136 @@
-import React, { useState }  from 'react'
-import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap'
-import BookCard from '../../common/BookCard/BookCard';
-import '../../styles/RentalList.style.css'
-import { useNavigate } from 'react-router-dom'
-import { useLendableBooksQuery } from '../../hooks/uselendable';
-import useBookByIDs from '../../hooks/useBookbyIDArray';
+import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import BookCard from "../../common/BookCard/BookCard";
+import "../../styles/RentalList.style.css";
+import { useNavigate } from "react-router-dom";
+import { useLendableBooksQuery } from "../../hooks/uselendable";
+import useBookByIDs from "../../hooks/useBookbyIDArray";
 import ReactPaginate from "react-paginate";
-
-
+import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
+import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 
 const RentalList = () => {
   const navigate = useNavigate();
+  const { data: mydata } = useMyInfoQuery();
+  const { data: allUsers } = useAllUsersQuery();
   const [page, setPage] = useState(1);
   const pageSize = 15;
 
-  //페이지 클릭
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
 
-  //대여가능도서목록 데이터 가져오기
-  const { data:lendabledata } = useLendableBooksQuery(page, pageSize);
-  //아이디만 뽑아와서 배열로 만들기
-  const bookIds = lendabledata?.map(item => item.bookId) || [];
-  //배열을 보내서 상응하는 알라딘 데이터로 가져오기
+  const { data: lendabledata } = useLendableBooksQuery(page, pageSize);
+  const bookIds = lendabledata?.map((item) => item.bookId) || [];
   const bookQueries = useBookByIDs(bookIds);
 
-  // 로딩 여부 확인
-const isLoading = bookQueries.some(q => q.isLoading);
+  const isLoading = bookQueries.some((q) => q.isLoading);
+  const isError = bookQueries.some((q) => q.isError);
 
-// 에러 여부 확인
-const isError = bookQueries.some(q => q.isError);
+  const books = bookQueries
+    .filter((q) => q.isSuccess && q.data)
+    .map((q) => q.data);
 
-// 데이터만 추출
-const books = bookQueries
-  .filter(q => q.isSuccess && q.data)
-  .map(q => q.data);
+  const displayBooks = books.map((book, index) => {
+    const ownerEmail = lendabledata[index]?.ownerEmail;
+    const ownerInfo = allUsers?.find((user) => user.email === ownerEmail);
 
-  const displayBooks = books;
+    let distance = null;
+    if (
+      mydata?.latitude &&
+      mydata?.longitude &&
+      ownerInfo?.latitude &&
+      ownerInfo?.longitude
+    ) {
+      distance = getDistanceFromLatLonInKm(
+        mydata.latitude,
+        mydata.longitude,
+        ownerInfo.latitude,
+        ownerInfo.longitude
+      );
+    }
 
-  if (isLoading) return <p>로딩 중…</p>
+    return {
+      ...book,
+      distance: distance ? `${distance} km` : "거리 정보 없음",
+    };
+  });
+
+  function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    const R = 6371; // 지구 반지름 km
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c; // 거리(km)
+    return d.toFixed(2);
+  }
+
+  if (isLoading) return <p>로딩 중…</p>;
   if (isError) {
-    const firstError = bookQueries.find(q => q.isError)?.error;
+    const firstError = bookQueries.find((q) => q.isError)?.error;
     return <p>에러 발생: {firstError?.message}</p>;
   }
 
-  return(
+  console.log(mydata);
+
+  console.log(lendabledata);
+
+  return (
     <>
-    <Container className="py-4 rental-container">
-      <Row className="align-items-center mb-5">
-        <Col xs={12} md="auto">
-          <strong className="rental-list">대여 가능 도서 목록</strong>
-        </Col>
-      </Row>
+      <Container className="py-4 rental-container">
+        <Row className="align-items-center mb-5">
+          <Col xs={12} md="auto">
+            <strong className="rental-list">대여 가능 도서 목록</strong>
+          </Col>
+        </Row>
 
-      <Row xs={1} sm={3} md={5} className="gx-1 gy-1 justify-content-center justify-content-sm-start">
-        {displayBooks.map(book => (
-          <BookCard
-            key={book.itemId || book.id}                       
-            book={book}                            
-          />
-        ))}
-      </Row>
-      {displayBooks.length === 0 && (
-        <p className="text-center mt-5">검색 결과가 없습니다.</p>
-      )}
+        <Row
+          xs={1}
+          sm={3}
+          md={5}
+          className="gx-1 gy-1 justify-content-center justify-content-sm-start"
+        >
+          {displayBooks.map((book) => (
+            <div key={book.itemId || book.id} className="mb-3 text-center">
+              <BookCard book={book} />
+              <p>거리: {book.distance}</p>
+            </div>
+          ))}
+        </Row>
+        {displayBooks.length === 0 && (
+          <p className="text-center mt-5">검색 결과가 없습니다.</p>
+        )}
 
-      <ReactPaginate
-        nextLabel=">"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
-        pageCount={Math.ceil(lendabledata?.length / 15)}
-        previousLabel="<"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
-        renderOnZeroPageCount={null}
-        forcePage={page - 1}
-      />
-    </Container>
+        <ReactPaginate
+          nextLabel=">"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={Math.ceil(lendabledata?.length / 15)}
+          previousLabel="<"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+          forcePage={page - 1}
+        />
+      </Container>
     </>
-  )
-}
+  );
+};
 
-export default RentalList
+export default RentalList;

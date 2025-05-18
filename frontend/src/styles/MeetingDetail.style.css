@@ -70,19 +70,45 @@ body {
 
 .meeting-detail {
   width: 100%;
-  height: 80vh;
+  height: 60vh;
   border: 1px solid #e3dcd2;
   border-radius: 4px;
   margin-top: 30px;
   font-family: "MaruBuriSemiBold", serif;
 }
 
-.meeting-detail h1 {
+.meeting-title-detail{
   padding: 20px;
   border-bottom: 1px solid #e3dcd2;
+  background-color: #e3dcd2;
+}
+
+.meeting-join-status{
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+.meeting-join-status div{
+  color: #F27D6C;
+  font-weight: bold;
+}
+
+.meeting-detail h1 {
+  margin: 0;
   font-size: 26px;
   font-weight: 600;
-  background-color: #e3dcd2;
+}
+
+.meeting-members{
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.meeting-members *{
+  font-size: 15px;
 }
 
 .meeting-desc {
@@ -107,4 +133,28 @@ body {
 .join-button-box button:focus {
   background-color: #d8f69e !important;
   color: #4b4b4b !important;
+}
+
+@media (max-width: 768px) {
+
+  .meeting-title-detail{
+  padding: 15px;
+  }
+  .meeting-join-status{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  }
+
+  .meeting-detail h1 {
+    font-size: 23px;
+  }
+
+  .meeting-members *{
+  font-size: 14px;
+  }
+
+  .meeting-desc {
+    font-size: 18px;
+  }
 }

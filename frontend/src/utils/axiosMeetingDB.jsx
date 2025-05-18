@@ -6,6 +6,9 @@ const axiosMeetingDB = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+    validateStatus: function (status) {
+    return status >= 200 && status < 300; // ✅ 2xx는 모두 성공으로 간주
+  }
 });
 
 export default axiosMeetingDB;

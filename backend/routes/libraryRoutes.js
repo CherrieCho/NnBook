@@ -7,6 +7,8 @@ import {
   // changeToFinished,
   changeToLiked,
   getLikedBooks,
+  addProgress,
+  getProgress,
 } from "../controllers/libraryController.js";
 import { verifyToken } from "../middlewares/veryfyToken.js";
 
@@ -18,6 +20,8 @@ const router = express.Router();
 // 책 내서재에 추가하기(읽는중상태로 감) - 상세페이지에서 내가 추가할경우 ownerEmail == holderEmail, 내가 빌린 책일경우 owner != holder
 //책 다읽음 상태로 변경
 //책 좋아요하기
+//책 진척도 기록하기
+//진척도 불러오기
 router.get("/reading", verifyToken, getReading);
 router.post("/reading", addReading);
 router.get("/finished", verifyToken, getFinished);
@@ -25,6 +29,8 @@ router.get("/finished", verifyToken, getFinished);
 router.get("/lended", verifyToken, getLendedBooks);
 router.get("/liked", verifyToken, getLikedBooks);
 router.patch("/liked", verifyToken, changeToLiked);
+router.post("/pages", verifyToken, addProgress);
+router.get("/pages", verifyToken, getProgress);
 
 router.get("/reading", (req, res) => {
   const { ownerEmail, holderEmail } = req.query;

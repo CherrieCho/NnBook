@@ -44,8 +44,10 @@ function SignUp() {
     confirmPassword: "",
     nickname: "",
     name: "",
-    genre: "",
     location: "",
+    city: "",
+    latitude: "",
+    longitude: "",
   });
   const [showGenres, setShowGenres] = useState(false);
   const [emailChecked, setEmailChecked] = useState(false);
@@ -65,6 +67,7 @@ function SignUp() {
     );
   };
 
+  //위치정보
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
@@ -90,6 +93,8 @@ function SignUp() {
             ...form,
             location: locationValue,
             city: cityValue,
+            latitude: latitude,
+            longitude: longitude,
           });
         } catch {
           setForm({
@@ -121,6 +126,7 @@ function SignUp() {
       setEmailAvailable(false);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -143,13 +149,18 @@ function SignUp() {
         location: form.location,
         city: form.city,
         genres: genres,
+        latitude: form.latitude,
+        longitude: form.longitude,
       });
-      alert("회원가입 성공");
+      alert("정상적으로 가입되었습니다.");
       navigate("/login");
     } catch (err) {
       alert("회원가입 실패: " + (err.response?.data?.message || err.message));
     }
   };
+
+  // console.log("폼", form);
+  // console.log("장르", genres)
 
   return (
     <div className="signup-container">

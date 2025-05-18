@@ -45,6 +45,7 @@ export const addNewBook = async (bookID, ownerEmail, holderEmail) => {
 //   return result;
 // };
 
+//좋아요하기
 export const changeLike = async (bookID, email) => {
   const [result] = await db.query(
     `
@@ -63,6 +64,30 @@ export const findLiked = async (email) => {
   const [rows] = await db.query(
     `SELECT id, bookID FROM userlibrary WHERE (ownerEmail = ? OR holderEmail = ?) AND isLiked = true`,
     [email, email]
+  );
+  return rows;
+};
+
+//진척도 추가
+export const addPages = async (
+  bookID,
+  email,
+  pageNow,
+  progressPercent,
+  readAt
+) => {
+  const [result] = await db.query(
+    "INSERT INTO pageHistory (bookId, holderEmail, pageNow, progressPercent, readAt) VALUES (?, ?, ?, ?, ?)",
+    [bookID, email, pageNow, progressPercent, readAt]
+  );
+  return result;
+};
+
+//진척도 불러오기
+export const getPages = async (bookID, email) => {
+  const [rows] = await db.query(
+    "SELECT pageNow, progressPercent, readAt FROM pageHistory WHERE bookId = ? AND holderEmail = ?",
+    [bookID, email]
   );
   return rows;
 };

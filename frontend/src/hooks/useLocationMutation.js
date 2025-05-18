@@ -5,8 +5,8 @@ export const useLocationMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ location, city }) =>
-      authApi.patch("/auth/location", { location, city }),
+    mutationFn: ({ location, city, latitude, longitude }) =>
+      authApi.patch("/auth/location", { location, city, latitude, longitude }),
     onSuccess: () => {
       queryClient.invalidateQueries(["myInfo"]); // 내 정보 다시 불러오기
     },

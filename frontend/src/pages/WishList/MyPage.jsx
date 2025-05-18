@@ -56,7 +56,7 @@ const MyPage = () => {
           });
 
           // 백엔드에 전송
-          updateLocation({location: locationValue, city: cityValue});
+          updateLocation({location: locationValue, city: cityValue, latitude, longitude});
         } catch {
           setForm({ location: "위치 정보 불러오기 실패", city: "위치 상세정보 불러오기 실패" });
         }

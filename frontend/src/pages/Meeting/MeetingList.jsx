@@ -10,7 +10,7 @@ import "../../styles/MeetingList.style.css";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
 
-const MeetingList = () => {
+const MeetingList = ({ showWriteButton = true }) => {
   const translateKorean = (location) => {
     switch (location) {
       case "seoul":
@@ -62,7 +62,6 @@ const MeetingList = () => {
   const { data: mydata } = useMyInfoQuery();
   const { data: allUsers } = useAllUsersQuery();
 
-
   const goToCreateMeeting = () => {
     if (!mydata?.email) {
       alert("로그인이 필요합니다.");
@@ -79,7 +78,6 @@ const MeetingList = () => {
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
-
 
   if (isLoading) {
     return <div>로딩 중...</div>;
@@ -151,11 +149,14 @@ const MeetingList = () => {
             renderOnZeroPageCount={null}
             forcePage={page - 1}
           />
-          <div className="add-button-area">
-            <Button type="button" size="md" onClick={goToCreateMeeting}>
-              글쓰기
-            </Button>
-          </div>
+
+          {showWriteButton && (
+            <div className="add-button-area">
+              <Button type="button" size="md" onClick={goToCreateMeeting}>
+                글쓰기
+              </Button>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>

@@ -4,7 +4,6 @@ import { Container as MapDiv, NaverMap, Marker } from "react-naver-maps";
 const Map = ({ lat = 37.5666103, lng = 126.9783882 }) => {
     const [currentPosition, setCurrentPosition] = useState(null);
 
-
   return (
     <MapDiv
       style={{

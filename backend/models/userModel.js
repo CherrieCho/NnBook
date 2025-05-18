@@ -49,10 +49,16 @@ export const fetchMyInfo = async (email) => {
 };
 
 //위치 변경
-export const changeLocationInfo = async (location, city, email) => {
+export const changeLocationInfo = async (
+  location,
+  city,
+  latitude,
+  longitude,
+  email
+) => {
   const [result] = await db.query(
-    "UPDATE userinfo SET location = ?, city = ? WHERE email = ?",
-    [location, city, email]
+    "UPDATE userinfo SET location = ?, city = ?, latitude = ?, longitude = ? WHERE email = ?",
+    [location, city, latitude, longitude, email]
   );
   return result;
 };

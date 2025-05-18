@@ -142,10 +142,10 @@ export const getMyInfo = async (req, res) => {
 //위치 변경
 export const changeLocation = async (req, res) => {
   const { email } = req.user; // 토큰에서 이메일
-  const { location, city } = req.body; // 요청 본문에서 새 위치
+  const { location, city, latitude, longitude } = req.body; // 요청 본문에서 새 위치
 
   try {
-    await changeLocationInfo(location, city, email);
+    await changeLocationInfo(location, city, latitude, longitude, email);
     res.status(200).json({ message: "변경 완료", location, city });
   } catch (error) {
     console.error("위치 변경 에러:", error);

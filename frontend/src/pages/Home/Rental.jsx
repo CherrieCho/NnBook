@@ -12,7 +12,7 @@ export default function Rental() {
 
   const { data: mydata, isLoading: userLoading } = useMyInfoQuery();
   // 대여 가능 도서 ID 목록 불러오기
-  const { data: lendabledata } = useLendableBooksQuery();
+  const { data: lendabledata, isLoading: lendableLoading } = useLendableBooksQuery();
   //id만 뽑아오기
   const bookIds = lendabledata?.map((item) => item.bookId) || [];
 
@@ -44,21 +44,15 @@ export default function Rental() {
         md={5}
         className="gx-1 gy-1 justify-content-center justify-content-sm-start"
       >
-        {books.map((book) => (
+        {books?.map((book) => (
           <Col key={book.itemId || book.id}>
             <BookCard book={book} />
           </Col>
         ))}
       </Row>
-      {!mydata?.email ? (
-        <p className="text-center mt-5">
-          누나네 책방에 가입하시고 책을 대여해보세요.
-        </p>
-      ) : (
-        books.length === 0 && (
+      {books.length === 0 && (
           <p className="text-center mt-5">아직 등록된 대여 도서가 없습니다.</p>
-        )
-      )}
+        )}
     </Container>
   );
 }

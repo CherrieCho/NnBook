@@ -1,19 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import authApi from "../utils/authApi";
 
-const fetchProgress = async (bookID, holderEmail) => {
+const fetchProgress = async (bookID) => {
   return authApi.get("/library/pages", {
     params: {
       bookID: bookID,
-      holderEmail: holderEmail,
     },
   });
 };
 
-export const useProgressDataQuery = ({ bookID, holderEmail }) => {
+export const useProgressDataQuery = ({ bookID }) => {
   return useQuery({
     queryKey: ["progress-now"],
-    queryFn: () => fetchProgress(bookID, holderEmail),
+    queryFn: () => fetchProgress(bookID),
     select: (result) => result.data,
   });
 };

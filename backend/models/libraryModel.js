@@ -84,10 +84,10 @@ export const addPages = async (
 };
 
 //진척도 불러오기
-export const getPages = async (bookID, holderEmail) => {
+export const getPages = async (bookID, email) => {
   const [rows] = await db.query(
     "SELECT pageNow, progressPercent, readAt FROM pageHistory WHERE bookId = ? AND holderEmail = ?",
-    [bookID, holderEmail]
+    [bookID, email]
   );
   return rows;
 };

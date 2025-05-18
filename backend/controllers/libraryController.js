@@ -118,9 +118,10 @@ export const addProgress = async (req, res) => {
 
 //진척도 불러오기
 export const getProgress = async (req, res) => {
-  const { bookID, holderEmail } = req.query;
+  const { bookID } = req.query;
+  const { email } = req.user; //토큰에서 가져오기
   try {
-    const progressData = await getPages(bookID, holderEmail);
+    const progressData = await getPages(bookID, email);
     res.status(200).json(progressData);
   } catch (error) {
     console.error("조회 실패:", error);

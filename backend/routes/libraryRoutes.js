@@ -30,7 +30,7 @@ router.get("/lended", verifyToken, getLendedBooks);
 router.get("/liked", verifyToken, getLikedBooks);
 router.patch("/liked", verifyToken, changeToLiked);
 router.post("/pages", verifyToken, addProgress);
-router.get("/pages", getProgress);
+router.get("/pages", verifyToken, getProgress);
 
 router.get("/reading", (req, res) => {
   const { ownerEmail, holderEmail } = req.query;

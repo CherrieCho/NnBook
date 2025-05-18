@@ -25,6 +25,8 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
     registerBookLend({ bookID, location });
   };
 
+  // console.log(bookinfo)
+
   if (isLoading) return <div>Loading...</div>;
 
   if (isError)

@@ -27,7 +27,7 @@ export const createUser = async (
 
 export const findAllUsers = async () => {
   const [rows] = await db.query(
-    "SELECT email, name, nickname, location FROM userinfo"
+    "SELECT email, name, nickname, location, latitude, longitude FROM userinfo"
   );
   return rows;
 };
@@ -42,7 +42,7 @@ export const createFavGenre = async (email, genre) => {
 
 export const fetchMyInfo = async (email) => {
   const [rows] = await db.query(
-    "SELECT email, name, nickname, location, city FROM userinfo WHERE email=?",
+    "SELECT email, name, nickname, location, city, latitude, longitude FROM userinfo WHERE email=?",
     [email]
   );
   return rows[0];

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "react-datepicker": "^8.3.0",
     "react-naver-maps": "^0.1.3"
   }
 }

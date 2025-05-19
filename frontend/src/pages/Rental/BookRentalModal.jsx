@@ -9,6 +9,7 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
   const navigate = useNavigate();
 
   const { data: lendabledata } = useLendableBooksQuery();
+  const lendableBooks = lendabledata?.data || [];
   const { mutate: borrowBook } = useBorrowMutation();
 
   const [location, setLocation] = useState(null);
@@ -20,11 +21,11 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
     navigate("/mypage");
   };
 
-  const rentInfo = lendabledata?.find((rent) => rent.bookId === book.itemId);
+  const rentInfo = lendableBooks?.find((rent) => rent.bookId === book.itemId);
 
-  console.log(lendabledata);
-  console.log("r", rentInfo);
-  console.log("b", book);
+  // console.log(lendableBooks);
+  // console.log("r", rentInfo);
+  // console.log("b", book);
 
   return (
     <Modal show={show} onHide={onClose} centered size="lg">

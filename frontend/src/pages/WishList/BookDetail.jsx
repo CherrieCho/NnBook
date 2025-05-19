@@ -20,6 +20,7 @@ const BookDetail = () => {
 
   const { bookID } = useParams();
   const { data: lendabledata } = useLendableBooksQuery();
+  const lendableBooks = lendabledata?.data || [];
   const { data: bookinfo, isLoading, error } = useBookByID(bookID);
   const value = bookinfo?.subInfo?.ratingInfo.ratingScore;
   //내정보 가져오는 훅, 내서재에 추가하는 훅
@@ -49,7 +50,7 @@ const BookDetail = () => {
 
   //책 대여가능 여부
   const canBorrowBook = () => {
-    const lendableBook = lendabledata?.filter((item) => item.bookId == bookID);
+    const lendableBook = lendableBooks?.filter((item) => item.bookId == bookID);
     if (lendableBook?.length === 0) {
       setCanBorrow(true);
     } else {

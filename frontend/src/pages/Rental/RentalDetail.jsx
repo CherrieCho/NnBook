@@ -14,7 +14,8 @@ export default function RentalDetail() {
 
   const { mutate: borrowBook } = useBorrowMutation();
   const { data: lendabledata } = useLendableBooksQuery();
-  const bookIds = lendabledata?.map(item => item.bookId) || [];
+  const lendableBooks = lendabledata?.data || [];
+  const bookIds = lendableBooks?.map((item) => item.bookId) || [];
   const bookQueries = useBookByIDs(bookIds);
 
   const isLoading = bookQueries.some(q => q.isLoading);
@@ -75,7 +76,7 @@ export default function RentalDetail() {
                 <p><strong>저자:</strong> {book.author}</p>
                 <p><strong>출판사:</strong> {book.publisher}</p>
                 <p><strong>대여자 위치:</strong> {
-                  lendabledata?.find(ld => ld.bookId === book.itemId || ld.bookId === book.id)?.location || '알 수 없음'
+                  lendableBooks?.find(ld => ld.bookId === book.itemId || ld.bookId === book.id)?.location || '알 수 없음'
                 }</p>
                 <hr />
                 <p className="book-detail-desc">{book.description}</p>

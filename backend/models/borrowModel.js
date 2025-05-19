@@ -65,13 +65,13 @@ export const fetchMyBookLend = async (email) => {
 };
 
 //도서대출
-export const FetchBorrowReq = async (bookId, owner, email) => {
-  const [result] = await db.query(
-    "INSERT INTO userlibrary (bookId, ownerEmail, holderEmail) VALUES (?, ?, ?)",
-    [bookId, owner, email]
-  );
-  return result;
-};
+// export const FetchBorrowReq = async (bookId, owner, email) => {
+//   const [result] = await db.query(
+//     "INSERT INTO userlibrary (bookId, ownerEmail, holderEmail) VALUES (?, ?, ?)",
+//     [bookId, owner, email]
+//   );
+//   return result;
+// };
 
 //대출된 책은 대출가능 목록에서 삭제
 export const deleteBookLend = async (bookId) => {
@@ -82,9 +82,19 @@ export const deleteBookLend = async (bookId) => {
   return result;
 };
 
+//대여중인 책 테이블에 책 추가(대여된 책들)
+export const addBorrowBook = async (bookId, owner, email) => {
+  const [result] = await db.query(
+    "INSERT INTO borrowedBooks (bookId, ownerEmail, holderEmail) VALUES (?, ?, ?)",
+    [bookId, owner, email]
+  );
+  return result;
+};
+
+//내가 빌리고 있는 책 보기
 export const findBorrowingBook = async (email) => {
   const [rows] = await db.query(
-    `SELECT id, bookID FROM userlibrary WHERE holderEmail = ? && ownerEmail != ?`,
+    `SELECT id, bookID FROM borrowedBooks WHERE holderEmail = ?`,
     [email, email]
   );
   return rows;

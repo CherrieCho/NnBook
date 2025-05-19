@@ -14,6 +14,8 @@ import { useNavigate } from "react-router";
 import { useLikedBooksQuery } from "../../hooks/useLikedBooks";
 import { useBorrowingBooksQuery } from "../../hooks/useBorrowingBooks";
 import useUserGenres from "../../hooks/useUserGenres";
+import { useLikedBooksBorrowQuery } from "../../hooks/useLikedBooksForBorrowed";
+import { useReadingBooksBorrowQuery } from "../../hooks/useReadingBooksForBorrowed";
 
 const MyPage = () => {
   const [form, setForm] = useState({ location: "" });
@@ -21,9 +23,29 @@ const MyPage = () => {
   const { data: readingdata } = useReadingBooksQuery();
   const { data: borrowdata } = useBorrowingBooksQuery();
   const { data: likedata } = useLikedBooksQuery();
+
+  //빌린책테이블에서 온 데이터
+  const { data: readingDataBorrowed } = useReadingBooksBorrowQuery();
+  const { data: likedDataBorrowed } = useLikedBooksBorrowQuery();
+
   const { data: genres } = useUserGenres(mydata?.email);
   const { mutate: updateLocation } = useLocationMutation();
   const navigate = useNavigate();
+
+  //읽고있는 책, 좋아요 한 책에 빌린 책 포함시키기
+    const readingDataPlusBorrowed =
+  (readingdata?.length ? readingdata : []).concat(
+    readingDataBorrowed?.length ? readingDataBorrowed : []
+  );
+  
+    const likeDataPlusBorrowed =
+  (likedata?.length ? likedata : []).concat(
+    likedDataBorrowed?.length ? likedDataBorrowed : []
+  );
+
+    // console.log("좋아요요", likedDataBorrowed)
+    // console.log("gk", readingDataPlusBorrowed)
+    // console.log("...", likeDataPlusBorrowed)
 
   //내서재 더보기
   const moveToLibrary = () => {
@@ -120,8 +142,8 @@ const MyPage = () => {
               </button>
             </div>
             <div>
-              {readingdata?.length > 0 && (
-                <SingleLineCarousel books={readingdata} />
+              {readingDataPlusBorrowed?.length > 0 && (
+                <SingleLineCarousel books={readingDataPlusBorrowed} />
               )}
             </div>
           </Col>
@@ -140,7 +162,7 @@ const MyPage = () => {
           <Col lg={12}>
             <h1 className="mypage-title">좋아요 한 책</h1>
             <div>
-              {likedata?.length > 0 && <SingleLineCarousel books={likedata} />}
+              {likeDataPlusBorrowed?.length > 0 && <SingleLineCarousel books={likeDataPlusBorrowed} />}
             </div>
           </Col>
         </Row>

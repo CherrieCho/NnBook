@@ -9,6 +9,9 @@ import {
   getLikedBooks,
   addProgress,
   getProgress,
+  getFinishedForBorrowed,
+  getLikedBooksForBorrowed,
+  getReadingForBorrowed,
 } from "../controllers/libraryController.js";
 import { verifyToken } from "../middlewares/veryfyToken.js";
 
@@ -31,6 +34,11 @@ router.get("/liked", verifyToken, getLikedBooks);
 router.patch("/liked", verifyToken, changeToLiked);
 router.post("/pages", verifyToken, addProgress);
 router.get("/pages", verifyToken, getProgress);
+
+//빌린책 테이블에서 불러오기
+router.get("/readingborrow", verifyToken, getReadingForBorrowed);
+router.get("/finishedborrow", verifyToken, getFinishedForBorrowed);
+router.get("/likedborrow", verifyToken, getLikedBooksForBorrowed);
 
 router.get("/reading", (req, res) => {
   const { ownerEmail, holderEmail } = req.query;

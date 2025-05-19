@@ -3,10 +3,11 @@ import {
   changeLendStatusFalse,
   deleteBookLend,
   fetchAllBookLend,
-  FetchBorrowReq,
+  // FetchBorrowReq,
   FetchNewBookLend,
   findBorrowingBook,
   fetchMyBookLend,
+  addBorrowBook,
 } from "../models/borrowModel.js";
 
 import { findReadingBooks, findFinishedBooks } from "../models/libraryModel.js";
@@ -58,7 +59,7 @@ export const borrowBook = async (req, res) => {
   const { email } = req.user; //토큰에서 가져오기
   try {
     //ownerEmail 뽑아오기
-    const lendList = await fetchAllBookLend(email);
+    const { rows: lendList } = await fetchAllBookLend(email);
     const owner = lendList?.find(
       (result) => Number(result.bookId) === Number(bookId)
     )?.ownerEmail;
@@ -74,8 +75,8 @@ export const borrowBook = async (req, res) => {
       return res.status(400).json({ message: "이미 서재에 추가된 도서입니다" });
     }
 
-    //도서대여하기
-    await FetchBorrowReq(bookId, owner, email);
+    //도서대여하기(대여중인 책 테이블에 새 row 추가)
+    await addBorrowBook(bookId, owner, email);
     //대여가능 도서리스트에서 삭제, 대여등록 상태 바꾸기
     await deleteBookLend(bookId);
     await changeLendStatusFalse(bookId, email);

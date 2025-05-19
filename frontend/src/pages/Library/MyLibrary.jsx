@@ -6,6 +6,8 @@ import SingleLineCarousel from "../../common/react-multi-carousel/SingleLineCaro
 import { useReadingBooksQuery } from "../../hooks/useReadingBooks";
 import { useFinishedBooksQuery } from "../../hooks/useFinishedBooks";
 import { useLendedBooksQuery } from "../../hooks/useLendedBooks";
+import { useFinishedBooksBorrowQuery } from "../../hooks/usedFinishedBooksForBorrowed";
+import { useReadingBooksBorrowQuery } from "../../hooks/useReadingBooksForBorrowed";
 
 const MyLibrary = () => {
   const { data: mydata, isLoading, isError, error } = useMyInfoQuery();
@@ -14,10 +16,24 @@ const MyLibrary = () => {
   const { data: finisheddata } = useFinishedBooksQuery();
   const { data: lendeddata } = useLendedBooksQuery();
 
-  console.log("data", mydata);
-  console.log("rb", readingdata);
-  console.log("fb", finisheddata);
-  console.log("lb", lendeddata);
+  //빌린책테이블에서 온 데이터
+  const { data: readingDataBorrowed } = useReadingBooksBorrowQuery();
+  const { data: finishedDataBorrowed } = useFinishedBooksBorrowQuery();
+
+    //읽고있는 책, 다읽은 책에 빌린 책 포함시키기
+  const readingDataPlusBorrowed =
+  (readingdata?.length ? readingdata : []).concat(
+    readingDataBorrowed?.length ? readingDataBorrowed : []
+  );
+  const finishedDataPlusBorrowed = 
+  (finisheddata?.length ? finisheddata : []).concat(
+    finishedDataBorrowed?.length ? finishedDataBorrowed : []
+  );
+
+  // console.log("data", mydata);
+  // console.log("rb", readingdata);
+  // console.log("fb", finisheddata);
+  // console.log("lb", lendeddata);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -31,8 +47,8 @@ const MyLibrary = () => {
         <h3 className="libraryTitle mb-3">읽고 있는 도서</h3>
         <div className="libraryBoxStroke libraryBookList">
           <div>
-            {readingdata?.length > 0 && (
-              <SingleLineCarousel books={readingdata} />
+            {readingDataPlusBorrowed?.length > 0 && (
+              <SingleLineCarousel books={readingDataPlusBorrowed} />
             )}
           </div>
         </div>
@@ -41,8 +57,8 @@ const MyLibrary = () => {
         <h3 className="libraryTitle mb-3">완독 도서</h3>
         <div className="libraryBoxStroke libraryBookList">
           <div>
-            {finisheddata?.length > 0 && (
-              <SingleLineCarousel books={finisheddata} libraryBookStatus="finished"/>
+            {finishedDataPlusBorrowed?.length > 0 && (
+              <SingleLineCarousel books={finishedDataPlusBorrowed} libraryBookStatus="finished"/>
             )}
           </div>
         </div>

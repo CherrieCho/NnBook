@@ -8,6 +8,8 @@ import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import { useLikedBooksQuery } from "../../hooks/useLikedBooks";
 import { useProgressMutation } from "../../hooks/useProgressMutation";
 import { useProgressDataQuery } from "../../hooks/useProgressData";
+import { useFinishBookMutation } from "../../hooks/useFinishBookMutation";
+import { useFinishedBooksQuery } from "../../hooks/useFinishedBooks";
 
 const MyLibraryDetail = () => {
   const [entries, setEntries] = useState([]);
@@ -17,6 +19,7 @@ const MyLibraryDetail = () => {
   const [inputDateTime, setInputDateTime] = useState("");
   const [inputPages, setInputPages] = useState("");
   const [inputTotal, setInputTotal] = useState("");
+  const [likeStatus, setLikeStatus] = useState(null); // 클릭 시 임시 저장
 
   const [showMinusPageModal, setShowMinusPageModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
@@ -24,15 +27,17 @@ const MyLibraryDetail = () => {
   const [showCompleteProgressBar, setShowCompleteProgressBar] = useState(false);
   const [showValidationMessage, setShowValidationMessage] = useState(false);
 
-  const [likeStatus, setLikeStatus] = useState(null); // 클릭 시 임시 저장
-
   const { bookID } = useParams();
   const numericBookID = Number(bookID);
 
   const { data: book, isLoading, error } = useBookByID(bookID);
   const { data: mydata } = useMyInfoQuery();
   const { data: likedBooks } = useLikedBooksQuery(); // 좋아요 목록 가져오기
+  const { data: finishedBooks } = useFinishedBooksQuery();
   const { mutate: addProgress } = useProgressMutation();
+  const { mutate: likeBook } = useLikeBookMutation();
+  const { mutate: finishBook } = useFinishBookMutation();
+
   const {
     data: progressData,
     isLoading: progressLoading,
@@ -43,7 +48,9 @@ const MyLibraryDetail = () => {
     (book) => Number(book.bookID) === numericBookID
   ); // 서버 기반 판단
 
-  const { mutate: likeBook } = useLikeBookMutation();
+  const isCompleted = finishedBooks?.some(
+    (book) => Number(book.bookID) === numericBookID
+  );
 
   useEffect(() => {
     if (book && book?.subInfo?.itemPage) {
@@ -139,9 +146,6 @@ const MyLibraryDetail = () => {
       setShowCompleteModal(true);
       setShowCompleteProgressBar(true);
     }
-
-    setInputDateTime("");
-    setInputPages("");
   };
 
   //진척도 퍼센트
@@ -158,12 +162,19 @@ const MyLibraryDetail = () => {
       setShowValidationMessage(true);
       return;
     }
-    setLikeStatus(status);
-    likeBook({ bookID: numericBookID });
+    if (status === "like") {
+      setLikeStatus(status);
+      likeBook({ bookID: numericBookID });
+    } else if (status === "dislike") {
+      finishBook({ bookID: numericBookID });
+    }
   };
 
   // console.log(entries)
   // console.log("겟해온거", progressData)
+
+  console.log(book);
+  console.log("lll", likedBooks);
 
   if (isLoading) return <p>로딩 중…</p>;
   if (error) return <p>오류: {error.message}</p>;
@@ -193,7 +204,13 @@ const MyLibraryDetail = () => {
               {isLiked !== undefined && (
                 <div className="libraryDetailBoxStroke libraryDetailRAL">
                   <div className="libraryDetailLike">
-                    {isLiked ? "👍 Like" : "😃 Please Rate!"}
+                    {isCompleted
+                      ? likedBooks.some(
+                          (book) => Number(book.bookID) === numericBookID
+                        )
+                        ? "👍 Like"
+                        : "👎 Dislike"
+                      : "😃 Please Rate!"}
                   </div>
                 </div>
               )}

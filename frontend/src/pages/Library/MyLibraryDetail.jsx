@@ -5,7 +5,7 @@ import useBookByID from "../../hooks/useBookbyID";
 import { useParams } from "react-router";
 import { useLikeBookMutation } from "../../hooks/useLikeBookMutation";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
-import { useLikedBooksQuery } from "../../hooks/useLikedBooks"; 
+import { useLikedBooksQuery } from "../../hooks/useLikedBooks";
 import { useProgressMutation } from "../../hooks/useProgressMutation";
 import { useProgressDataQuery } from "../../hooks/useProgressData";
 
@@ -33,9 +33,15 @@ const MyLibraryDetail = () => {
   const { data: mydata } = useMyInfoQuery();
   const { data: likedBooks } = useLikedBooksQuery(); // ✅ 좋아요 목록 가져오기
   const { mutate: addProgress } = useProgressMutation();
-  const { data: progressData, isLoading: progressLoading, error: progressError } = useProgressDataQuery({bookID: Number(bookID)});
+  const {
+    data: progressData,
+    isLoading: progressLoading,
+    error: progressError,
+  } = useProgressDataQuery({ bookID: Number(bookID) });
 
-  const isLiked = likedBooks?.some(book => Number(book.bookID) === numericBookID); // ✅ 서버 기반 판단
+  const isLiked = likedBooks?.some(
+    (book) => Number(book.bookID) === numericBookID
+  ); // ✅ 서버 기반 판단
 
   const { mutate: likeBook } = useLikeBookMutation();
 
@@ -70,20 +76,21 @@ const MyLibraryDetail = () => {
     if (!readPages || !total || !inputDateTime || isDuplicateDate) return;
 
     //페이지 누적치(데이터에서 불러오기)
-    const SumOfPages = progressData?.length > 0 && progressData[progressData.length - 1]?.pageSum
-    ? progressData[progressData.length - 1].pageSum
-    : 0;
+    const SumOfPages =
+      progressData?.length > 0 && progressData[progressData.length - 1]?.pageSum
+        ? progressData[progressData.length - 1].pageSum
+        : 0;
     const newSum = SumOfPages + readPages;
 
     if (newSum > total) {
-      setShowOverPageModal(true);
+      alert("총 페이지 수를 초과했어요!");
       return;
     }
 
     if (readPages < 0) {
-      setShowMinusPageModal(true);
+      alert("읽은 페이지 수는 0 이상이어야 해요!");
       return;
-    } 
+    }
 
     const percent = Math.min(Math.round((newSum / total) * 100), 100);
 
@@ -92,7 +99,13 @@ const MyLibraryDetail = () => {
     setProgress(percent);
 
     //서버에 전송
-    addProgress({ bookID: Number(bookID), pageNow: readPages, pageSum: newSum, progressPercent: percent, readAt: inputDateTime });
+    addProgress({
+      bookID: Number(bookID),
+      pageNow: readPages,
+      pageSum: newSum,
+      progressPercent: percent,
+      readAt: inputDateTime,
+    });
 
     if (newSum === total) {
       setShowCompleteModal(true);
@@ -104,9 +117,10 @@ const MyLibraryDetail = () => {
   };
 
   //진척도 퍼센트
-  const getPercent = Array.isArray(progressData) && progressData.length > 0
-  ? progressData[progressData.length - 1].progressPercent
-  : 0;
+  const getPercent =
+    Array.isArray(progressData) && progressData.length > 0
+      ? progressData[progressData.length - 1].progressPercent
+      : 0;
 
   const isTotalPagesInputDisabled =
     totalPages > 0 || (book && book?.subInfo?.itemPage);
@@ -184,11 +198,13 @@ const MyLibraryDetail = () => {
               <div className="libraryDetailProgressList">
                 <p>진척도 데이터를 불러오고 있어요...</p>
               </div>
-              ) : progressError ? (
-                <div className="libraryDetailProgressList">
-                  <p className="text-danger">진척도 불러오기 실패: {progressError.message}</p>
-                </div>
-              ) : (
+            ) : progressError ? (
+              <div className="libraryDetailProgressList">
+                <p className="text-danger">
+                  진척도 불러오기 실패: {progressError.message}
+                </p>
+              </div>
+            ) : (
               <div className="libraryDetailProgressList">
                 <ul>
                   {progressData?.map((progress, idx) => (
@@ -201,7 +217,7 @@ const MyLibraryDetail = () => {
                   ))}
                 </ul>
               </div>
-              )}
+            )}
           </div>
         </div>
 

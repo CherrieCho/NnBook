@@ -165,6 +165,7 @@ const MyLibraryDetail = () => {
     if (status === "like") {
       setLikeStatus(status);
       likeBook({ bookID: numericBookID });
+      finishBook({ bookID: numericBookID });
     } else if (status === "dislike") {
       finishBook({ bookID: numericBookID });
     }

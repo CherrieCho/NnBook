@@ -2,19 +2,35 @@ import React, { useState } from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
 import Map from "../../components/Map/Map";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import { useRegisterBookLendMutation } from "../../hooks/useRegisterBookLendMutation";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
 const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
-  const { data: mydata, isLoading: myLoading } = useMyInfoQuery();
   const [rentalDate, setRentalDate] = useState(new Date());
   const [location, setLocation] = useState(null);
   const [isMapVisible, setIsMapVisible] = useState(false);
   const [placeName, setPlaceName] = useState("");
 
-  console.log(mydata);
+  const { data: mydata, isLoading: myLoading } = useMyInfoQuery();
+  const { mutate: registerBookLend } = useRegisterBookLendMutation();
 
-  if (!book) return null;
+  const handleRegisterLend = () => {
+    if (!location || !placeName) {
+      alert("약속 장소를 선택하고 이름을 입력해주세요.");
+      return;
+    }
+
+    registerBookLend({
+      bookID: book.id,
+      email: mydata?.email,
+      location: `${mydata?.location || ""} ${placeName}`,
+      latitude: location.lat,
+      longitude: location.lng,
+    });
+
+    onClose();
+  };
 
   return (
     <Modal show={show} onHide={onClose} centered size="lg">
@@ -47,7 +63,7 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
               variant="outline-primary"
               onClick={() => setIsMapVisible(!isMapVisible)}
             >
-              {isMapVisible ? "약속장소 숨기기" : "약속장소 선택"}
+              약속 장소 선택
             </Button>
             {isMapVisible && (
               <>
@@ -59,7 +75,7 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
                 <input
                   type="text"
                   className="form-control mt-2"
-                  placeholder="약속 장소명을 입력해주세요."
+                  placeholder="핀을 움직여 장소를 설정하고, 약속 장소명을 입력해주세요~!"
                   maxLength={15}
                   value={placeName}
                   onChange={(e) => setPlaceName(e.target.value)}
@@ -74,13 +90,7 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
         <Button variant="secondary" onClick={onClose}>
           취소
         </Button>
-        <Button
-          className="rental-register-detail"
-          onClick={() => {
-            onSubmit(book);
-            onClose();
-          }}
-        >
+        <Button className="rental-register-detail" onClick={handleRegisterLend}>
           대여 등록
         </Button>
       </Modal.Footer>

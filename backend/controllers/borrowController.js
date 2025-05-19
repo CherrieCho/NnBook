@@ -12,10 +12,10 @@ import { findReadingBooks, findFinishedBooks } from "../models/libraryModel.js";
 
 //대여도서 등록
 export const addBookLend = async (req, res) => {
-  const { bookID, location } = req.body;
+  const { bookID, location, latitude, longitude } = req.body;
   try {
     const { email } = req.user; //토큰에서 가져오기
-    await FetchNewBookLend(bookID, email, location);
+    await FetchNewBookLend(bookID, email, location, latitude, longitude);
 
     //대여등록 상태 true로 바꾸기
     await changeLendStatus(bookID);

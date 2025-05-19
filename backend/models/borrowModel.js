@@ -1,9 +1,9 @@
 import { db } from "../config/db.js";
 
-export const FetchNewBookLend = async (bookID, email, location) => {
+export const FetchNewBookLend = async (bookID, email, location, latitude, longitude) => {
   const [result] = await db.query(
-    "INSERT INTO registerbooklend (bookId, ownerEmail, location) VALUES (?, ?, ?)",
-    [bookID, email, location]
+    "INSERT INTO registerbooklend (bookId, ownerEmail, location, latitude, longitude) VALUES (?, ?, ?, ?, ?)",
+    [bookID, email, location, latitude, longitude]
   );
   return result;
 };

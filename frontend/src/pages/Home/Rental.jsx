@@ -33,6 +33,8 @@ export default function Rental() {
     return <p>에러 발생: {firstError?.message}</p>;
   }
 
+  console.log(lendableBooks)
+
   return (
     <Container className="py-4 rental-container">
       <div className="rental-home-title">

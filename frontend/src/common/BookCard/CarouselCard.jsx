@@ -8,6 +8,9 @@ import { useRegisterBookLendMutation } from "../../hooks/useRegisterBookLendMuta
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import BookRentalRegistrationModal from "../../pages/Library/BookRentalRegistrationModal";
 import { useBorrowingBooksQuery } from "../../hooks/useBorrowingBooks";
+import { useMyLendableQuery } from "../../hooks/useBooksIRegistered";
+import { useLendedBooksQuery } from "../../hooks/useLendedBooks";
+
 
 export default function BookCard({ bookID, libraryBookStatus, email }) {
   const navigate = useNavigate();
@@ -15,6 +18,8 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
   const { data: bookinfo, isLoading, isError, error } = useBookByID(bookID);
   const { data: mydata } = useMyInfoQuery();
   const {data: borrowdata} = useBorrowingBooksQuery();
+  const { data: mylendabledata } = useMyLendableQuery();
+  const { data: lendeddata } = useLendedBooksQuery();
   const { mutate: registerBookLend } = useRegisterBookLendMutation();
 
   const [showModal, setShowModal] = useState(false);
@@ -52,7 +57,11 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
           e.target.src = "/fallback-image.png";
         }}
       />
-      {libraryBookStatus === "finished"  && !borrowdata?.find((book) => book?.bookID === bookID) && (
+      {/* 완독한 책 중에서 내가 빌린 책, 이미 대여등록한 책, 빌려준 책 제외 대여등록 가능 */}
+      {libraryBookStatus === "finished"  && !borrowdata?.find((book) => book?.bookID === bookID) 
+        && !mylendabledata?.find((book) => book?.bookId === bookID) 
+        && !lendeddata?.find((book) => book?.bookID === bookID) 
+        && (
         <button
           className="lend-btn "
           onClick={(e) => {

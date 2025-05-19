@@ -73,12 +73,13 @@ export const addPages = async (
   bookID,
   email,
   pageNow,
+  pageSum,
   progressPercent,
   readAt
 ) => {
   const [result] = await db.query(
-    "INSERT INTO pageHistory (bookId, holderEmail, pageNow, progressPercent, readAt) VALUES (?, ?, ?, ?, ?)",
-    [bookID, email, pageNow, progressPercent, readAt]
+    "INSERT INTO pageHistory (bookId, holderEmail, pageNow, pageSum, progressPercent, readAt) VALUES (?, ?, ?, ?, ?, ?)",
+    [bookID, email, pageNow, pageSum, progressPercent, readAt]
   );
   return result;
 };
@@ -86,7 +87,7 @@ export const addPages = async (
 //진척도 불러오기
 export const getPages = async (bookID, email) => {
   const [rows] = await db.query(
-    "SELECT pageNow, progressPercent, readAt FROM pageHistory WHERE bookId = ? AND holderEmail = ?",
+    "SELECT pageNow, pageSum, progressPercent, readAt FROM pageHistory WHERE bookId = ? AND holderEmail = ?",
     [bookID, email]
   );
   return rows;

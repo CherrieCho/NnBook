@@ -11,7 +11,7 @@ const fetchBookByID = async (bookID) => {
     },
   });
 
-  //데이터 없으면 trow error
+  //데이터 없으면 throw error
   const item = res?.data?.item;
   if (!Array.isArray(item) || item.length === 0) {
     throw new Error(`일시적 응답 실패: bookID=${bookID}`);

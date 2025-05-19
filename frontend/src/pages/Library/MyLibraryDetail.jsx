@@ -12,7 +12,6 @@ import { useProgressDataQuery } from "../../hooks/useProgressData";
 const MyLibraryDetail = () => {
   const [entries, setEntries] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [currentPageSum, setCurrentPageSum] = useState(0);
   const [progress, setProgress] = useState(0);
 
   const [inputDateTime, setInputDateTime] = useState("");
@@ -70,7 +69,11 @@ const MyLibraryDetail = () => {
 
     if (!readPages || !total || !inputDateTime || isDuplicateDate) return;
 
-    const newSum = currentPageSum + readPages;
+    //페이지 누적치(데이터에서 불러오기)
+    const SumOfPages = progressData?.length > 0 && progressData[progressData.length - 1]?.pageSum
+    ? progressData[progressData.length - 1].pageSum
+    : 0;
+    const newSum = SumOfPages + readPages;
 
     if (newSum > total) {
       setShowOverPageModal(true);
@@ -80,17 +83,16 @@ const MyLibraryDetail = () => {
     if (readPages < 0) {
       setShowMinusPageModal(true);
       return;
-    }
+    } 
 
     const percent = Math.min(Math.round((newSum / total) * 100), 100);
 
     setEntries([...entries, { date: inputDateTime, pages: readPages }]);
-    setCurrentPageSum(newSum);
     if (totalPages === 0) setTotalPages(total);
     setProgress(percent);
 
     //서버에 전송
-    addProgress({ bookID: Number(bookID), pageNow: readPages, progressPercent: percent, readAt: inputDateTime });
+    addProgress({ bookID: Number(bookID), pageNow: readPages, pageSum: newSum, progressPercent: percent, readAt: inputDateTime });
 
     if (newSum === total) {
       setShowCompleteModal(true);
@@ -195,7 +197,7 @@ const MyLibraryDetail = () => {
                 </ul>
                 <ul>
                   {progressData?.map((progress, idx) => (
-                    <li key={idx}>{progress.pageNow} 페이지</li>
+                    <li key={idx}>{progress.pageSum} 페이지</li>
                   ))}
                 </ul>
               </div>

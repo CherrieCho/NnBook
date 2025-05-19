@@ -8,7 +8,7 @@ const fetchMyLendable = async () => {
 
 export const useMyLendableQuery = () => {
   return useQuery({
-    queryKey: ["books-lendable"],
+    queryKey: ["my-books-lendable"],
     queryFn: fetchMyLendable,
     retry: false, // 토큰 오류 시 무한 재시도 방지
     staleTime: 1000 * 60 * 5,

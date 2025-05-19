@@ -105,9 +105,9 @@ export const getLikedBooks = async (req, res) => {
 //진척도 기록하기
 export const addProgress = async (req, res) => {
   const { email } = req.user; //토큰에서 가져오기
-  const { bookID, pageNow, progressPercent, readAt } = req.body;
+  const { bookID, pageNow, pageSum, progressPercent, readAt } = req.body;
   try {
-    await addPages(bookID, email, pageNow, progressPercent, readAt);
+    await addPages(bookID, email, pageNow, pageSum, progressPercent, readAt);
 
     res.status(201).json({ message: "진척도 추가 완료!" });
   } catch (error) {

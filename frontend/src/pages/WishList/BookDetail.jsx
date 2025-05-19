@@ -36,16 +36,6 @@ const BookDetail = () => {
     }
   };
 
-  //대여신청
-  const goToRental = () => {
-    if (!mydata?.email) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-    } else {
-      navigate(`/rental/${bookID}`);
-    }
-  };
-
   const goToAladin = () => {
     if (!mydata?.email) {
       alert("로그인이 필요합니다.");

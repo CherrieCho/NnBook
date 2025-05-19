@@ -5,10 +5,11 @@ export const useProgressMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ bookID, pageNow, progressPercent, readAt }) =>
+    mutationFn: ({ bookID, pageNow, pageSum, progressPercent, readAt }) =>
       authApi.post("/library/pages", {
         bookID,
         pageNow,
+        pageSum,
         progressPercent,
         readAt,
       }),

@@ -7,12 +7,14 @@ import { useAddToLibraryMutation } from "../../hooks/useAddToLibraryMutation";
 import { useRegisterBookLendMutation } from "../../hooks/useRegisterBookLendMutation";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import BookRentalRegistrationModal from "../../pages/Library/BookRentalRegistrationModal";
+import { useBorrowingBooksQuery } from "../../hooks/useBorrowingBooks";
 
 export default function BookCard({ bookID, libraryBookStatus, email }) {
   const navigate = useNavigate();
 
   const { data: bookinfo, isLoading, isError, error } = useBookByID(bookID);
   const { data: mydata } = useMyInfoQuery();
+  const {data: borrowdata} = useBorrowingBooksQuery();
   const { mutate: registerBookLend } = useRegisterBookLendMutation();
 
   const [showModal, setShowModal] = useState(false);
@@ -50,7 +52,7 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
           e.target.src = "/fallback-image.png";
         }}
       />
-      {libraryBookStatus === "finished" && (
+      {libraryBookStatus === "finished"  && !borrowdata?.find((book) => book?.bookID === bookID) && (
         <button
           className="lend-btn "
           onClick={(e) => {

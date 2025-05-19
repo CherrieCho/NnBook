@@ -1,6 +1,12 @@
 import { db } from "../config/db.js";
 
-export const FetchNewBookLend = async (bookID, email, location, latitude, longitude) => {
+export const FetchNewBookLend = async (
+  bookID,
+  email,
+  location,
+  latitude,
+  longitude
+) => {
   const [result] = await db.query(
     "INSERT INTO registerbooklend (bookId, ownerEmail, location, latitude, longitude) VALUES (?, ?, ?, ?, ?)",
     [bookID, email, location, latitude, longitude]
@@ -38,6 +44,15 @@ export const fetchAllBookLend = async (email) => {
     const [rows] = await db.query("SELECT * FROM registerbooklend");
     return rows;
   }
+};
+
+//내가 대여등록한 도서 조회
+export const fetchMyBookLend = async (email) => {
+  const [rows] = await db.query(
+    `SELECT * FROM registerbooklend WHERE ownerEmail = ?`,
+    [email]
+  );
+  return rows;
 };
 
 //도서대출

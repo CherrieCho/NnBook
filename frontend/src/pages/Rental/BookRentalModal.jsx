@@ -1,9 +1,30 @@
-// src/library/components/BookRentalModal.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
+import Map from "../../components/Map/Map";
+import { useLendableBooksQuery } from "../../hooks/uselendable";
+import { useBorrowMutation } from "../../hooks/useBorrowMutation";
+import { useNavigate } from "react-router";
 
 export default function BookRentalModal({ show, book, onClose, onSubmit }) {
-  if (!book) return null;
+  const navigate = useNavigate();
+
+  const { data: lendabledata } = useLendableBooksQuery();
+  const { mutate: borrowBook } = useBorrowMutation();
+
+  const [location, setLocation] = useState(null);
+  const [isMapVisible, setIsMapVisible] = useState(false);
+  const [placeName, setPlaceName] = useState("");
+
+  const startBorrowing = () => {
+    borrowBook({ bookId: book.itemId });
+    navigate("/mypage");
+  };
+
+  const rentInfo = lendabledata?.find((rent) => rent.bookId === book.itemId);
+
+  console.log(lendabledata);
+  console.log("r", rentInfo);
+  console.log("b", book);
 
   return (
     <Modal show={show} onHide={onClose} centered size="lg">
@@ -20,17 +41,13 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
           </Col>
           <Col md={8}>
             <h2 className="book-detail-title">{book.title}</h2>
-            <p>
-              <strong>대여자 : </strong> {}
-            </p>
-            <p>
-              <strong>대여 장소 : </strong> {}
-            </p>
-            <p>
-              <strong>대여 날짜 : </strong> {}
-            </p>
             <hr />
-            <p className="book-detail-desc">{book.description}</p>
+            <p>대여 장소 : {rentInfo?.location || "정보 없음"}</p>
+            <Map
+              lat={rentInfo?.latitude}
+              lng={rentInfo?.longitude}
+              onLocationSelect={setLocation}
+            />
           </Col>
         </Row>
       </Modal.Body>
@@ -39,13 +56,7 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
         <Button variant="secondary" onClick={onClose}>
           취소
         </Button>
-        <Button
-          className="rental-detail"
-          onClick={() => {
-            onSubmit(book);
-            onClose();
-          }}
-        >
+        <Button className="rental-detail" onClick={startBorrowing}>
           대여 신청
         </Button>
       </Modal.Footer>

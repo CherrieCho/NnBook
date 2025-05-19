@@ -28,7 +28,7 @@ const Map = ({ lat, lng, onLocationSelect }) => {
         defaultCenter={{ lat, lng }}
         zoom={15}
         minZoom={15}
-        maxZoom={15}
+        maxZoom={18}
         draggable={false}
         onClick={handleMapClick}
       >

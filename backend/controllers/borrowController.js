@@ -6,6 +6,7 @@ import {
   FetchBorrowReq,
   FetchNewBookLend,
   findBorrowingBook,
+  fetchMyBookLend,
 } from "../models/borrowModel.js";
 
 import { findReadingBooks, findFinishedBooks } from "../models/libraryModel.js";
@@ -31,6 +32,17 @@ export const getAllBookLend = async (req, res) => {
   const email = req.user?.email; //토큰에서 가져오기
   try {
     const rows = await fetchAllBookLend(email);
+    res.status(200).json(rows);
+  } catch (error) {
+    res.status(500).json({ message: "서버 오류, 조회 실패" });
+  }
+};
+
+//내가 대여등록한 도서 조회
+export const getMyLendable = async (req, res) => {
+  const email = req.user?.email; //토큰에서 가져오기
+  try {
+    const rows = await fetchMyBookLend(email);
     res.status(200).json(rows);
   } catch (error) {
     res.status(500).json({ message: "서버 오류, 조회 실패" });

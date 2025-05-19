@@ -2,19 +2,35 @@ import React, { useState } from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
 import Map from "../../components/Map/Map";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import { useRegisterBookLendMutation } from "../../hooks/useRegisterBookLendMutation";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
 const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
-  const { data: mydata, isLoading: myLoading } = useMyInfoQuery();
   const [rentalDate, setRentalDate] = useState(new Date());
   const [location, setLocation] = useState(null);
   const [isMapVisible, setIsMapVisible] = useState(false);
   const [placeName, setPlaceName] = useState("");
 
-  console.log(mydata);
+  const { data: mydata, isLoading: myLoading } = useMyInfoQuery();
+  const { mutate: registerBookLend } = useRegisterBookLendMutation();
 
-  if (!book) return null;
+  const handleRegisterLend = () => {
+    if (!location || !placeName) {
+      alert("약속 장소를 선택하고 이름을 입력해주세요.");
+      return;
+    }
+
+    registerBookLend({
+      bookID: book.id,
+      email: mydata?.email,
+      location: `${mydata?.location || ""} ${placeName}`,
+      latitude: location.lat,
+      longitude: location.lng,
+    });
+
+    onClose();
+  };
 
   return (
     <Modal show={show} onHide={onClose} centered size="lg">
@@ -66,6 +82,12 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
                 />
               </>
             )}
+            {location && (
+              <p className="mt-2 text-muted">
+                선택된 위치: 위도 {location.lat.toFixed(6)}, 경도{" "}
+                {location.lng.toFixed(6)}
+              </p>
+            )}
           </Col>
         </Row>
       </Modal.Body>
@@ -74,13 +96,7 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
         <Button variant="secondary" onClick={onClose}>
           취소
         </Button>
-        <Button
-          className="rental-register-detail"
-          onClick={() => {
-            onSubmit(book);
-            onClose();
-          }}
-        >
+        <Button className="rental-register-detail" onClick={handleRegisterLend}>
           대여 등록
         </Button>
       </Modal.Footer>

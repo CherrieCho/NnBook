@@ -18,6 +18,8 @@ const RentalList = () => {
 
   const { data: mydata } = useMyInfoQuery();
   const { data: allUsers } = useAllUsersQuery();
+  
+
 
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
@@ -90,10 +92,6 @@ const RentalList = () => {
     return <p>에러 발생: {firstError?.message}</p>;
   }
 
-  console.log(mydata);
-
-  console.log(lendabledata);
-
   return (
     <>
       <Container className="py-4 rental-container">
@@ -118,7 +116,7 @@ const RentalList = () => {
           className="gx-1 gy-1 justify-content-center justify-content-sm-start"
         >
           {displayBooks.map((book) => (
-            <div key={book.itemId || book.id} className="mb-3 text-center">
+            <div className="mb-3 text-center">
               <BookCard book={book} />
               <p>
                 {book.distance !== null

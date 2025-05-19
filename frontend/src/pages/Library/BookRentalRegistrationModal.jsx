@@ -63,7 +63,7 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
               variant="outline-primary"
               onClick={() => setIsMapVisible(!isMapVisible)}
             >
-              {isMapVisible ? "약속장소 숨기기" : "약속장소 선택"}
+              약속 장소 선택
             </Button>
             {isMapVisible && (
               <>
@@ -75,18 +75,12 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
                 <input
                   type="text"
                   className="form-control mt-2"
-                  placeholder="약속 장소명을 입력해주세요."
+                  placeholder="핀을 움직여 장소를 설정하고, 약속 장소명을 입력해주세요~!"
                   maxLength={15}
                   value={placeName}
                   onChange={(e) => setPlaceName(e.target.value)}
                 />
               </>
-            )}
-            {location && (
-              <p className="mt-2 text-muted">
-                선택된 위치: 위도 {location.lat.toFixed(6)}, 경도{" "}
-                {location.lng.toFixed(6)}
-              </p>
             )}
           </Col>
         </Row>

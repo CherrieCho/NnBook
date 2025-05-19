@@ -31,7 +31,7 @@ const MyLibraryDetail = () => {
 
   const { data: book, isLoading, error } = useBookByID(bookID);
   const { data: mydata } = useMyInfoQuery();
-  const { data: likedBooks } = useLikedBooksQuery(); // ✅ 좋아요 목록 가져오기
+  const { data: likedBooks } = useLikedBooksQuery(); // 좋아요 목록 가져오기
   const { mutate: addProgress } = useProgressMutation();
   const {
     data: progressData,
@@ -41,7 +41,7 @@ const MyLibraryDetail = () => {
 
   const isLiked = likedBooks?.some(
     (book) => Number(book.bookID) === numericBookID
-  ); // ✅ 서버 기반 판단
+  ); // 서버 기반 판단
 
   const { mutate: likeBook } = useLikeBookMutation();
 
@@ -83,7 +83,7 @@ const MyLibraryDetail = () => {
       alert("전체 페이지 수를 입력해주세요.");
       return;
     }
-    
+
     const isDuplicateDate = entries.some(
       (entry) => entry.date === inputDateTime
     );
@@ -93,6 +93,15 @@ const MyLibraryDetail = () => {
       return;
     }
 
+    const latestDate =
+      progressData?.length > 0
+        ? new Date(progressData[progressData.length - 1].readAt)
+        : null;
+    const inputDate = new Date(inputDateTime);
+    if (latestDate && inputDate < latestDate) {
+      alert("기록한 날짜보다 이전 날짜는 기록할 수 없어요.");
+      return;
+    }
 
     if (readPages < 0) {
       alert("읽은 페이지 수는 1쪽 이상이어야 해요.");

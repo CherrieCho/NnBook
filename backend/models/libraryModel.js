@@ -51,7 +51,7 @@ export const changeLike = async (bookID, email) => {
   const [result] = await db.query(
     `
     UPDATE userlibrary
-    SET isLiked = true, status = 'finished'
+    SET isLiked = true
     WHERE bookId = ?
       AND (ownerEmail = ? OR holderEmail = ?)
     `,

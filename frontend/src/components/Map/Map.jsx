@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Container as MapDiv, NaverMap, Marker } from "react-naver-maps";
 
-const Map = ({ lat = 37.5666103, lng = 126.9783882 }) => {
-    const [currentPosition, setCurrentPosition] = useState(null);
+const Map = ({ lat, lng }) => {
 
   return (
     <MapDiv
@@ -11,7 +9,13 @@ const Map = ({ lat = 37.5666103, lng = 126.9783882 }) => {
         height: "300px",
       }}
     >
-      <NaverMap defaultCenter={{ lat, lng }} defaultZoom={15}>
+      <NaverMap
+        defaultCenter={{ lat, lng }}
+        zoom={16}
+        minZoom={16}
+        maxZoom={16}
+        draggable={false}
+      >
         <Marker defaultPosition={{ lat, lng }} />
       </NaverMap>
     </MapDiv>

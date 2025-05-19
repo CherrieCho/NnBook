@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
 import Map from "../../components/Map/Map";
+import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
+  const { data: mydata, isLoading: myLoading } = useMyInfoQuery();
+  const [rentalDate, setRentalDate] = useState(new Date());
+  const [location, setLocation] = useState(null);
+  const [isMapVisible, setIsMapVisible] = useState(false);
+  const [placeName, setPlaceName] = useState("");
+
+  console.log(mydata);
+
   if (!book) return null;
 
   return (
@@ -23,13 +34,38 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
               {book.title?.split(" - ")[0].split(" (")[0]}
             </h2>
             <hr />
-            <p>대여자:</p>
-            <input></input>
-            <p>대여 장소:</p>
-            <input></input>
-            <p>대여 날짜:</p>
-            <input></input>
-            <Map lat={37.5666103} lng={126.9783882} />
+            <p>대여 가능 날짜:</p>
+            <DatePicker
+              selected={rentalDate}
+              onChange={(date) => setRentalDate(date)}
+              dateFormat="yyyy-MM-dd"
+              className="form-control"
+              placeholderText="날짜를 선택하세요"
+            />
+            <p>대여 희망 장소:</p>
+            <Button
+              variant="outline-primary"
+              onClick={() => setIsMapVisible(!isMapVisible)}
+            >
+              {isMapVisible ? "약속장소 숨기기" : "약속장소 선택"}
+            </Button>
+            {isMapVisible && (
+              <>
+                <Map
+                  lat={mydata?.latitude}
+                  lng={mydata?.longitude}
+                  onLocationSelect={setLocation}
+                />
+                <input
+                  type="text"
+                  className="form-control mt-2"
+                  placeholder="약속 장소명을 입력해주세요."
+                  maxLength={15}
+                  value={placeName}
+                  onChange={(e) => setPlaceName(e.target.value)}
+                />
+              </>
+            )}
           </Col>
         </Row>
       </Modal.Body>

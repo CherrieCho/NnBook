@@ -69,11 +69,35 @@ const MyLibraryDetail = () => {
     const readPages = parseInt(inputPages, 10);
     const total = totalPages > 0 ? totalPages : parseInt(inputTotal, 10);
 
+    if (!inputDateTime) {
+      alert("날짜를 선택해주세요.");
+      return;
+    }
+
+    if (!readPages) {
+      alert("읽은 페이지 수를 입력해주세요.");
+      return;
+    }
+
+    if (!total) {
+      alert("전체 페이지 수를 입력해주세요.");
+      return;
+    }
+    
     const isDuplicateDate = entries.some(
       (entry) => entry.date === inputDateTime
     );
 
-    if (!readPages || !total || !inputDateTime || isDuplicateDate) return;
+    if (isDuplicateDate) {
+      alert("이미 해당 날짜에 기록이 있습니다.");
+      return;
+    }
+
+
+    if (readPages < 0) {
+      alert("읽은 페이지 수는 1쪽 이상이어야 해요.");
+      return;
+    }
 
     //페이지 누적치(데이터에서 불러오기)
     const SumOfPages =
@@ -83,12 +107,7 @@ const MyLibraryDetail = () => {
     const newSum = SumOfPages + readPages;
 
     if (newSum > total) {
-      alert("총 페이지 수를 초과했어요!");
-      return;
-    }
-
-    if (readPages < 0) {
-      alert("읽은 페이지 수는 0 이상이어야 해요!");
+      alert("총 페이지 수를 초과했어요.");
       return;
     }
 

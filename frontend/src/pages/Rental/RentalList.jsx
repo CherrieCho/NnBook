@@ -12,7 +12,7 @@ import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 const RentalList = () => {
   const navigate = useNavigate();
 
-  const pageSize = 15;
+  const pageSize = 10;
   const [page, setPage] = useState(1);
   const [sortByDistance, setSortByDistance] = useState(false);
 
@@ -25,8 +25,13 @@ const RentalList = () => {
     setPage(selected + 1);
   };
 
+  //대여가능한 도서
   const { data: lendabledata } = useLendableBooksQuery(page, pageSize);
-  const bookIds = lendabledata?.map((item) => item.bookId) || [];
+  //응답으로 받아온 데이터 중에서 data 부분이랑 totalCount부분 분리
+  const lendableBooks = lendabledata?.data || [];
+  const totalCount = lendabledata?.totalCount || 0;
+
+  const bookIds = lendableBooks?.map((item) => item.bookId) || [];
   const bookQueries = useBookByIDs(bookIds);
 
   const isLoading = bookQueries.some((q) => q.isLoading);
@@ -37,7 +42,7 @@ const RentalList = () => {
     .map((q) => q.data);
 
   let displayBooks = books.map((book, index) => {
-    const ownerEmail = lendabledata[index]?.ownerEmail;
+    const ownerEmail = lendableBooks[index]?.ownerEmail;
     const ownerInfo = allUsers?.find((user) => user.email === ownerEmail);
 
     let distance = null;
@@ -135,7 +140,7 @@ const RentalList = () => {
           onPageChange={handlePageClick}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
-          pageCount={Math.ceil(lendabledata?.length / 15)}
+          pageCount={Math.ceil(totalCount / pageSize)}
           previousLabel="<"
           pageClassName="page-item"
           pageLinkClassName="page-link"

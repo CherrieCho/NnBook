@@ -12,9 +12,10 @@ export default function Rental() {
 
   const { data: mydata, isLoading: userLoading } = useMyInfoQuery();
   // 대여 가능 도서 ID 목록 불러오기
-  const { data: lendabledata, isLoading: lendableLoading } = useLendableBooksQuery();
+    const { data: lendabledata } = useLendableBooksQuery();
+    const lendableBooks = lendabledata?.data || [];
   //id만 뽑아오기
-  const bookIds = lendabledata?.map((item) => item.bookId) || [];
+  const bookIds = lendableBooks?.map((item) => item.bookId) || [];
 
   // 각 ID에 해당하는 도서 정보 요청
   const bookQueries = useBookByIDs(bookIds);

@@ -30,20 +30,29 @@ export const changeLendStatusFalse = async (bookId, email) => {
   return result;
 };
 
-//현재 대여 가능한 도서 조회
-export const fetchAllBookLend = async (email) => {
+//현재 대여 가능한 도서 조회(페이지네이션 반영)
+export const fetchAllBookLend = async (email, page = 1, pageSize = 10) => {
+  const offset = (page - 1) * pageSize;
+
+  let rowsQuery, countQuery, rowsParams, countParams;
+
   if (email) {
-    // 로그인 상태: 내가 등록한 책 제외
-    const [rows] = await db.query(
-      "SELECT * FROM registerbooklend WHERE ownerEmail != ?",
-      [email]
-    );
-    return rows;
+    rowsQuery = `SELECT * FROM registerbooklend WHERE ownerEmail != ? LIMIT ? OFFSET ?`;
+    countQuery = `SELECT COUNT(*) AS total FROM registerbooklend WHERE ownerEmail != ?`;
+    rowsParams = [email, pageSize, offset];
+    countParams = [email];
   } else {
-    // 비로그인 상태: 전체 목록 조회
-    const [rows] = await db.query("SELECT * FROM registerbooklend");
-    return rows;
+    rowsQuery = `SELECT * FROM registerbooklend LIMIT ? OFFSET ?`;
+    countQuery = `SELECT COUNT(*) AS total FROM registerbooklend`;
+    rowsParams = [pageSize, offset];
+    countParams = [];
   }
+
+  const [rows] = await db.query(rowsQuery, rowsParams);
+  const [countResult] = await db.query(countQuery, countParams);
+  const totalCount = countResult[0]?.total || 0;
+
+  return { rows, totalCount };
 };
 
 //내가 대여등록한 도서 조회

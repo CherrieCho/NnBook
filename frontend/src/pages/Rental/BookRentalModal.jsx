@@ -42,12 +42,12 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
           <Col md={8}>
             <h2 className="book-detail-title">{book.title}</h2>
             <hr />
-            <p>대여 장소 : {rentInfo?.location || "정보 없음"}</p>
             <Map
               lat={rentInfo?.latitude}
               lng={rentInfo?.longitude}
               onLocationSelect={setLocation}
             />
+            <p>대여 장소 : {rentInfo?.location || "정보 없음"}</p>
           </Col>
         </Row>
       </Modal.Body>

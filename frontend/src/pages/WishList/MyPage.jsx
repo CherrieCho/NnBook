@@ -33,19 +33,17 @@ const MyPage = () => {
   const navigate = useNavigate();
 
   //읽고있는 책, 좋아요 한 책에 빌린 책 포함시키기
-    const readingDataPlusBorrowed =
-  (readingdata?.length ? readingdata : []).concat(
-    readingDataBorrowed?.length ? readingDataBorrowed : []
-  );
-  
-    const likeDataPlusBorrowed =
-  (likedata?.length ? likedata : []).concat(
+  const readingDataPlusBorrowed = (
+    readingdata?.length ? readingdata : []
+  ).concat(readingDataBorrowed?.length ? readingDataBorrowed : []);
+
+  const likeDataPlusBorrowed = (likedata?.length ? likedata : []).concat(
     likedDataBorrowed?.length ? likedDataBorrowed : []
   );
 
-    // console.log("좋아요요", likedDataBorrowed)
-    // console.log("gk", readingDataPlusBorrowed)
-    // console.log("...", likeDataPlusBorrowed)
+  // console.log("좋아요요", likedDataBorrowed)
+  // console.log("gk", readingDataPlusBorrowed)
+  // console.log("...", likeDataPlusBorrowed)
 
   //내서재 더보기
   const moveToLibrary = () => {
@@ -66,8 +64,9 @@ const MyPage = () => {
           console.log(address);
           const province = address.province || "";
           const city = address.city || address.county || address.state || "";
-          const borough = address.borough || address.suburb || address.city_district || "";
-            
+          const borough =
+            address.borough || address.suburb || address.city_district || "";
+
           //주소유형에 따라 다른 값 표시
           const locationValue = province ? `${province}` : `${city}`;
           const cityValue = province ? `${city}` : `${borough}`;
@@ -78,9 +77,17 @@ const MyPage = () => {
           });
 
           // 백엔드에 전송
-          updateLocation({location: locationValue, city: cityValue, latitude, longitude});
+          updateLocation({
+            location: locationValue,
+            city: cityValue,
+            latitude,
+            longitude,
+          });
         } catch {
-          setForm({ location: "위치 정보 불러오기 실패", city: "위치 상세정보 불러오기 실패" });
+          setForm({
+            location: "위치 정보 불러오기 실패",
+            city: "위치 상세정보 불러오기 실패",
+          });
         }
       });
     } else {
@@ -153,7 +160,7 @@ const MyPage = () => {
             <h1 className="mypage-title">대여중인 책</h1>
             <div>
               {borrowdata?.length > 0 && (
-                <SingleLineCarousel books={borrowdata} />
+                <SingleLineCarousel books={borrowdata} libraryBookStatus="borrowed"/>
               )}
             </div>
           </Col>
@@ -162,7 +169,9 @@ const MyPage = () => {
           <Col lg={12}>
             <h1 className="mypage-title">좋아요 한 책</h1>
             <div>
-              {likeDataPlusBorrowed?.length > 0 && <SingleLineCarousel books={likeDataPlusBorrowed} />}
+              {likeDataPlusBorrowed?.length > 0 && (
+                <SingleLineCarousel books={likeDataPlusBorrowed} />
+              )}
             </div>
           </Col>
         </Row>

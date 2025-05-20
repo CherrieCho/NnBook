@@ -32,9 +32,7 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
     registerBookLend({ bookID, location });
   };
 
-  const handleBookReturn = (book) => {
-    registerBookLend({ bookID, location });
-  };
+  const handleBookReturn = (book) => {};
 
   const moveToDetail = (bookID) => {
     navigate(`/library/${bookID}`);

@@ -80,7 +80,15 @@ export const addReading = async (req, res) => {
   const { bookID, ownerEmail, holderEmail } = req.body;
   try {
     const existingBook = await findReadingBooks(ownerEmail, holderEmail);
-    if (existingBook.find((result) => result.bookID === bookID)) {
+    const existingBookBorrow = await findReadingBooksForBorrowed(holderEmail);
+    const finishedBook = await findFinishedBooks(ownerEmail, holderEmail);
+    const finishedBookBorrow = await findFinishedBooksForBorrowed(holderEmail);
+    if (
+      existingBook.find((result) => result.bookID === bookID) ||
+      existingBookBorrow.find((result) => result.bookID === bookID) ||
+      finishedBook.find((result) => result.bookID === bookID) ||
+      finishedBookBorrow.find((result) => result.bookID === bookID)
+    ) {
       return res.status(400).json({ message: "이미 추가된 도서입니다" });
     }
 

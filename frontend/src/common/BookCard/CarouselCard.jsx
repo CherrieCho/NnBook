@@ -10,6 +10,8 @@ import BookRentalRegistrationModal from "../../pages/Library/BookRentalRegistrat
 import { useBorrowingBooksQuery } from "../../hooks/useBorrowingBooks";
 import { useMyLendableQuery } from "../../hooks/useBooksIRegistered";
 import { useLendedBooksQuery } from "../../hooks/useLendedBooks";
+import { useReturnMutation } from "../../hooks/useReturnMutation";
+import { useFinishedBooksBorrowQuery } from "../../hooks/usedFinishedBooksForBorrowed";
 
 export default function BookCard({ bookID, libraryBookStatus, email }) {
   const navigate = useNavigate();
@@ -19,7 +21,9 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
   const { data: borrowdata } = useBorrowingBooksQuery();
   const { data: mylendabledata } = useMyLendableQuery();
   const { data: lendeddata } = useLendedBooksQuery();
+  const { data: finishedDataBorrowed } = useFinishedBooksBorrowQuery();
   const { mutate: registerBookLend } = useRegisterBookLendMutation();
+  const { mutate: returnThisBook } = useReturnMutation();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -31,8 +35,12 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
   const handleSubmit = (book) => {
     registerBookLend({ bookID, location });
   };
+  //ownerEmail 뽑기
+  const owner = borrowdata?.find((book) => book?.bookID === bookID)?.ownerEmail;
 
-  const handleBookReturn = (book) => {};
+  const handleBookReturn = (book) => {
+    returnThisBook({ bookID, owner });
+  };
 
   const moveToDetail = (bookID) => {
     navigate(`/library/${bookID}`);
@@ -62,6 +70,7 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
       {/* 완독한 책 중에서 내가 빌린 책, 이미 대여등록한 책, 빌려준 책 제외 대여등록 가능 */}
       {libraryBookStatus === "finished" &&
         !borrowdata?.find((book) => book?.bookID === bookID) &&
+        !finishedDataBorrowed?.find((book) => book?.bookID === bookID) &&
         !mylendabledata?.find((book) => book?.bookId === bookID) &&
         !lendeddata?.find((book) => book?.bookID === bookID) && (
           <button

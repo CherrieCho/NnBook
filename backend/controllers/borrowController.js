@@ -8,6 +8,8 @@ import {
   findBorrowingBook,
   fetchMyBookLend,
   addBorrowBook,
+  changeBorrow,
+  changeBorrowStatus,
 } from "../models/borrowModel.js";
 
 import { findReadingBooks, findFinishedBooks } from "../models/libraryModel.js";
@@ -86,7 +88,7 @@ export const borrowBook = async (req, res) => {
     await addBorrowBook(bookId, owner, email);
     //대여가능 도서리스트에서 삭제, 대여등록 상태 바꾸기
     await deleteBookLend(bookId);
-    await changeLendStatusFalse(bookId, email);
+    await changeLendStatusFalse(bookId, owner);
     res.status(201).json({ message: "대여 완료!" });
   } catch (error) {
     console.error(error);
@@ -103,5 +105,20 @@ export const getBorrowingBook = async (req, res) => {
   } catch (error) {
     console.error("조회 실패:", error);
     res.status(500).json({ message: "조회 중 오류 발생" });
+  }
+};
+
+//도서 반납하기
+export const returnBook = async (req, res) => {
+  const { bookID, owner } = req.body;
+  const { email } = req.user; // 토큰에서 가져오기
+  try {
+    await changeBorrowStatus(bookID, owner);
+    await changeBorrow(bookID, email);
+
+    res.status(201).json({ message: "반납 완료" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "서버 에러" });
   }
 };

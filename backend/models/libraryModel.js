@@ -12,7 +12,7 @@ export const findReadingBooks = async (email) => {
 //읽고있는 도서 조회(빌린책 테이블)
 export const findReadingBooksForBorrowed = async (email) => {
   const [rows] = await db.query(
-    `SELECT id, bookID FROM borrowedBooks WHERE holderEmail = ? AND status = "reading"`,
+    `SELECT id, bookID FROM borrowedBooks WHERE holderEmail = ? AND status = "reading" AND isReturned = false`,
     [email]
   );
   return rows;
@@ -53,7 +53,7 @@ export const addNewBook = async (bookID, ownerEmail, holderEmail) => {
   return result;
 };
 
-// 완독 상태
+// 완독 상태로 바꾸기
 export const changeStatus = async (bookID, email) => {
   const [result] = await db.query(
     `

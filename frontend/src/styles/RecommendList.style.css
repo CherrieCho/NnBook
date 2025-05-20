@@ -17,6 +17,11 @@ body {
   color: #4b4b4b;
 }
 
+.rental-title{
+    font-family: "Paperlogy-7Bold", serif;
+    font-size: 26px;
+    color: #4b4b4b;
+}
 
 .recommend-card {
   background-color: #ffffff;
@@ -48,4 +53,3 @@ body {
   font-weight: 600;
   line-height: 1.4;
 }
-

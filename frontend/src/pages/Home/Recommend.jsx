@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Spinner } from "react-bootstrap";
+import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
 import "../../styles/Recommend.style.css";
 import { useNavigate } from "react-router-dom";
 import useRecommendedBooks from "../../hooks/useRecommendedBooks";
@@ -81,19 +81,28 @@ const Recommend = ({ previewCount }) => {
   console.log(recommended);
 
   return (
-    <div className="recommend-section">
-      <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
-      <div className="recommend-grid">
-        {recommended.map((book, idx) => (
-          <BookCard book={book} />
-        ))}
+    <Container className="recommend-section">
+      <div className="rental-title">
+        <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
       </div>
+      <Row
+        xs={1}
+        sm={3}
+        md={5}
+        className="gx-1 gy-1 justify-content-center justify-content-sm-start"
+      >
+        {recommended.map((book, idx) => (
+          <Col>
+            <BookCard book={book} />
+          </Col>
+        ))}
+      </Row>
       {!mydata?.email && (
         <p className="text-center mt-5">
           누나네 책방에 가입하시고 취향에 맞는 도서를 추천받아보세요.
         </p>
       )}
-    </div>
+    </Container>
   );
 };
 

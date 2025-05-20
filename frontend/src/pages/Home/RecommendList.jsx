@@ -1,6 +1,6 @@
 import React from "react";
-import { Alert, Spinner } from "react-bootstrap";
-import "../../styles/Recommend.style.css";
+import { Alert, Container, Row, Spinner } from "react-bootstrap";
+import "../../styles/RecommendList.style.css";
 import { useNavigate } from "react-router-dom";
 import useRecommendedBooks from "../../hooks/useRecommendedBooks";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
@@ -90,13 +90,20 @@ const Recommend = () => {
   console.log(books);
 
   return (
-    <div className="recommend-section container">
-      <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
-      <div className="recommend-grid">
+    <Container className="book-list-container py-4">
+      <div className="rental-title">
+        <h3 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h3>
+      </div>
+      <Row
+        xs={1}
+        sm={3}
+        md={5}
+        className="gx-1 gy-1 justify-content-center justify-content-sm-start"
+      >
         {books?.map((book, idx) => (
           <BookCard book={book} />
         ))}
-      </div>
+      </Row>
       <ReactPaginate
         nextLabel=">"
         onPageChange={handlePageClick}
@@ -118,7 +125,7 @@ const Recommend = () => {
         renderOnZeroPageCount={null}
         forcePage={page - 1}
       />
-    </div>
+    </Container>
   );
 };
 

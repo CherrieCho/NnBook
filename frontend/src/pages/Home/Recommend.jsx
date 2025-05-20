@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useRecommendedBooks from "../../hooks/useRecommendedBooks";
 import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import useUserGenres from "../../hooks/useUserGenres";
+import BookCard from "../../common/BookCard/BookCard";
 
 const genreOptions = [
   { id: "1", name: "소설/시/희곡" },
@@ -84,23 +85,13 @@ const Recommend = ({ previewCount }) => {
       <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
       <div className="recommend-grid">
         {recommended.map((book, idx) => (
-          <div
-            key={idx}
-            className="recommend-card"
-            onClick={() => goToDetail(book.itemId)}
-          >
-            <img
-              src={book.cover?.replace("/api/image-proxy?url=", "")}
-              alt={book.title}
-            />
-            <div className="recommend-card-title">
-              {book.title?.split(" - ")[0].split(" (")[0]}
-            </div>
-          </div>
+          <BookCard book={book} />
         ))}
       </div>
       {!mydata?.email && (
-        <p className="text-center mt-5">누나네 책방에 가입하시고 취향에 맞는 도서를 추천받아보세요.</p>
+        <p className="text-center mt-5">
+          누나네 책방에 가입하시고 취향에 맞는 도서를 추천받아보세요.
+        </p>
       )}
     </div>
   );

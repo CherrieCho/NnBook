@@ -69,7 +69,9 @@ body {
   font-family: "MaruBuri", serif;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
 }
@@ -77,4 +79,21 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.spinner-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
 }

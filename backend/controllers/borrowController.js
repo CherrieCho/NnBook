@@ -67,12 +67,19 @@ export const borrowBook = async (req, res) => {
     //신청하려는 책이 이미 내 서재에 있는 경우
     const existingBook = await findReadingBooks(email);
     const finishedBook = await findFinishedBooks(email);
+    const borrowingBook = await findBorrowingBook(email);
 
     if (
       existingBook.find((result) => Number(result.bookID) === Number(bookId)) ||
       finishedBook.find((result) => Number(result.bookID) === Number(bookId))
     ) {
       return res.status(400).json({ message: "이미 서재에 추가된 도서입니다" });
+    }
+
+    if (
+      borrowingBook.find((result) => Number(result.bookID) === Number(bookId))
+    ) {
+      return res.status(400).json({ message: "이미 해당 도서를 대여중입니다" });
     }
 
     //도서대여하기(대여중인 책 테이블에 새 row 추가)

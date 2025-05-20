@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
   position: relative;
 }
 
@@ -47,7 +48,6 @@
   background-color: #d8f69e;
   color: #4b4b4b;
 }
-
 
 @media screen and (max-width: 767px) {
   .bookcard-contents img {

@@ -24,7 +24,7 @@ export const changeLendStatus = async (bookID) => {
 
 export const changeLendStatusFalse = async (bookId, owner) => {
   const [result] = await db.query(
-    "UPDATE userlibrary SET isLendable = false, isBorrowed = true WHERE bookId = ? && ownerEmail != ?",
+    "UPDATE userlibrary SET isLendable = false, isBorrowed = true WHERE bookId = ? && ownerEmail = ?",
     [bookId, owner]
   );
   return result;

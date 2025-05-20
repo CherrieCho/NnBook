@@ -5,9 +5,10 @@ export const useBorrowMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ bookId }) =>
+    mutationFn: ({ bookId, owner }) =>
       authApi.post("/borrow/borrowreq", {
         bookId,
+        owner,
       }),
     onSuccess: () => {
       queryClient.invalidateQueries(["myLibrary"]); // 필요 시 갱신

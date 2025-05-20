@@ -16,8 +16,11 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
   const [isMapVisible, setIsMapVisible] = useState(false);
   const [placeName, setPlaceName] = useState("");
 
+  //ownerEmail 뽑기
+  const owner = lendableBooks?.find((rent) => rent?.bookId === book.itemId)?.ownerEmail;
+
   const startBorrowing = () => {
-    borrowBook({ bookId: book.itemId });
+    borrowBook({ bookId: book.itemId, owner: owner });
     navigate("/mypage");
   };
 

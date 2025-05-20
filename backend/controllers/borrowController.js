@@ -57,15 +57,9 @@ export const getMyLendable = async (req, res) => {
 
 //도서 대여 신청
 export const borrowBook = async (req, res) => {
-  const { bookId } = req.body;
+  const { bookId, owner } = req.body;
   const { email } = req.user; //토큰에서 가져오기
   try {
-    //ownerEmail 뽑아오기
-    const { rows: lendList } = await fetchAllBookLend(email);
-    const owner = lendList?.find(
-      (result) => Number(result.bookId) === Number(bookId)
-    )?.ownerEmail;
-
     //신청하려는 책이 이미 내 서재에 있는 경우
     const existingBook = await findReadingBooks(email);
     const finishedBook = await findFinishedBooks(email);

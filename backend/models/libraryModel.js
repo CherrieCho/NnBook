@@ -36,6 +36,7 @@ export const findFinishedBooksForBorrowed = async (email) => {
   return rows;
 };
 
+//내가 빌려준 책 조회
 export const findLendedBooks = async (email) => {
   const [rows] = await db.query(
     `SELECT id, bookID FROM userlibrary WHERE ownerEmail = ? AND  isBorrowed = true`,

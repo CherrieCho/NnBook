@@ -81,7 +81,7 @@ body,
   min-height: 100vh;
 }
 
-.spinner-container{
+.spinner-container {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -92,4 +92,8 @@ body,
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+a {
+  text-decoration: none;
 }

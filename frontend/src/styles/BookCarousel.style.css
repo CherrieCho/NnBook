@@ -16,6 +16,7 @@
 
 .book-card {
   position: relative;
+  width: fit-content;
   flex: 0 0 calc(25% - 12px);
   max-width: calc(25% - 12px);
   background-color: transparent;
@@ -37,24 +38,19 @@
   .bottom-carousel {
     display: none;
   }
-
 }
 
 .book-card:hover {
-  transform: translateY(-5px);
+  transform: scale(1.05);
 }
 
 .book-card img {
-  width: 100%;
+  width: fit-content;
   max-height: 200px;
   object-fit: contain;
   border-radius: 4px;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.book-card:hover img {
-  opacity: 0.15;
-  transform: scale(1.05);
+  box-shadow: 0 0 5px rgba(75, 75, 75, 0.3);
+  transition: transform 0.5s ease;
 }
 
 .book-info {
@@ -73,15 +69,9 @@
   pointer-events: none;
 }
 
-.book-card:hover .book-info {
-  opacity: 1;
-  pointer-events: auto;
-}
-
 .book-title {
   font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-block: 0.5rem;
   color: #4b4b4b;
 }
 

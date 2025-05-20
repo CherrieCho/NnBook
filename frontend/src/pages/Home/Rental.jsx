@@ -12,8 +12,8 @@ export default function Rental() {
 
   const { data: mydata, isLoading: userLoading } = useMyInfoQuery();
   // 대여 가능 도서 ID 목록 불러오기
-    const { data: lendabledata } = useLendableBooksQuery();
-    const lendableBooks = lendabledata?.data || [];
+  const { data: lendabledata } = useLendableBooksQuery();
+  const lendableBooks = lendabledata?.data || [];
   //id만 뽑아오기
   const bookIds = lendableBooks?.map((item) => item.bookId) || [];
 
@@ -33,7 +33,7 @@ export default function Rental() {
     return <p>에러 발생: {firstError?.message}</p>;
   }
 
-  console.log(lendableBooks)
+  console.log(lendableBooks);
 
   return (
     <Container className="py-4 rental-container">

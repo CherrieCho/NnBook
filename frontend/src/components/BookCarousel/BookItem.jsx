@@ -9,7 +9,6 @@ const BookItem = ({ book }) => {
       <Link to={`/books/${book.itemId}`}>
         <img src={imageUrl} alt={book.title?.split(" - ")[0].split(" (")[0]} />
         <p className="book-title">{book.title?.split(" - ")[0]}</p>
-        <small className="book-author">{book.author?.split(" (")[0]}</small>
       </Link>
     </div>
   );

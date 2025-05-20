@@ -22,10 +22,19 @@ export const changeLendStatus = async (bookID) => {
   return result;
 };
 
-export const changeLendStatusFalse = async (bookId, email) => {
+export const changeLendStatusFalse = async (bookId, owner) => {
   const [result] = await db.query(
-    "UPDATE userlibrary SET isLendable = false, isBorrowed = true WHERE bookId = ? && holderEmail != ?",
-    [bookId, email]
+    "UPDATE userlibrary SET isLendable = false, isBorrowed = true WHERE bookId = ? && ownerEmail != ?",
+    [bookId, owner]
+  );
+  return result;
+};
+
+//반납된 도서는 isBorrowed = false로 바꾸기
+export const changeBorrowStatus = async (bookID, owner) => {
+  const [result] = await db.query(
+    "UPDATE userlibrary SET isBorrowed = false WHERE bookId = ? && ownerEmail = ?",
+    [bookID, owner]
   );
   return result;
 };
@@ -94,8 +103,22 @@ export const addBorrowBook = async (bookId, owner, email) => {
 //내가 빌리고 있는 책 보기
 export const findBorrowingBook = async (email) => {
   const [rows] = await db.query(
-    `SELECT id, bookID FROM borrowedBooks WHERE holderEmail = ?`,
+    `SELECT id, bookID, ownerEmail FROM borrowedBooks WHERE holderEmail = ? AND isReturned = false`,
     [email, email]
   );
   return rows;
+};
+
+//도서 반납
+export const changeBorrow = async (bookID, email) => {
+  const [result] = await db.query(
+    `
+    UPDATE borrowedBooks
+    SET isReturned = true
+    WHERE bookId = ?
+      AND holderEmail = ?
+    `,
+    [bookID, email]
+  );
+  return result;
 };

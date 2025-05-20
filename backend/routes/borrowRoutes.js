@@ -4,6 +4,8 @@ import {
   getAllBookLend,
   borrowBook,
   getBorrowingBook,
+  getMyLendable,
+  returnBook,
 } from "../controllers/borrowController.js";
 import { verifyToken } from "../middlewares/veryfyToken.js";
 
@@ -17,6 +19,8 @@ router.post("/booklend", verifyToken, addBookLend);
 router.get("/lendables", verifyToken, getAllBookLend);
 router.post("/borrowreq", verifyToken, borrowBook);
 router.get("/borrowing", verifyToken, getBorrowingBook);
+router.get("/mybooklendable", verifyToken, getMyLendable);
+router.patch("/returnbook", verifyToken, returnBook);
 
 router.post("/booklend", (req, res) => {
   const { bookID, ownerEmail, location, startDate, endDate } = req.body;

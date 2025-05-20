@@ -11,13 +11,12 @@ import { useBorrowingBooksQuery } from "../../hooks/useBorrowingBooks";
 import { useMyLendableQuery } from "../../hooks/useBooksIRegistered";
 import { useLendedBooksQuery } from "../../hooks/useLendedBooks";
 
-
 export default function BookCard({ bookID, libraryBookStatus, email }) {
   const navigate = useNavigate();
 
   const { data: bookinfo, isLoading, isError, error } = useBookByID(bookID);
   const { data: mydata } = useMyInfoQuery();
-  const {data: borrowdata} = useBorrowingBooksQuery();
+  const { data: borrowdata } = useBorrowingBooksQuery();
   const { data: mylendabledata } = useMyLendableQuery();
   const { data: lendeddata } = useLendedBooksQuery();
   const { mutate: registerBookLend } = useRegisterBookLendMutation();
@@ -28,9 +27,12 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
   const handleCloseModal = () => setShowModal(false);
 
   const location = mydata?.location;
+
   const handleSubmit = (book) => {
     registerBookLend({ bookID, location });
   };
+
+  const handleBookReturn = (book) => {};
 
   const moveToDetail = (bookID) => {
     navigate(`/library/${bookID}`);
@@ -58,18 +60,34 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
         }}
       />
       {/* 완독한 책 중에서 내가 빌린 책, 이미 대여등록한 책, 빌려준 책 제외 대여등록 가능 */}
-      {libraryBookStatus === "finished"  && !borrowdata?.find((book) => book?.bookID === bookID) 
-        && !mylendabledata?.find((book) => book?.bookId === bookID) 
-        && !lendeddata?.find((book) => book?.bookID === bookID) 
-        && (
+      {libraryBookStatus === "finished" &&
+        !borrowdata?.find((book) => book?.bookID === bookID) &&
+        !mylendabledata?.find((book) => book?.bookId === bookID) &&
+        !lendeddata?.find((book) => book?.bookID === bookID) && (
+          <button
+            className="lend-btn "
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpenModal();
+            }}
+          >
+            대여 등록
+          </button>
+        )}
+
+      {libraryBookStatus === "borrowed" && (
         <button
-          className="lend-btn "
+          className="lend-btn"
           onClick={(e) => {
             e.stopPropagation();
-            handleOpenModal();
+            const confirmReturnBook =
+              window.confirm("정말 이 책을 반납하시겠습니까?");
+            if (confirmReturnBook) {
+              handleBookReturn();
+            }
           }}
         >
-          대여 등록
+          반납하기
         </button>
       )}
 

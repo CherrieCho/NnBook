@@ -25,7 +25,7 @@ export default function Rental() {
   const books = bookQueries
     .filter((q) => q.isSuccess && q.data)
     .map((q) => q.data)
-    .slice(0, 5); // 홈에서는 5개만 표시
+    .slice(0, 6); // 홈에서는 5개만 표시
 
   if (isLoading) return <p>로딩 중…</p>;
   if (isError) {
@@ -42,9 +42,9 @@ export default function Rental() {
       </div>
 
       <Row
-        xs={1}
+        xs={2}
         sm={3}
-        md={5}
+        md={6}
         className="gx-1 gy-1 justify-content-center justify-content-sm-start"
       >
         {books.map((book) => (

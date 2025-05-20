@@ -19,7 +19,7 @@ body {
 
 .recommend-grid {
   margin-top: 2rem;
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1.5rem;
 }

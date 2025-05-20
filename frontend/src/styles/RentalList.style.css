@@ -94,7 +94,7 @@
   }
 
   .book-cover-img {
-    width: 200px;
+    max-height: 200px;
     height: auto;
     object-fit: cover;
     margin-left: 1.5rem;

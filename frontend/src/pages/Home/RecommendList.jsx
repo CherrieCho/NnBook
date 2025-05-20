@@ -7,6 +7,7 @@ import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
 import useUserGenres from "../../hooks/useUserGenres";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import BookCard from "../../common/BookCard/BookCard";
 
 const genreOptions = [
   { id: "1", name: "소설/시/희곡" },
@@ -89,23 +90,11 @@ const Recommend = () => {
   console.log(books);
 
   return (
-    <div className="recommend-section">
+    <div className="recommend-section container">
       <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
       <div className="recommend-grid">
         {books?.map((book, idx) => (
-          <div
-            key={idx}
-            className="recommend-card"
-            onClick={() => goToDetail(book.itemId)}
-          >
-            <img
-              src={book.cover?.replace("/api/image-proxy?url=", "")}
-              alt={book.title}
-            />
-            <div className="recommend-card-title">
-              {book.title?.split(" - ")[0].split(" (")[0]}
-            </div>
-          </div>
+          <BookCard book={book} />
         ))}
       </div>
       <ReactPaginate

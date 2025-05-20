@@ -77,10 +77,14 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
 
       {libraryBookStatus === "borrowed" && (
         <button
-          className="lend-btn "
+          className="lend-btn"
           onClick={(e) => {
             e.stopPropagation();
-            handleBookReturn();
+            const confirmReturnBook =
+              window.confirm("정말 이 책을 반납하시겠습니까?");
+            if (confirmReturnBook) {
+              handleBookReturn();
+            }
           }}
         >
           반납하기

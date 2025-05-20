@@ -88,7 +88,7 @@ const Recommend = ({ previewCount }) => {
       <Row
         xs={1}
         sm={3}
-        md={5}
+        md={6}
         className="gx-1 gy-1 justify-content-center justify-content-sm-start"
       >
         {recommended.map((book, idx) => (

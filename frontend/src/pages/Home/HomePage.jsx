@@ -54,13 +54,6 @@ const HomePage = () => {
         </button>
       </div>
 
-      <MeetingList showWriteButton={false} />
-      <div className="text-end mt-3">
-        <button className="btn-custom" onClick={() => navigate("/meeting")}>
-          더보기
-        </button>
-      </div>
-
       <Recommend previewCount={6} />
       <div className="text-end mt-3">
         <button className="btn-custom" onClick={() => navigate("/recommend")}>
@@ -71,6 +64,13 @@ const HomePage = () => {
       <Rental />
       <div className="text-end mt-3">
         <button className="btn-custom" onClick={() => navigate("/rental")}>
+          더보기
+        </button>
+      </div>
+
+      <MeetingList showWriteButton={false} />
+      <div className="text-end mt-3">
+        <button className="btn-custom" onClick={() => navigate("/meeting")}>
           더보기
         </button>
       </div>

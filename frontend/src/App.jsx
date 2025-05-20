@@ -4,7 +4,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import AppLayout from "./layouts/AppLayout";
 import BookList from "./pages/Home/BookList";
 import HomePage from "./pages/Home/HomePage";
-import Recommend from "./pages/Home/Recommend";
+import RecommendList from "./pages/Home/RecommendList";
 import MyLibrary from "./pages/Library/MyLibrary";
 import MyLibraryDetail from "./pages/Library/MyLibraryDetail";
 import SignIn from "./pages/Login/SignIn";
@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="recommend" element={<Recommend />} />
+          <Route path="recommend" element={<RecommendList />} />
           <Route path="books">
             <Route index element={<BookList />} />
             <Route path=":bookID" element={<BookDetail />} />

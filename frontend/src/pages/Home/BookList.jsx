@@ -67,7 +67,7 @@ const BookList = () => {
         xs={1}
         sm={3}
         md={5}
-        className="gx-1 gy-1 justify-content-center justify-content-sm-start"
+        className="gx-0 gy-4 justify-content-center justify-content-sm-start"
       >
         {booksToDisplay.map((book) => (
           <BookCard

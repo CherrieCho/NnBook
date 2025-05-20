@@ -15,7 +15,7 @@ const HomePage = () => {
 
   const { data: books = [], isLoading, error } = useBooks();
 
-  // ✅ categoryId -> categoryName 변환용
+  // categoryId -> categoryName 변환용
   const categoryMap = Object.fromEntries(categories.map((c) => [c.id, c.name]));
   const selectedCategoryName = categoryMap[categoryId];
 
@@ -54,14 +54,7 @@ const HomePage = () => {
         </button>
       </div>
 
-      <MeetingList showWriteButton={false} />
-      <div className="text-end mt-3">
-        <button className="btn-custom" onClick={() => navigate("/meeting")}>
-          더보기
-        </button>
-      </div>
-
-      <Recommend previewCount={5} />
+      <Recommend previewCount={6} />
       <div className="text-end mt-3">
         <button className="btn-custom" onClick={() => navigate("/recommend")}>
           더보기
@@ -71,6 +64,13 @@ const HomePage = () => {
       <Rental />
       <div className="text-end mt-3">
         <button className="btn-custom" onClick={() => navigate("/rental")}>
+          더보기
+        </button>
+      </div>
+
+      <MeetingList showWriteButton={false} />
+      <div className="text-end mt-3">
+        <button className="btn-custom" onClick={() => navigate("/meeting")}>
           더보기
         </button>
       </div>

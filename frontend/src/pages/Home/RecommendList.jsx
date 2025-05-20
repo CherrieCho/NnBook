@@ -46,7 +46,7 @@ const Recommend = () => {
   const [page, setPage] = useState(1);
 
   //페이지 계산
-  const PAGE_SIZE = 40;
+  const PAGE_SIZE = 20;
   const MAX_TOTAL = 200;
 
   const maxPage = Math.ceil(MAX_TOTAL / PAGE_SIZE); // 5
@@ -108,7 +108,7 @@ const Recommend = () => {
         nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
+        marginPagesDisplayed={0}
         pageCount={maxPage}
         previousLabel="<"
         pageClassName="page-item"

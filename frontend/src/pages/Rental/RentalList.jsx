@@ -139,7 +139,7 @@ const RentalList = () => {
           nextLabel=">"
           onPageChange={handlePageClick}
           pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
+          marginPagesDisplayed={0}
           pageCount={Math.ceil(totalCount / pageSize)}
           previousLabel="<"
           pageClassName="page-item"

@@ -1,12 +1,15 @@
 /* ====== 공통 ====== */
 .rental-container {
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
 }
 
 .rental-list {
   font-family: "Paperlogy-7Bold", serif;
   font-size: 26px;
   color: #4b4b4b;
+  margin-top: 30px;
+  margin-bottom: 35px;
 }
 
 /* 홈에서만 쓰는 검색 기능 포함 스타일 (rental.jsx용) */
@@ -63,11 +66,6 @@
   cursor: pointer;
 }
 
-.rental-home-title {
-  display: flex;
-  gap: 3em;
-}
-
 .rental-auth {
   display: block;
 }
@@ -80,10 +78,6 @@
 }
 
 @media (max-width: 576px) {
-  .rental-container {
-    margin-bottom: 4rem;
-  }
-
   .rental-search-input {
     max-width: 20ch;
     margin-left: 0.5rem;

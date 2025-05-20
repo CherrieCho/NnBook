@@ -82,11 +82,11 @@ const Recommend = ({ previewCount }) => {
 
   return (
     <Container className="recommend-section">
-      <div className="rental-title">
+      <div className="recommend-title-home">
         <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
       </div>
       <Row
-        xs={1}
+        xs={2}
         sm={3}
         md={6}
         className="gx-1 gy-1 justify-content-center justify-content-sm-start"

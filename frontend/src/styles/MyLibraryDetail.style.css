@@ -56,11 +56,11 @@
 
 .libraryDetailReview p {
   margin: 0;
-  font-family: "MaruBuriSemiBold";
+  font-family: "Paperlogy-6SemiBold";
 }
 
 .libraryDetailLike {
-  font-family: "MaruBuriSemiBold";
+  font-family: "Paperlogy-6SemiBold";
 }
 
 .libraryDetailLikeGreen {
@@ -72,7 +72,7 @@
 }
 
 .libraryDetailBookInfo h5 {
-  font-family: "MaruBuriBold";
+  font-family: "Paperlogy-7Bold";
 }
 
 .progress {
@@ -110,7 +110,7 @@
 }
 
 .libraryDetailDandP h6 {
-  font-family: "MaruBuriSemiBold";
+  font-family: "Paperlogy-6SemiBold";
   flex: 1;
   text-align: center;
   margin: 0;

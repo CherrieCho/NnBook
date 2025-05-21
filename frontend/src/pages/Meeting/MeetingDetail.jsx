@@ -82,7 +82,10 @@ const MeetingDetail = () => {
 
   //모입 가입
 const handleJoin = () => {
-  if (window.confirm("모임에 가입하시겠습니까?")) {
+  if(!userData?.email){
+    alert("로그인이 필요합니다.");
+    navigate("/login");
+  }else if (window.confirm("모임에 가입하시겠습니까?")) {
     joinMeeting({
       leaderEmail: leader,
       memberEmail: userData?.email,

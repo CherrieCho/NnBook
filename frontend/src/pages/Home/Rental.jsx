@@ -25,7 +25,7 @@ export default function Rental() {
   const books = bookQueries
     .filter((q) => q.isSuccess && q.data)
     .map((q) => q.data)
-    .slice(0, 6); // 홈에서는 5개만 표시
+    .slice(0, 6); // 홈에서는 6개만 표시
 
   if (isLoading) return <p>로딩 중…</p>;
   if (isError) {
@@ -33,12 +33,18 @@ export default function Rental() {
     return <p>에러 발생: {firstError?.message}</p>;
   }
 
+  const goToRental = () => {
+    navigate(`/rental`);
+  };
+
   console.log(lendableBooks);
 
   return (
     <Container className="rental-container">
       <div className="rental-home-title">
-        <h1 className="rental-list">대여 가능 도서 목록</h1>
+        <h3 className="rental-list" onClick={goToRental}>
+          대여 가능 도서 목록 <span>›</span>
+        </h3>
       </div>
 
       <Row

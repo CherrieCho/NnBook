@@ -1,0 +1,46 @@
+.best-pick-duo-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 6rem 0 2rem 0;
+}
+
+.best-pick-duo-title {
+  font-family: "Paperlogy-7Bold";
+  font-size: 1.5rem;
+  color: #101010;
+}
+
+.best-pick-blog-info-area {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.best-pick-today-info-area {
+  display: flex;
+  gap: 1.5rem;
+  border-right: 1px solid #f6a89e;
+}
+
+.best-pick-book-img {
+  width: fit-content;
+  max-height: 200px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.best-pick-book-title {
+  font-family: "Paperlogy-6SemiBold";
+  font-size: 1rem;
+  color: #101010;
+}
+.best-pick-book-author {
+  font-family: "Paperlogy-4Regular";
+  font-size: 0.75rem;
+  color: #4b4b4b;
+}
+.best-pick-book-description {
+  font-family: "Paperlogy-6SemiBold";
+  font-size: 0.75rem;
+  color: #4b4b4b;
+}

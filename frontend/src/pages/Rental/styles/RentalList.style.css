@@ -6,13 +6,21 @@
 
 .rental-list {
   font-family: "Paperlogy-7Bold", serif;
-  font-size: 26px;
-  color: #4b4b4b;
-  margin-top: 30px;
-  margin-bottom: 35px;
+  font-size: 1.5rem;
+  color: #101010;
+  margin: 6rem 0 2rem 0;
 }
 
 /* 홈에서만 쓰는 검색 기능 포함 스타일 (rental.jsx용) */
+
+.rental-home-title{
+  cursor: pointer;
+}
+
+.rental-list span {
+  font-family: "Paperlogy-1Thin";
+}
+
 .rental-search {
   background-color: #e3dcd2 !important;
   border-color: #e3dcd2 !important;

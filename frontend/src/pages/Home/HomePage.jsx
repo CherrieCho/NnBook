@@ -7,7 +7,8 @@ import "./styles/HomePage.style.css";
 import MeetingList from "../Meeting/MeetingList";
 import Recommend from "../Recommend/Recommend";
 import Rental from "./Rental";
-import useBlogBest from "../../hooks/Recommend/useBlogBest";
+import HomeBanner from "../../components/HomeBanner/HomeBanner";
+import BestPickDuo from "../../components/BestPickDuo/BestPickDuo";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");
@@ -15,17 +16,6 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const { data: books = [], isLoading, error } = useBooks();
-  const {data: blogData} = useBlogBest();
-  console.log("블로그", blogData)
-
-  //데이터 중 랜덤값 가져오기
-  const randomData = () => {
-    const randomIndex = Math.floor(Math.random() * blogData?.length);
-    return blogData?.[randomIndex]
-  }
-
-  console.log(randomData())
-
 
   // categoryId -> categoryName 변환용
   const categoryMap = Object.fromEntries(categories.map((c) => [c.id, c.name]));
@@ -44,12 +34,16 @@ const HomePage = () => {
   });
 
   return (
-    <div className="container mt-4">
+    <div className="container custom-container">
+      <HomeBanner />
+
+      <BestPickDuo />
+
       <h3
-        className="mb-3 homepage-bestseller-title"
+        className="homepage-bestseller-title"
         onClick={() => navigate("/books")}
       >
-        베스트 셀러
+        베스트 셀러 <span>›</span>
       </h3>
       {isLoading && <p>로딩 중…</p>}
       {error && <p>에러 발생: {error.message}</p>}
@@ -60,32 +54,11 @@ const HomePage = () => {
         !isLoading && <p>검색 결과가 없습니다.</p>
       )}
 
-      <div className="text-end mt-3">
-        <button className="btn-custom" onClick={() => navigate("/books")}>
-          더보기
-        </button>
-      </div>
-
-      <Recommend previewCount={6} />
-      <div className="text-end mt-3">
-        <button className="btn-custom" onClick={() => navigate("/recommend")}>
-          더보기
-        </button>
-      </div>
+      <Recommend previewCount={3} />
 
       <Rental />
-      <div className="text-end mt-3">
-        <button className="btn-custom" onClick={() => navigate("/rental")}>
-          더보기
-        </button>
-      </div>
 
       <MeetingList showWriteButton={false} />
-      <div className="text-end mt-3">
-        <button className="btn-custom" onClick={() => navigate("/meeting")}>
-          더보기
-        </button>
-      </div>
     </div>
   );
 };

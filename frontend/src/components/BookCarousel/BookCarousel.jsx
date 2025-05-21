@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom"; // 수정: react-router-dom
 import "./BookCarousel.style.css";
@@ -13,6 +13,18 @@ const chunkArray = (array, size) => {
 
 const BookCarousel = ({ books }) => {
   const navigate = useNavigate();
+  const [chunkSize, setChunkSize] = useState(5);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setChunkSize(window.innerWidth <= 768 ? 4 : 5);
+    };
+
+    handleResize(); // 초기 설정
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const goToDetail = (id) => {
     navigate(`/books/${id}`);
@@ -20,32 +32,36 @@ const BookCarousel = ({ books }) => {
 
   if (!books || books.length === 0) return <p>도서가 없습니다.</p>;
 
-  const groupedBooks = chunkArray(books, 4);
+  const groupedBooks = chunkArray(books, chunkSize);
   const topChunks = groupedBooks.filter((_, i) => i % 2 === 0);
   const bottomChunks = groupedBooks.filter((_, i) => i % 2 === 1);
 
-  console.log(topChunks);
+  console.log("tt", topChunks);
 
   return (
-    <div className="book-carousel-wrapper mt-4">
+    <div className="bestseller-book-carousel-wrapper">
       {/* 위쪽 캐러셀 */}
       <Carousel interval={null} indicators={false} controls>
         {topChunks.map((group, idx) => (
           <Carousel.Item key={`top-${idx}`}>
-            <div className="book-row">
+            <div className="bestseller-book-row">
               {group.map((book, i) => (
                 <div
-                  className="book-card"
+                  className="bestseller-book-card"
                   key={i}
                   onClick={() => goToDetail(book.itemId)}
                 >
                   <img
                     src={book.cover?.replace("/cover500/", "/coversum/")}
                     alt={book.title}
+                    className="bestseller-book-img"
                   />
-                  <p className="book-title">
-                    {book.title?.split(" - ")[0].split(" (")[0].split(":")[0]}
-                  </p>
+                  <div className="bestseller-info-area">
+                    <p className="bestseller-book-rank">{book.bestRank}</p>
+                    <p className="bestseller-book-title">
+                      {book.title?.split(" - ")[0].split(" (")[0].split(":")[0]}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -62,20 +78,24 @@ const BookCarousel = ({ books }) => {
       >
         {bottomChunks.map((group, idx) => (
           <Carousel.Item key={`bottom-${idx}`}>
-            <div className="book-row">
+            <div className="bestseller-book-row">
               {group.map((book, i) => (
                 <div
-                  className="book-card"
+                  className="bestseller-book-card"
                   key={i}
                   onClick={() => goToDetail(book.itemId)}
                 >
                   <img
                     src={book.cover?.replace("/cover500/", "/coversum/")}
                     alt={book.title}
+                    className="bestseller-book-img"
                   />
-                  <p className="book-title">
-                    {book.title?.split(" - ")[0].split(" (")[0]}
-                  </p>
+                  <div className="bestseller-info-area">
+                    <p className="bestseller-book-rank">{book.bestRank}</p>
+                    <p className="bestseller-book-title">
+                      {book.title?.split(" - ")[0].split(" (")[0].split(":")[0]}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>

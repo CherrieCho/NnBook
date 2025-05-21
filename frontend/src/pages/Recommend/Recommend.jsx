@@ -6,6 +6,7 @@ import useRecommendedBooks from "../../hooks/Recommend/useRecommendedBooks";
 import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import useUserGenres from "../../hooks/Recommend/useUserGenres";
 import BookCard from "../../common/BookCard/BookCard";
+import RecommendBookCard from "../../common/BookCard/RecommendBookCard";
 
 const genreOptions = [
   { id: "1", name: "소설/시/희곡" },
@@ -81,19 +82,16 @@ const Recommend = ({ previewCount }) => {
   console.log(recommended);
 
   return (
-    <Container className="recommend-section">
+    <Container className="container custom-container">
       <div className="recommend-title-home">
-        <h1 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h1>
+        <h3 onClick={() => navigate("/recommend")}>
+          취향 기반 추천 도서<span>›</span>
+        </h3>
       </div>
-      <Row
-        xs={2}
-        sm={3}
-        md={6}
-        className="gx-1 gy-1 justify-content-center justify-content-sm-start"
-      >
+      <Row xs={3} sm={3} md={3}>
         {recommended.map((book, idx) => (
           <Col>
-            <BookCard book={book} />
+            <RecommendBookCard book={book} />
           </Col>
         ))}
       </Row>

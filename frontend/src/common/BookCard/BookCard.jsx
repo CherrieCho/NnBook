@@ -25,7 +25,7 @@ export default function BookCard({ book, onClick }) {
         }}
       />
 
-      <h6 className="mt-2 truncate" title={book.title}>
+      <h6 className="book-card-title" title={book.title}>
         {book.title?.split(" - ")[0].split(" (")[0].split(":")[0]}
       </h6>
     </Col>

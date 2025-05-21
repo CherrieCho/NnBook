@@ -5,16 +5,15 @@ body {
   background-color: #fdfcf9;
 }
 
-.recommend-section {
-  margin-top: 2rem;
-  margin-bottom: 4rem;
-  padding: 0 1rem;
+.recommend-title-home h3 {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 1.5rem;
+  color: #101010;
+  margin: 6rem 0 2rem 0;
 }
 
-.recommend-section h1 {
-  font-family: "Paperlogy-7Bold", serif;
-  font-size: 26px;
-  color: #4b4b4b;
+.recommend-title-home span {
+  font-family: "Paperlogy-1Thin";
 }
 
 .recommend-card {
@@ -34,11 +33,11 @@ body {
 }
 
 .recommend-card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
-  margin-bottom: 0.75rem;
+  width: fit-content;
+  max-height: 200px;
   object-fit: cover;
+  box-shadow: 0 0 10px rgba(75, 75, 75, 0.3);
+  transition: transform 0.5s ease;
 }
 
 .recommend-card-title {
@@ -46,9 +45,4 @@ body {
   color: #333;
   font-weight: 600;
   line-height: 1.4;
-}
-
-.recommend-title-home h1{
-  margin-top: 30px;
-  margin-bottom: 35px;
 }

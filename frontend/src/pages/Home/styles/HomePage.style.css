@@ -1,15 +1,20 @@
+.custom-container {
+  max-width: 1200px;
+}
+
 .homepage-bestseller-title {
-  margin-top: 30px;
-  margin-bottom: 30px;
   font-family: "Paperlogy-7Bold", serif;
-  font-size: 26px;
-  font-weight: 600;
-  color: #4b4b4b;
-  padding-inline: 12px;
+  font-size: 1.5rem;
+  color: #101010;
+  margin: 6rem  0 2rem 0;
   cursor: pointer;
 }
 
-.btn-custom{
+.homepage-bestseller-title span {
+  font-family: "Paperlogy-1Thin";
+}
+
+.btn-custom {
   font-family: "Paperlogy-6SemiBold";
   background-color: #f6a89e;
   color: #fff;

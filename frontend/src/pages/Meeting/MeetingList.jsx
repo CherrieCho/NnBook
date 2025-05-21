@@ -88,17 +88,17 @@ const MeetingList = ({ showWriteButton = true }) => {
       <Row>
         <Col lg={12}>
           <h1 className="meeting-title" onClick={() => navigate("/meeting")}>
-            모임 게시판
+            모임 게시판 <span>›</span>
           </h1>
         </Col>
-        <Col lg={12}>
+        <Col lg={12} className="meeting-background">
           <table className="meeting-table">
             <thead>
               <tr>
                 <th scope="col">제목</th>
                 <th scope="col">지역</th>
-                <th scope="col">작성자</th>
                 <th scope="col">모임 날짜</th>
+                <th scope="col">작성자</th>
               </tr>
             </thead>
             <tbody>
@@ -115,6 +115,7 @@ const MeetingList = ({ showWriteButton = true }) => {
                   >
                     <td>{meeting.title}</td>
                     <td>{translateKorean(meeting.location)}</td>
+                    <td>{meeting.date.slice(0, 10)}</td>
                     <td>
                       {allUsers?.map((users) => {
                         if (users.email == meeting.leaderEmail) {
@@ -122,44 +123,43 @@ const MeetingList = ({ showWriteButton = true }) => {
                         }
                       })}
                     </td>
-                    <td>{meeting.date.slice(0, 10)}</td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
-
-          {showWriteButton && (
-            <>
-              <ReactPaginate
-                nextLabel=">"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={3}
-                marginPagesDisplayed={0}
-                pageCount={Math.ceil(data?.data.length / 10)}
-                previousLabel="<"
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                previousClassName="page-item"
-                previousLinkClassName="page-link"
-                nextClassName="page-item"
-                nextLinkClassName="page-link"
-                breakLabel="..."
-                breakClassName="page-item"
-                breakLinkClassName="page-link"
-                containerClassName="pagination"
-                activeClassName="active"
-                renderOnZeroPageCount={null}
-                forcePage={page - 1}
-              />
-              <div className="add-button-area">
-                <Button type="button" size="md" onClick={goToCreateMeeting}>
-                  글쓰기
-                </Button>
-              </div>
-            </>
-          )}
         </Col>
+
+        {showWriteButton && (
+          <>
+            <ReactPaginate
+              nextLabel=">"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={0}
+              pageCount={Math.ceil(data?.data.length / 10)}
+              previousLabel="<"
+              pageClassName="page-item"
+              pageLinkClassName="page-link"
+              previousClassName="page-item"
+              previousLinkClassName="page-link"
+              nextClassName="page-item"
+              nextLinkClassName="page-link"
+              breakLabel="..."
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
+              containerClassName="pagination"
+              activeClassName="active"
+              renderOnZeroPageCount={null}
+              forcePage={page - 1}
+            />
+            <div className="add-button-area">
+              <Button type="button" size="md" onClick={goToCreateMeeting}>
+                글쓰기
+              </Button>
+            </div>
+          </>
+        )}
       </Row>
     </Container>
   );

@@ -3,7 +3,7 @@ body {
   box-sizing: border-box;
 }
 
-.home-meeting-list{
+.home-meeting-list {
   margin-top: 2rem;
   margin-bottom: 4rem;
 }
@@ -18,35 +18,59 @@ body {
   cursor: pointer;
 }
 
+.meeting-title span {
+  font-family: "Paperlogy-1Thin";
+}
+
+.meeting-background {
+  background-color: rgba(227, 220, 210, 0.3);
+  padding: 3rem 6rem 3rem 6rem;
+  border-radius: 15px;
+}
+
 .meeting-table {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
   color: #4b4b4b;
 }
 
-thead,
-tbody {
+thead {
+  font-family: "Paperlogy-6SemiBold";
+  font-size: 1rem;
+  color: #101010;
   width: 100%;
 }
 
-thead tr,
+tbody {
+  font-family: "Paperlogy-4Regular";
+  font-size: 1rem;
+  color: #4b4b4b;
+  width: 100%;
+}
+
+thead tr {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border-bottom: 1.5px solid #CBC2B6;
+}
+
 tbody tr {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  border-bottom: 1px solid #e3dcd2;
+  border-bottom: 1px solid #E3DCD2;
 }
 
 thead tr {
-  padding-bottom: 10px;
+  padding-bottom: 0.75rem;
 }
 
 tbody tr {
-  padding: 10px 0;
+  padding: 0.75rem 0;
 }
 
 thead tr th:first-child {
@@ -60,7 +84,7 @@ tbody tr td:nth-child(2) {
 }
 
 tbody tr td:first-child {
-  padding-left: 10px;
+  padding-left: 0.75rem;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -70,15 +94,6 @@ tbody tr td:last-child {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-}
-
-thead tr th {
-  font-family: "Paperlogy-7Bold", serif;
-  font-weight: 600;
-}
-
-tbody tr td {
-  font-family: "Paperlogy-6SemiBold", serif;
 }
 
 thead tr th:nth-child(2),
@@ -94,6 +109,7 @@ tbody tr td:last-child {
 thead tr th:first-child,
 tbody tr td:first-child {
   width: 50%;
+  text-align: center;
 }
 
 .meeting-row:hover td {

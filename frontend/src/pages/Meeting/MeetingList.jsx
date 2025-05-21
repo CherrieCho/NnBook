@@ -135,7 +135,7 @@ const MeetingList = ({ showWriteButton = true }) => {
                 nextLabel=">"
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={3}
-                marginPagesDisplayed={2}
+                marginPagesDisplayed={0}
                 pageCount={Math.ceil(data?.data.length / 10)}
                 previousLabel="<"
                 pageClassName="page-item"

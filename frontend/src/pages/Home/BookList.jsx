@@ -15,7 +15,7 @@ const BookList = () => {
   const navigate = useNavigate();
 
   //페이지 계산
-  const PAGE_SIZE = 40;
+  const PAGE_SIZE = 20;
   const MAX_TOTAL = 200;
 
   const maxPage = Math.ceil(MAX_TOTAL / PAGE_SIZE); // 5
@@ -85,7 +85,7 @@ const BookList = () => {
         nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
+        marginPagesDisplayed={0}
         pageCount={maxPage}
         previousLabel="<"
         pageClassName="page-item"

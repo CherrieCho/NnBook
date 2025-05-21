@@ -49,6 +49,7 @@
   color: #4b4b4b;
 }
 
+
 @media screen and (max-width: 767px) {
   .bookcard-contents img {
     width: 150px;
@@ -58,6 +59,15 @@
   .truncate {
     width: 14ch;
   }
+}
+
+@media (max-width: 576px) {
+    .book-cover-img {
+        max-height: 200px;
+        height: auto;
+        object-fit: cover;
+        margin: 0 1.5rem;
+    }
 }
 
 @media screen and (max-width: 540px) {

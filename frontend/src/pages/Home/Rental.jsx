@@ -36,9 +36,9 @@ export default function Rental() {
   console.log(lendableBooks);
 
   return (
-    <Container className="py-4 rental-container">
+    <Container className="rental-container">
       <div className="rental-home-title">
-        <h1 className="mb-3 rental-list">대여 가능 도서 목록</h1>
+        <h1 className="rental-list">대여 가능 도서 목록</h1>
       </div>
 
       <Row

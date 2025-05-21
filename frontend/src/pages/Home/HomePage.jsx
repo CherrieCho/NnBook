@@ -8,6 +8,7 @@ import MeetingList from "../Meeting/MeetingList";
 import Recommend from "../Recommend/Recommend";
 import Rental from "./Rental";
 import useBlogBest from "../../hooks/Recommend/useBlogBest";
+import HomeBanner from "./HomeBanner";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");

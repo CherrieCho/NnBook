@@ -10,6 +10,7 @@ body {
   font-size: 1.5rem;
   color: #101010;
   margin: 6rem 0 2rem 0;
+  cursor: pointer;
 }
 
 .recommend-title-home span {

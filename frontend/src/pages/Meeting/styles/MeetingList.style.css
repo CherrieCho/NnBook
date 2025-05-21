@@ -4,17 +4,14 @@ body {
 }
 
 .home-meeting-list {
-  margin-top: 2rem;
   margin-bottom: 4rem;
 }
 
 .meeting-title {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 6rem 0 2rem 0;
   font-family: "Paperlogy-7Bold", serif;
-  font-size: 26px;
-  font-weight: 600;
-  color: #4b4b4b;
+  font-size: 1.5rem;
+  color: #101010;
   cursor: pointer;
 }
 
@@ -26,6 +23,7 @@ body {
   background-color: rgba(227, 220, 210, 0.3);
   padding: 3rem 6rem 3rem 6rem;
   border-radius: 15px;
+  margin-inline: 0.75rem;
 }
 
 .meeting-table {
@@ -55,14 +53,14 @@ thead tr {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  border-bottom: 1.5px solid #CBC2B6;
+  border-bottom: 1.5px solid #cbc2b6;
 }
 
 tbody tr {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  border-bottom: 1px solid #E3DCD2;
+  border-bottom: 1px solid #e3dcd2;
 }
 
 thead tr {

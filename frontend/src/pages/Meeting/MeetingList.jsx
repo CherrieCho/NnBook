@@ -5,10 +5,10 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router";
-import { useMeetingQuery } from "../../hooks/useMeetingQuery";
-import "../../styles/MeetingList.style.css";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
-import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
+import { useMeetingQuery } from "../../hooks/Meeting/useMeetingQuery";
+import "./styles/MeetingList.style.css";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
+import { useAllUsersQuery } from "../../hooks/Common/useAllUserQuery";
 
 const MeetingList = ({ showWriteButton = true }) => {
   const translateKorean = (location) => {

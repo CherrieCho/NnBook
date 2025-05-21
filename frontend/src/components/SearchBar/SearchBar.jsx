@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/SearchBar.style.css";
+import "./SearchBar.style.css";
 
 export const categories = [
   { id: "", name: "장르" },

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
 import Map from "../../components/Map/Map";
-import { useLendableBooksQuery } from "../../hooks/uselendable";
-import { useBorrowMutation } from "../../hooks/useBorrowMutation";
+import { useLendableBooksQuery } from "../../hooks/Rental/uselendable";
+import { useBorrowMutation } from "../../hooks/Rental/useBorrowMutation";
 import { useNavigate } from "react-router";
 
 export default function BookRentalModal({ show, book, onClose, onSubmit }) {

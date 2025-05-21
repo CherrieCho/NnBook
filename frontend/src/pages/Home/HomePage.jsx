@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookCarousel from "../../components/BookCarousel/BookCarousel";
 import SearchBar, { categories } from "../../components/SearchBar/SearchBar";
-import useBooks from "../../hooks/useBooks";
-import "../../styles/HomePage.style.css";
+import useBooks from "../../hooks/Common/useBooks";
+import "./styles/HomePage.style.css";
 import MeetingList from "../Meeting/MeetingList";
-import Recommend from "./Recommend";
+import Recommend from "../Recommend/Recommend";
 import Rental from "./Rental";
 
 const HomePage = () => {

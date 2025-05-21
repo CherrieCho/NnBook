@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom"; // 수정: react-router-dom
-import "../../styles/BookCarousel.style.css";
+import "./BookCarousel.style.css";
 
 const chunkArray = (array, size) => {
   const result = [];

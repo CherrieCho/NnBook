@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LogoImg from "../../assets/NnBook-Logo.png";
-import "../../styles/SignUp.style.css";
+import "./styles/SignUp.style.css";
 import authApi from "../../utils/authApi";
 
 const genreOptions = [

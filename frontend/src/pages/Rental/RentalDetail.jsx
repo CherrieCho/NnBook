@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Card, Alert } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useLendableBooksQuery } from '../../hooks/uselendable';
-import useBookByIDs from '../../hooks/useBookbyIDArray';
+import { useLendableBooksQuery } from '../../hooks/Rental/uselendable';
+import useBookByIDs from '../../hooks/Common/useBookbyIDArray';
 import BookRentalModal from './BookRentalModal';
-import '../../styles/RentalDetail.style.css';
+import './styles/RentalDetail.style.css';
 import '/src/styles/BookRentalModal.style.css';
-import { useBorrowMutation } from '../../hooks/useBorrowMutation';
+import { useBorrowMutation } from '../../hooks/Rental/useBorrowMutation';
 
 export default function RentalDetail() {
   const { bookId } = useParams(); 

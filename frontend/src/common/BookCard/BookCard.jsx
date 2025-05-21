@@ -1,6 +1,6 @@
 import React from "react";
 import { Col } from "react-bootstrap";
-import "/src/styles/BookCard.style.css";
+import "./styles/BookCard.style.css";
 import { useNavigate } from "react-router";
 
 export default function BookCard({ book, onClick }) {

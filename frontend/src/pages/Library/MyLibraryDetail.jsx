@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import "../../styles/MyLibraryDetail.style.css";
-import useBookByID from "../../hooks/useBookbyID";
+import "./styles/MyLibraryDetail.style.css";
+import useBookByID from "../../hooks/Common/useBookbyID";
 import { useParams } from "react-router";
-import { useLikeBookMutation } from "../../hooks/useLikeBookMutation";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
-import { useLikedBooksQuery } from "../../hooks/useLikedBooks";
-import { useProgressMutation } from "../../hooks/useProgressMutation";
-import { useProgressDataQuery } from "../../hooks/useProgressData";
-import { useFinishBookMutation } from "../../hooks/useFinishBookMutation";
-import { useFinishedBooksQuery } from "../../hooks/useFinishedBooks";
+import { useLikeBookMutation } from "../../hooks/MyPage/useLikeBookMutation";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
+import { useLikedBooksQuery } from "../../hooks/MyPage/useLikedBooks";
+import { useProgressMutation } from "../../hooks/Library/useProgressMutation";
+import { useProgressDataQuery } from "../../hooks/Library/useProgressData";
+import { useFinishBookMutation } from "../../hooks/Library/useFinishBookMutation";
+import { useFinishedBooksQuery } from "../../hooks/Library/useFinishedBooks";
 
 const MyLibraryDetail = () => {
   const [entries, setEntries] = useState([]);

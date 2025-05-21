@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { Alert } from "react-bootstrap";
-import "/src/styles/CarouselCard.style.css";
-import useBookByID from "../../hooks/useBookbyID";
+import "./styles/CarouselCard.style.css";
 import { useNavigate } from "react-router";
-import { useAddToLibraryMutation } from "../../hooks/useAddToLibraryMutation";
-import { useRegisterBookLendMutation } from "../../hooks/useRegisterBookLendMutation";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import { useAddToLibraryMutation } from "../../hooks/Library/useAddToLibraryMutation";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import BookRentalRegistrationModal from "../../pages/Library/BookRentalRegistrationModal";
-import { useBorrowingBooksQuery } from "../../hooks/useBorrowingBooks";
-import { useMyLendableQuery } from "../../hooks/useBooksIRegistered";
-import { useLendedBooksQuery } from "../../hooks/useLendedBooks";
-import { useReturnMutation } from "../../hooks/useReturnMutation";
-import { useFinishedBooksBorrowQuery } from "../../hooks/usedFinishedBooksForBorrowed";
+import { useBorrowingBooksQuery } from "../../hooks/Rental/useBorrowingBooks";
+import { useMyLendableQuery } from "../../hooks/Rental/useBooksIRegistered";
+import { useLendedBooksQuery } from "../../hooks/Rental/useLendedBooks";
+import { useReturnMutation } from "../../hooks/Rental/useReturnMutation";
+import { useFinishedBooksBorrowQuery } from "../../hooks/Library/usedFinishedBooksForBorrowed";
+import useBookByID from "../../hooks/Common/useBookbyID";
+import { useRegisterBookLendMutation } from "../../hooks/Rental/useRegisterBookLendMutation";
+
 
 export default function BookCard({ bookID, libraryBookStatus, email }) {
   const navigate = useNavigate();

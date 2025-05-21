@@ -3,18 +3,18 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import "../../styles/MeetingDetail.style.css";
-import { useMeetingQuery } from "../../hooks/useMeetingQuery";
+import "./styles/MeetingDetail.style.css";
+import { useMeetingQuery } from "../../hooks/Meeting/useMeetingQuery";
 import { useNavigate, useParams } from "react-router";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
-import { useDeleteMeeting } from "../../hooks/useDeleteMeeting";
-import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
+import { useDeleteMeeting } from "../../hooks/Meeting/useDeleteMeeting";
+import { useAllUsersQuery } from "../../hooks/Common/useAllUserQuery";
 import axiosMeetingDB from "../../utils/axiosMeetingDB";
-import { useMeetingMemberQuery } from "../../hooks/useMeetingMembers";
-import { useLeaveMeeting } from "../../hooks/useLeaveMeeting";
-import { useJoinMeeting } from "../../hooks/useJoinMeeting";
+import { useMeetingMemberQuery } from "../../hooks/Meeting/useMeetingMembers";
+import { useJoinMeeting } from "../../hooks/Meeting/useJoinMeeting";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import { useLeaveMeeting } from "../../hooks/Meeting/useLeaveMeeting";
 
 const MeetingDetail = () => {
   let { id } = useParams();

@@ -2,7 +2,7 @@ import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LogoImg from "../../assets/NnBook-Logo.png";
-import "../../styles/SignIn.style.css";
+import "./styles/SignIn.style.css";
 import authApi from "../../utils/authApi";
 
 function SignIn() {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
 import Map from "../../components/Map/Map";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
-import { useRegisterBookLendMutation } from "../../hooks/useRegisterBookLendMutation";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
+import { useRegisterBookLendMutation } from "../../hooks/Rental/useRegisterBookLendMutation";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 

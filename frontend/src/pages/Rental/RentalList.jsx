@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import BookCard from "../../common/BookCard/BookCard";
-import "../../styles/RentalList.style.css";
+import "./styles/RentalList.style.css";
 import { useNavigate } from "react-router-dom";
-import { useLendableBooksQuery } from "../../hooks/uselendable";
-import useBookByIDs from "../../hooks/useBookbyIDArray";
+import { useLendableBooksQuery } from "../../hooks/Rental/uselendable";
+import useBookByIDs from "../../hooks/Common/useBookbyIDArray";
 import ReactPaginate from "react-paginate";
-import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import { useAllUsersQuery } from "../../hooks/Common/useAllUserQuery";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 
 const RentalList = () => {
   const navigate = useNavigate();

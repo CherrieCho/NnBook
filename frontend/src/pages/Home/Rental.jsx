@@ -2,10 +2,10 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../../common/BookCard/BookCard";
-import "../../styles/RentalList.style.css";
-import { useLendableBooksQuery } from "../../hooks/uselendable";
-import useBookByIDs from "../../hooks/useBookbyIDArray";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import "../Rental/styles/RentalList.style.css";
+import { useLendableBooksQuery } from "../../hooks/Rental/uselendable";
+import useBookByIDs from "../../hooks/Common/useBookbyIDArray";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 
 export default function Rental() {
   const navigate = useNavigate();

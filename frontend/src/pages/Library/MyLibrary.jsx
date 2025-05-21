@@ -1,13 +1,13 @@
 import React from "react";
-import "../../styles/MyLibrary.style.css";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
+import "./styles/MyLibrary.style.css";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import { Alert } from "react-bootstrap";
 import SingleLineCarousel from "../../common/react-multi-carousel/SingleLineCarousel";
-import { useReadingBooksQuery } from "../../hooks/useReadingBooks";
-import { useFinishedBooksQuery } from "../../hooks/useFinishedBooks";
-import { useLendedBooksQuery } from "../../hooks/useLendedBooks";
-import { useFinishedBooksBorrowQuery } from "../../hooks/usedFinishedBooksForBorrowed";
-import { useReadingBooksBorrowQuery } from "../../hooks/useReadingBooksForBorrowed";
+import { useReadingBooksQuery } from "../../hooks/Library/useReadingBooks";
+import { useFinishedBooksQuery } from "../../hooks/Library/useFinishedBooks";
+import { useLendedBooksQuery } from "../../hooks/Rental/useLendedBooks";
+import { useFinishedBooksBorrowQuery } from "../../hooks/Library/usedFinishedBooksForBorrowed";
+import { useReadingBooksBorrowQuery } from "../../hooks/Library/useReadingBooksForBorrowed";
 
 const MyLibrary = () => {
   const { data: mydata, isLoading, isError, error } = useMyInfoQuery();

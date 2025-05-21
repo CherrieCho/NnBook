@@ -4,8 +4,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
-import { useCreateMeeting } from "../../hooks/useCreateMeeting";
-import "../../styles/CreateMeeting.style.css";
+import { useCreateMeeting } from "../../hooks/Meeting/useCreateMeeting";
+import "./styles/CreateMeeting.style.css";
 
 const CreateMeeting = () => {
   const [form, setForm] = useState({

@@ -3,7 +3,7 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import LogoImg from "../assets/NnBook-Logo.png";
 import Footer from "./Footer";
-import "../styles/AppLayout.style.css";
+import "./styles/AppLayout.style.css";
 
 const AppLayout = () => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CarouselCard from "../BookCard/CarouselCard";
-import "../../styles/SingleLineCarousel.style.css";
+import "./SingleLineCarousel.style.css";
 
 const SingleLineCarousel = ({ books, libraryBookStatus }) => {
   const responsive = {

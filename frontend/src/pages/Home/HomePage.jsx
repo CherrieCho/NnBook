@@ -7,8 +7,8 @@ import "./styles/HomePage.style.css";
 import MeetingList from "../Meeting/MeetingList";
 import Recommend from "../Recommend/Recommend";
 import Rental from "./Rental";
-import useBlogBest from "../../hooks/Recommend/useBlogBest";
-import HomeBanner from "./HomeBanner";
+import HomeBanner from "../../components/HomeBanner/HomeBanner";
+import BestPickDuo from "../../components/BestPickDuo/BestPickDuo";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");
@@ -16,17 +16,6 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const { data: books = [], isLoading, error } = useBooks();
-  const {data: blogData} = useBlogBest();
-  console.log("블로그", blogData)
-
-  //데이터 중 랜덤값 가져오기
-  const randomData = () => {
-    const randomIndex = Math.floor(Math.random() * blogData?.length);
-    return blogData?.[randomIndex]
-  }
-
-  console.log(randomData())
-
 
   // categoryId -> categoryName 변환용
   const categoryMap = Object.fromEntries(categories.map((c) => [c.id, c.name]));
@@ -47,6 +36,8 @@ const HomePage = () => {
   return (
     <div className="container custom-container">
       <HomeBanner />
+
+      <BestPickDuo />
 
       <h3
         className="homepage-bestseller-title"

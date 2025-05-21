@@ -23,7 +23,7 @@ const AppLayout = () => {
     localStorage.removeItem("user");
     alert("로그아웃 되었습니다.");
     setIsLoggedIn(false);
-    window.location.href = '/';
+    window.location.href = "/";
   };
 
   return (
@@ -42,12 +42,11 @@ const AppLayout = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link as={Link} to="/meeting">
-                모임
-              </Nav.Link>
-
               {isLoggedIn && (
                 <>
+                  <Nav.Link as={Link} to="/meeting">
+                    모임
+                  </Nav.Link>
                   <Nav.Link as={Link} to="/library">
                     내 서재
                   </Nav.Link>
@@ -65,9 +64,14 @@ const AppLayout = () => {
                   로그아웃
                 </Nav.Link>
               ) : (
-                <Nav.Link as={Link} to="/login">
-                  로그인
-                </Nav.Link>
+                <>
+                  <Nav.Link as={Link} to="/login">
+                    로그인
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/login/signup">
+                    회원가입
+                  </Nav.Link>
+                </>
               )}
             </Nav>
           </Navbar.Collapse>

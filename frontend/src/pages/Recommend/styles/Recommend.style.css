@@ -17,6 +17,22 @@ body {
   font-family: "Paperlogy-1Thin";
 }
 
+.recommend-book-card {
+  flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .recommend-book-card {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .recommend-book-card .col {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 .recommend-card {
   background-color: #ffffff;
   border: 1px solid #e3dcd2;

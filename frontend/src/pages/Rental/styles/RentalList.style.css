@@ -4,21 +4,29 @@
 
 .rental-list {
   font-family: "Paperlogy-7Bold", serif;
-  font-size: 1.5rem;
-  color: #101010;
-  margin: 6rem 0 2rem 0;
+  font-size: 26px;
+  color: #4b4b4b;
+  margin-top: 30px;
+  margin-bottom: 35px;
 }
 
-/* 홈에서만 쓰는 검색 기능 포함 스타일 (rental.jsx용) */
-
-.rental-home-title{
+.rental-home-title h3 {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 1.5rem;
+  margin: 6rem 0 2rem 0;
   cursor: pointer;
+  color: #101010;
 }
 
 .rental-list span {
   font-family: "Paperlogy-1Thin";
 }
 
+.rental-home-list-row .col{
+  padding-bottom: 1.5rem;
+}
+
+/* 홈에서만 쓰는 검색 기능 포함 스타일 (rental.jsx용) */
 .rental-search {
   background-color: #e3dcd2 !important;
   border-color: #e3dcd2 !important;

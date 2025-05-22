@@ -9,6 +9,7 @@ import Recommend from "../Recommend/Recommend";
 import Rental from "./Rental";
 import HomeBanner from "../../components/HomeBanner/HomeBanner";
 import BestPickDuo from "../../components/BestPickDuo/BestPickDuo";
+import { Container } from "react-bootstrap";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");
@@ -34,7 +35,7 @@ const HomePage = () => {
   });
 
   return (
-    <div className="container custom-container">
+    <Container className="container custom-container">
       <HomeBanner />
 
       <BestPickDuo />
@@ -59,7 +60,7 @@ const HomePage = () => {
       <Rental />
 
       <MeetingList showWriteButton={false} />
-    </div>
+    </Container>
   );
 };
 

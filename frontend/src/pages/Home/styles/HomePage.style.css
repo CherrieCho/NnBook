@@ -2,11 +2,17 @@
   max-width: 1200px;
 }
 
+@media (max-width: 768px) {
+  .custom-container {
+    padding-inline: 1rem;
+  }
+}
+
 .homepage-bestseller-title {
   font-family: "Paperlogy-7Bold", serif;
   font-size: 1.5rem;
   color: #101010;
-  margin: 6rem  0 2rem 0;
+  margin: 6rem 0 2rem 0;
   cursor: pointer;
 }
 

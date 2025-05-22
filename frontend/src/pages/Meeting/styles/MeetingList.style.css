@@ -26,6 +26,20 @@ body {
   margin-inline: 0.75rem;
 }
 
+@media (max-width: 768px) {
+  .meeting-background {
+    padding: 2rem 1rem 2rem 1rem;
+  }
+
+  thead tr {
+    font-size: 0.9em;
+  }
+
+  tbody tr {
+    font-size: 0.75em;
+  }
+}
+
 .meeting-table {
   display: flex;
   flex-direction: column;
@@ -54,6 +68,7 @@ thead tr {
   justify-content: space-around;
   width: 100%;
   border-bottom: 1.5px solid #cbc2b6;
+  padding-bottom: 0.75rem;
 }
 
 tbody tr {
@@ -61,13 +76,6 @@ tbody tr {
   justify-content: space-around;
   width: 100%;
   border-bottom: 1px solid #e3dcd2;
-}
-
-thead tr {
-  padding-bottom: 0.75rem;
-}
-
-tbody tr {
   padding: 0.75rem 0;
 }
 
@@ -100,13 +108,13 @@ thead tr th:last-child,
 tbody tr td:nth-child(2),
 tbody tr td:nth-child(3),
 tbody tr td:last-child {
-  width: 25%;
+  width: 30%;
   text-align: center;
 }
 
 thead tr th:first-child,
 tbody tr td:first-child {
-  width: 50%;
+  width: 45%;
   text-align: center;
 }
 
@@ -137,7 +145,9 @@ tbody tr td:first-child {
   justify-content: center;
 }
 
-.page-item, .previous-page, .next-page {
+.page-item,
+.previous-page,
+.next-page {
   padding: 0 10px;
 }
 
@@ -147,7 +157,8 @@ tbody tr td:first-child {
   color: #f6a89e;
 }
 
-.previous-page a, .next-page a{
+.previous-page a,
+.next-page a {
   border: 1.5px solid #f6a89e;
   border-radius: 15px;
   color: #f6a89e;
@@ -160,7 +171,7 @@ tbody tr td:first-child {
   border: 1.5px solid #f6a89e;
   color: white;
   font-weight: bold;
-} 
+}
 
 .page-item.active a {
   background-color: #f6a89e;

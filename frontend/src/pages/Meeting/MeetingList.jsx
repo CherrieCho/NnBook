@@ -95,12 +95,20 @@ const MeetingList = ({ showWriteButton = true }) => {
   }
 
   return (
-    <Container className="home-meeting-list custom-container">
+    <Container className="home-meeting-list container">
       <Row>
         <Col lg={12}>
-          <h1 className="meeting-title" onClick={goToMeetingFromHome}>
-            모임 게시판 {showWriteButton || <span>›</span>}
-          </h1>
+          {showWriteButton ? (
+            <h3 className="meeting-title" onClick={goToMeetingFromHome}>
+              모임 게시판
+            </h3>
+          ) : (
+            <>
+              <h3 className="meeting-home-title" onClick={goToMeetingFromHome}>
+                모임 게시판 <span>›</span>
+              </h3>
+            </>
+          )}
           {showWriteButton && (
             <p className="meeting-title-description">
               직접 독서 모임을 개최하여 다양한 사람들과 책과 자신의 생각을

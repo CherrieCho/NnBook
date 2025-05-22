@@ -8,7 +8,7 @@ const fetchMeeting = async (page, pageSize) => {
   return res.data;
 };
 
-export const useMeetingQuery = (page = 1, pageSize = 10) => {
+export const useMeetingQuery = (page = 1, pageSize = 3) => {
   return useQuery({
     queryKey: ["meetings", page],
     queryFn: () => fetchMeeting(page, pageSize),

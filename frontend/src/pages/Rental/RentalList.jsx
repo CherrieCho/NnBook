@@ -99,7 +99,7 @@ const RentalList = () => {
 
   return (
     <>
-      <Container className="py-4 rental-container">
+      <Container className="rental-list-container">
         <Row className="rental-title-area justify-content-between align-items-center">
           <Col xs={12} md="auto">
             <h1 className="rental-list-page">대여 가능 도서 목록</h1>

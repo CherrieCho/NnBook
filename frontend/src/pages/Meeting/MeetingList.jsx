@@ -57,7 +57,7 @@ const MeetingList = ({ showWriteButton = true }) => {
 
   const navigate = useNavigate();
 
-  const pageSize = 10;
+  const pageSize = 3;
   const [page, setPage] = useState(1);
 
   const { data, isLoading, isError, error } = useMeetingQuery(page, pageSize);

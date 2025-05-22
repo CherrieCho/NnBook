@@ -4,8 +4,7 @@ body {
 }
 
 .home-meeting-list {
-  padding: 0;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .meeting-title {
@@ -31,7 +30,9 @@ body {
   margin-top: 2rem;
   padding: 3rem 6rem 3rem 6rem;
   border-radius: 15px;
-  margin-inline: 0.75rem;
+  margin-inline: auto;
+  overflow-x: auto; 
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
@@ -49,10 +50,10 @@ body {
 }
 
 .meeting-table {
+  min-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
   border-collapse: collapse;
   color: #4b4b4b;
 }
@@ -139,15 +140,24 @@ tbody tr td:first-child {
 }
 
 .add-button-area button {
-  border: none;
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
   background-color: #f6a89e;
+  color: white;
 }
 
-.add-button-area button:hover,
-.add-button-area button:active,
-.add-button-area button:focus {
-  background-color: #d8f69e !important;
-  color: #4b4b4b !important;
+.add-button-area button:hover{
+  border: 1.5px solid #f6a89e;
+  color: #f6a89e;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.add-button-area button:active {
+  border: 1.5px solid #f6a89e !important;
+  color: #f6a89e !important;
+  background-color: white !important;
+  border-radius: 15px !important;
 }
 
 .pagination {
@@ -197,5 +207,17 @@ tbody tr td:first-child {
 @media screen and (min-width: 768px) {
   .page-item {
     padding: 0 15px;
+  }
+
+  thead tr th,
+  tbody tr td {
+    font-size: 0.75rem;
+    padding: 0.25rem;
+    width: auto; 
+  }
+
+  thead tr,
+  tbody tr {
+    flex-wrap: nowrap;
   }
 }

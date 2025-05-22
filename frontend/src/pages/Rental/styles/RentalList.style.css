@@ -3,6 +3,11 @@
   padding: 0;
 }
 
+.rental-list-container{
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
 .rental-home-list-row .col{
   padding-bottom: 0;
 }

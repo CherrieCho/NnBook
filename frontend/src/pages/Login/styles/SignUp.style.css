@@ -21,6 +21,7 @@
   color: #101010;
   border: 1px solid #e3dcd2;
   border-radius: 15px;
+  outline: none;
   padding-left: 1rem;
   margin-bottom: 0.5rem;
 }
@@ -51,6 +52,7 @@
   color: #101010;
   border: 1px solid #e3dcd2;
   border-radius: 15px;
+  outline: none;
   padding-left: 1rem;
   margin-bottom: 0.5rem;
 }

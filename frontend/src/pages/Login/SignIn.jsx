@@ -42,7 +42,7 @@ function SignIn() {
           onClick={() => navigate("/")}
         />
       </div>
-      <form onSubmit={handleSubmit} className="signin-form">
+      <form onSubmit={handleSubmit} className="sign-in-form">
         <input
           placeholder="이메일"
           type="email"

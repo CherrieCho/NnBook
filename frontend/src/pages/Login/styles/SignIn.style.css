@@ -1,89 +1,91 @@
-.signin-container {
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 2rem;
+.sign-in-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.sign-in-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-top: 10rem;
+}
+
+.sign-in-logo-img {
+  height: 30px;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign-in-input-box {
+  font-family: "Paperlogy-4Regular";
+  height: 40px;
+  width: 300px;
+  max-height: 40px;
+  max-width: 300px;
+  color: #101010;
   border: 1px solid #e3dcd2;
-  border-radius: 8px;
-  background-color: #ffffff;
-  color: #4b4b4b;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-.signin-container h2 {
-  text-align: center;
-  font-weight: bold;
-  color: #f6a89e;
-}
-
-.signin-form .form-label {
-  font-weight: 500;
+  border-radius: 15px;
+  padding-left: 1rem;
   margin-bottom: 0.5rem;
 }
 
-.signin-form .form-control {
-  border: 1px solid #e3dcd2;
-  border-radius: 5px;
-  padding: 0.5rem;
+.sign-in-input-box::placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Paperlogy-4Regular";
+  font-size: 0.75rem;
+  color: #e3dcd2;
 }
 
-.signin-form .form-control:focus {
-  border-color: #f6a89e;
-  box-shadow: 0 0 0 0.2rem rgba(246, 168, 158, 0.25);
-}
-
-.signin-form .btn-dark {
+.sign-in-log-in-btn {
+  height: 40px;
+  width: 300px;
+  max-height: 40px;
+  max-width: 300px;
   background-color: #f6a89e;
   border: none;
-  font-weight: bold;
+  color: white;
+  border-radius: 15px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.signin-form .btn-dark:hover {
-  background-color: #d8f69e;
+.sign-in-log-in-btn:hover {
   color: #4b4b4b;
-}
-
-.signin-form .btn-outline-secondary {
-  color: #4b4b4b;
-  border: 1px solid #e3dcd2;
-}
-
-.signin-form .btn-outline-secondary:hover {
   background-color: #d8f69e;
   border-color: #d8f69e;
 }
 
-.signin-logo-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.signin-logo-img {
-  max-width: 160px;
-  height: auto;
-  object-fit: contain;
+.sign-in-sign-up-btn {
+  font-family: "Paperlogy-3Light";
+  height: 40px;
+  width: 300px;
+  max-height: 40px;
+  max-width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #f6a89e;
+  color: #f6a89e;
+  border-radius: 15px;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.input-underline {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #e3dcd2;
-  border-radius: 0;
-  padding: 0.5rem 0;
-  background-color: transparent;
-  box-shadow: none;
-  font-size: 1rem;
-  color: #333;
-}
-
-.input-underline:focus {
-  border-bottom: 1px solid #d8f69e;
-  outline: none;
-  box-shadow: 0 1px 0 0 #d8f69e;
-}
-
-.input-underline::placeholder {
-  color: #aaa;
-  font-style: italic;
+.sign-in-sign-up-btn:hover {
+  color: #4b4b4b;
+  background-color: #d8f69e;
+  border-color: #d8f69e;
 }

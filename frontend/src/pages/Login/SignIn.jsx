@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import LogoImg from "../../assets/NnBook-Logo.png";
 import "./styles/SignIn.style.css";
 import authApi from "../../utils/authApi";
+import { Container } from "react-bootstrap";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -33,38 +34,39 @@ function SignIn() {
 
   return (
     <div className="signin-container">
-      <div className="signin-logo-wrapper" onClick={() => navigate("/")}>
-        <img src={LogoImg} alt="NnBook 로고" className="signin-logo-img" />
+      <div className="sign-in-logo-wrapper" onClick={() => navigate("/")}>
+        <img
+          src={LogoImg}
+          alt="NnBook 로고"
+          className="sign-in-logo-img"
+          onClick={() => navigate("/")}
+        />
       </div>
       <form onSubmit={handleSubmit} className="signin-form">
-        <div className="mb-3">
-          <input
-            placeholder="이메일"
-            type="email"
-            name="email"
-            className="input-underline"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <input
-            placeholder="비밀번호"
-            type="password"
-            name="password"
-            className="input-underline"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-dark w-100">
+        <input
+          placeholder="이메일"
+          type="email"
+          name="email"
+          className="sign-in-input-box"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          placeholder="비밀번호"
+          type="password"
+          name="password"
+          className="sign-in-input-box"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit" className="sign-in-log-in-btn">
           로그인
         </button>
         <button
           type="button"
-          className="btn btn-outline-secondary w-100 mt-2"
+          className="sign-in-sign-up-btn"
           onClick={() => navigate("/login/signup")}
         >
           회원가입

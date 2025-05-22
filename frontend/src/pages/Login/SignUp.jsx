@@ -82,8 +82,7 @@ function SignUp() {
           // console.log(address);
           const province = address.province || "";
           const city = address.city || address.county || address.state || "";
-          const borough =
-            address.borough || address.suburb || "";
+          const borough = address.borough || address.suburb || "";
 
           //주소유형에 따라 다른 값 표시
           const locationValue = province ? `${province}` : `${city}`;
@@ -100,7 +99,7 @@ function SignUp() {
           setForm({
             ...form,
             location: "위치 정보 불러오기 실패",
-            city: "위치 상세정보 불러오기 실패"
+            city: "위치 상세정보 불러오기 실패",
           });
         }
       });
@@ -115,14 +114,14 @@ function SignUp() {
         email: form.email,
       });
       if (res.data.available) {
-        setEmailMessage("✅ 사용 가능한 이메일입니다.");
+        setEmailMessage("사용 가능한 이메일입니다.");
         setEmailAvailable(true);
       } else {
-        setEmailMessage("❌ 이미 사용 중인 이메일입니다.");
+        setEmailMessage("이미 사용 중인 이메일입니다.");
         setEmailAvailable(false);
       }
     } catch (err) {
-      setEmailMessage("⚠️ 중복 확인 중 오류 발생");
+      setEmailMessage("중복 확인 중 오류 발생");
       setEmailAvailable(false);
     }
   };
@@ -152,30 +151,27 @@ function SignUp() {
         latitude: form.latitude,
         longitude: form.longitude,
       });
-      alert("정상적으로 가입되었습니다.");
+      alert("회원 가입이 완료되었습니다!");
       navigate("/login");
     } catch (err) {
       alert("회원가입 실패: " + (err.response?.data?.message || err.message));
     }
   };
 
-  // console.log("폼", form);
-  // console.log("장르", genres)
-
   return (
-    <div className="signup-container">
-      <div className="signup-logo-wrapper" onClick={() => navigate("/")}>
+    <div className="sign-up-container">
+      <div className="sign-up-logo-wrapper" onClick={() => navigate("/")}>
         <img
           src={LogoImg}
           alt="NnBook Logo"
-          className="signup-logo-img"
+          className="sign-up-logo-img"
           style={{ cursor: "pointer" }}
         />
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="sign-up-input-box-area">
         <input
-          className="input-underline"
+          className="sign-up-input-box"
           type="name"
           name="name"
           placeholder="이름"
@@ -185,7 +181,7 @@ function SignUp() {
         />
 
         <input
-          className="input-underline"
+          className="sign-up-input-box"
           type="text"
           name="nickname"
           placeholder="닉네임"
@@ -194,9 +190,9 @@ function SignUp() {
           required
         />
 
-        <div className="input-row">
+        <div className="sign-up-input-box-email-area">
           <input
-            className="input-underline"
+            className="sign-up-input-box-email"
             type="email"
             name="email"
             placeholder="이메일"
@@ -204,7 +200,7 @@ function SignUp() {
             onChange={handleChange}
             required
           />
-          <button type="button" onClick={checkEmail}>
+          <button className="sign-up-btns" type="button" onClick={checkEmail}>
             중복 확인
           </button>
         </div>
@@ -219,7 +215,7 @@ function SignUp() {
         )}
 
         <input
-          className="input-underline"
+          className="sign-up-input-box"
           type="password"
           name="password"
           placeholder="비밀번호"
@@ -229,7 +225,7 @@ function SignUp() {
         />
 
         <input
-          className="input-underline"
+          className="sign-up-input-box"
           type="password"
           name="confirmPassword"
           placeholder="비밀번호 확인"
@@ -239,7 +235,7 @@ function SignUp() {
         />
 
         <button
-          className="genre-toggle"
+          className="sign-up-btns"
           type="button"
           onClick={() => setShowGenres(!showGenres)}
         >
@@ -264,7 +260,7 @@ function SignUp() {
 
         <div className="location-group">
           <input
-            className="input-underline location-input"
+            className="sign-up-input-box location-input"
             type="text"
             name="location"
             placeholder="위치"
@@ -273,7 +269,7 @@ function SignUp() {
             readOnly
           />
           <input
-            className="input-underline location-input"
+            className="sign-up-input-box location-input"
             type="text"
             name="location"
             placeholder="상세위치"
@@ -281,11 +277,11 @@ function SignUp() {
             onChange={handleChange}
             readOnly
           />
-          <button type="button" onClick={getLocation}>
+          <button className="sign-up-btns" type="button" onClick={getLocation}>
             위치 검색
           </button>
         </div>
-        <button type="submit">회원가입</button>
+        <button className="sign-up-btn" type="submit">회원가입</button>
       </form>
     </div>
   );

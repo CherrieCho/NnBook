@@ -117,7 +117,8 @@ const RentalList = () => {
         <Row
           xs={1}
           sm={3}
-          md={5}
+          md={4}
+          lg={5}
           className="gx-1 gy-1 justify-content-center justify-content-sm-start"
         >
           {displayBooks.map((book) => (

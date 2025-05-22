@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import BookCard from "../../common/BookCard/BookCard";
 import "./styles/RentalList.style.css";
 import { useNavigate } from "react-router-dom";
@@ -100,20 +100,22 @@ const RentalList = () => {
   return (
     <>
       <Container className="py-4 rental-container">
-        <Row className="rental-title-area mb-5 justify-content-between align-items-center">
+        <Row className="rental-title-area justify-content-between align-items-center">
           <Col xs={12} md="auto">
-            <strong className="rental-list">대여 가능 도서 목록</strong>
+            <h1 className="rental-list-page">대여 가능 도서 목록</h1>
+            <p className="rental-list-sub">원하는 도서를 가까운 이웃에게서 빌려 보세요!</p>
           </Col>
+        </Row>
+        <Row className="sort-distance-button">
           <Col xs="auto">
-            <button
+            <Button
               className="rental-distance-button"
               onClick={() => setSortByDistance((prev) => !prev)}
             >
               {sortByDistance ? "등록순" : "가까운순"}
-            </button>
+            </Button>
           </Col>
         </Row>
-
         <Row
           xs={1}
           sm={3}
@@ -124,7 +126,7 @@ const RentalList = () => {
           {displayBooks.map((book) => (
             <div className="mb-3 text-center">
               <BookCard book={book} />
-              <p>
+              <p className="distance-info">
                 {book.distance !== null
                   ? `${book.distance}km`
                   : "거리 정보가 없습니다."}

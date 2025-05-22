@@ -140,7 +140,7 @@ const MyPage = () => {
                     <span>{mydata.location}</span>
                     <span>{mydata.city}</span>
                   </div>
-                  <Button variant="primary" onClick={getLocation}>
+                  <Button onClick={getLocation}>
                     지역 변경
                   </Button>
                 </div>

@@ -1,5 +1,4 @@
 .mypage-container{
-  margin-top: 3rem;
   margin-bottom: 3rem;
 }
 
@@ -59,18 +58,24 @@ h2{
 }
 
 .my-location button{
-  border: none;
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
   background-color: #f6a89e;
+  color: white;
 }
 
 .my-location button:hover{
-  background-color: #d8f69e;
-  color: #4b4b4b;
+  border: 1.5px solid #f6a89e;
+  color: #f6a89e;
+  background-color: white;
+  border-radius: 15px;
 }
 
 .my-location button:active{
-  background-color: #d8f69e !important;
-  color: #4b4b4b !important;
+  border: 1.5px solid #f6a89e !important;
+  color: #f6a89e !important;
+  background-color: white !important;
+  border-radius: 15px !important;
 }
 
 .library-book, .rental-book, .liked-book{

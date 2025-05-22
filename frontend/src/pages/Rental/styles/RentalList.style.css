@@ -7,12 +7,24 @@
   padding-bottom: 0;
 }
 
+
 .rental-list {
   font-family: "Paperlogy-7Bold", serif;
   font-size: 26px;
   color: #4b4b4b;
   margin-top: 30px;
   margin-bottom: 35px;
+}
+
+.rental-list-page {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 26px;
+  color: #4b4b4b;
+}
+
+.rental-list-sub{
+  font-family: "Paperlogy-4Regular";
+  margin: 0;
 }
 
 .rental-home-title h3 {
@@ -59,18 +71,33 @@
 .rental-distance-button {
   font-family: "Paperlogy-6SemiBold";
   background-color: #f6a89e;
-  color: #fff;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  margin-right: 12px;
-  border-radius: 0.375rem;
-  font-size: 1rem;
+  color: white;
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
   transition: background-color 0.3s;
 }
 
-.rental-distance-button:hover {
-  background-color: #d8f69e;
-  color: #4b4b4b;
+.rental-distance-button:hover{
+  border: 1.5px solid #f6a89e;
+  background-color: white;
+  color: #f6a89e;
+}
+
+.rental-distance-button:active {
+  border: 1.5px solid #f6a89e !important;
+  background-color: white !important;
+  color: #f6a89e !important;
+}
+
+
+.sort-distance-button{
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em 0;
+}
+
+.distance-info{
+  margin: 0.5em 0;
 }
 
 /* more 링크 */

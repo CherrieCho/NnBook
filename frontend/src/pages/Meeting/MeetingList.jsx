@@ -101,6 +101,12 @@ const MeetingList = ({ showWriteButton = true }) => {
           <h1 className="meeting-title" onClick={goToMeetingFromHome}>
             모임 게시판 {showWriteButton || <span>›</span>}
           </h1>
+          {showWriteButton && (
+            <p className="meeting-title-description">
+              직접 독서 모임을 개최하여 다양한 사람들과 책과 자신의 생각을
+              공유해보세요!
+            </p>
+          )}
         </Col>
 
         {!mydata?.email ? (

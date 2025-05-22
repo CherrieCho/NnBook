@@ -9,11 +9,17 @@ body {
 }
 
 .meeting-title {
-  margin: 6rem 0 2rem 0;
+  margin: 6rem 0 1rem 0;
   font-family: "Paperlogy-7Bold", serif;
   font-size: 1.5rem;
   color: #101010;
   cursor: pointer;
+}
+
+.meeting-title-description {
+  font-family: "Paperlogy-3Light", serif;
+  font-size: 1rem;
+  color: #4b4b4b;
 }
 
 .meeting-title span {
@@ -22,6 +28,7 @@ body {
 
 .meeting-background {
   background-color: rgba(227, 220, 210, 0.3);
+  margin-top: 2rem;
   padding: 3rem 6rem 3rem 6rem;
   border-radius: 15px;
   margin-inline: 0.75rem;

@@ -69,7 +69,8 @@ const BookList = () => {
       <Row
         xs={1}
         sm={3}
-        md={5}
+        md={4}
+        lg={5}
         className="gx-0 gy-4 justify-content-center justify-content-sm-start"
       >
         {booksToDisplay.map((book) => (

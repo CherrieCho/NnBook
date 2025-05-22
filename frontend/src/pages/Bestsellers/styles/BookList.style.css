@@ -5,14 +5,23 @@
 }
 
 .book-list-title-area{
-  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
 }
 
 .book-list-title {
   font-family: "Paperlogy-7Bold", serif;
   font-size: 26px;
   color: #4b4b4b;
-  margin-bottom: 2rem;
+  margin: 0;
+}
+
+.book-list-sub{
+  font-family: "Paperlogy-3Light";
+  margin: 5px 0;
 }
 
 .book-list-row {

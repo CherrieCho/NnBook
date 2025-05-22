@@ -56,7 +56,10 @@ const BookList = () => {
   return (
     <Container className="book-list-container py-4">
       <div className="book-list-title-area">
-        <h3 className="book-list-title">전체 도서 목록</h3>
+        <div>
+          <h3 className="book-list-title">전체 도서 목록</h3>
+          <p className="book-list-sub">원하는 책과 저자를 검색해보세요!</p>
+        </div>
         <SearchBar onSearch={handleSearch} />
       </div>
 

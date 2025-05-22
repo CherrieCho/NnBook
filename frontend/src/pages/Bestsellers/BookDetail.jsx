@@ -90,72 +90,73 @@ const BookDetail = () => {
   return (
     <div>
       <Container className="detail-container">
-        <Row>
-          <Col className="book-image" lg={4}>
-            <div className="book-image-cover">
-              <img src={bookinfo.cover} />
-            </div>
-          </Col>
-          <Col lg={8}>
-            <div className="bookdetail-area">
-              <div>{bookinfo.categoryName}</div>
-              <h1>{bookinfo.title}</h1>
-              <div className="ratings">
-                <Rating value={value} max={5} precision={0.5} readOnly />
-                <span>{value}</span>
+        <div className="detail-border">
+          <Row className="bookdetail-top">
+            <Col className="book-image" lg={3}>
+              <div className="book-image-cover">
+                <img src={bookinfo.cover} />
               </div>
-              <div>{bookinfo.author}</div>
-              <div>{bookinfo.publisher}</div>
-            </div>
-            <div className="detail-buttons">
-              <Button variant="primary" size="lg" onClick={addToLibrary}>
-                내 서재 추가
-              </Button>
-              {canBorrow ? (
-                <OverlayTrigger
-                  placement="bottom"
-                  delay={{ show: 100, hide: 100 }}
-                  overlay={renderTooltip}
-                >
-                  <span className="d-inline-block">
-                    <Button
-                      className="detail-purchase"
-                      variant="primary"
-                      size="lg"
-                      onClick={goToAladin}
-                    >
-                      대여 불가
-                    </Button>
-                  </span>
-                </OverlayTrigger>
-              ) : (
-                <Button variant="primary" size="lg" onClick={handleOpenModal}>
-                  대여 신청
+            </Col>
+            <Col lg={9}>
+              <div className="bookdetail-area">
+                <div>{bookinfo.categoryName}</div>
+                <h1>{bookinfo.title}</h1>
+                <div className="ratings">
+                  <Rating value={value} max={5} precision={0.5} readOnly />
+                  <span>{value}</span>
+                </div>
+                <div>{bookinfo.author}</div>
+                <div>{bookinfo.publisher}</div>
+              </div>
+              <div className="detail-buttons">
+                <Button variant="primary" onClick={addToLibrary}>
+                  내 서재 추가
                 </Button>
-              )}
-            </div>
-          </Col>
-        </Row>
-        <Row className="bookdetail-bottom first-bottom-row">
-          <Col lg={3} className="bottom-subtitle">
-            <h2>기본 정보</h2>
-          </Col>
-          <Col lg={9}>
-            <ul className="bookdetail-list">
-              <li>{`출판일:  ${bookinfo.pubDate}`}</li>
-              <li>{`쪽수:  ${bookinfo?.subInfo?.itemPage} 페이지`}</li>
-              <li>{`ISBN:  ${bookinfo.isbn13}`}</li>
-            </ul>
-          </Col>
-        </Row>
-        <Row className="bookdetail-bottom">
-          <Col lg={3} className="bottom-subtitle">
-            <h2>도서 소개</h2>
-          </Col>
-          <Col lg={9}>
-            <p>{bookinfo.description}</p>
-          </Col>
-        </Row>
+                {canBorrow ? (
+                  <OverlayTrigger
+                    placement="bottom"
+                    delay={{ show: 100, hide: 100 }}
+                    overlay={renderTooltip}
+                  >
+                    <span className="d-inline-block">
+                      <Button
+                        className="detail-purchase"
+                        variant="primary"
+                        onClick={goToAladin}
+                      >
+                        대여 불가
+                      </Button>
+                    </span>
+                  </OverlayTrigger>
+                ) : (
+                  <Button variant="primary" onClick={handleOpenModal}>
+                    대여 신청
+                  </Button>
+                )}
+              </div>
+            </Col>
+          </Row>
+          <Row className="bookdetail-bottom first-bottom-row">
+            <Col lg={2} className="bottom-subtitle">
+              <h2>기본 정보</h2>
+            </Col>
+            <Col lg={10}>
+              <ul className="bookdetail-list">
+                <li>{`출판일:  ${bookinfo.pubDate}`}</li>
+                <li>{`쪽수:  ${bookinfo?.subInfo?.itemPage} 페이지`}</li>
+                <li>{`ISBN:  ${bookinfo.isbn13}`}</li>
+              </ul>
+            </Col>
+          </Row>
+          <Row className="bookdetail-bottom">
+            <Col lg={2} className="bottom-subtitle">
+              <h2>도서 소개</h2>
+            </Col>
+            <Col lg={10}>
+              <p>{bookinfo.description}</p>
+            </Col>
+          </Row>
+        </div>
       </Container>
 
       <BookRentalModal

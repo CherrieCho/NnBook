@@ -10,6 +10,10 @@ export default function Footer() {
         <p>이용약관</p>
         <p>개인정보처리방침</p>
         <p>청소년보호정책</p>
+        <div className="footer-top-area-hidden">
+          <p>채용정보</p>
+          <p>도서홍보안내</p>
+        </div>
       </div>
       <div className="footer-bottom-area">
         <div className="footer-logo-area">

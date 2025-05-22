@@ -16,6 +16,11 @@
   gap: 3rem;
 }
 
+.footer-top-area-hidden {
+  display: flex;
+  gap: 3rem;
+}
+
 .footer-bottom-area {
   height: 100%;
   display: flex;
@@ -112,5 +117,9 @@
 
   .footer-copyright {
     font-size: 0.6rem;
+  }
+
+  .footer-top-area-hidden {
+    display: none;
   }
 }

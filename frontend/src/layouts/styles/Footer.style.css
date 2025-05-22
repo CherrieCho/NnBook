@@ -1,9 +1,54 @@
 .footer {
-  background-color: #e3dcd2;
+  background-color: #fdfcf9;
+  height: 200px;
   border-top: 1px solid #e3dcd2;
-  color: #4b4b4b;
-  padding: 3rem 1rem 2rem;
-  font-size: 14px;
+  color: #b9b3ab;
+}
+
+.footer-top-area {
+  font-family: "Paperlogy-4Regular";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e3dcd2;
+  font-size: 1rem;
+  padding-block: 1.5rem;
+  gap: 3rem;
+}
+
+.footer-bottom-area {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-top-area p {
+  margin: 0;
+}
+
+.footer-logo-area {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-logo-img {
+  height: 60px;
+}
+
+.footer-copyright-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-self: flex-end;
+}
+
+.footer-copyright {
+  font-family: "Paperlogy-3Light";
+  font-size: 0.75rem;
+  padding: 0;
 }
 
 .footer-inner {
@@ -14,6 +59,38 @@
   flex-wrap: wrap;
   gap: 2rem;
   text-align: left;
+}
+
+.footer-customer-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-customer {
+  color: #b9b3ab;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.footer-button {
+  font-family: "Paperlogy-3Light";
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 15px;
+  width: 10rem;
+  color: #b9b3ab;
+  border: none;
+  background-color: rgba(227, 220, 210, 0.3);
+}
+
+.footer-button span {
+  font-family: "Paperlogy-1Thin";
 }
 
 .footer-column {

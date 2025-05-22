@@ -23,7 +23,8 @@ body {
 }
 
 .recommend-book-card:hover .col {
-  filter: blur(2px);
+  filter: blur(1px);
+  transform: scale(0.985);
   opacity: 0.8;
 }
 

@@ -77,6 +77,15 @@ const MeetingList = ({ showWriteButton = true }) => {
     navigate(`/meeting/${id}`);
   };
 
+  const goToMeetingFromHome = () => {
+    if (!mydata?.email) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else {
+      navigate("/meeting");
+    }
+  };
+
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
@@ -89,41 +98,11 @@ const MeetingList = ({ showWriteButton = true }) => {
     <Container className="home-meeting-list custom-container">
       <Row>
         <Col lg={12}>
-          <h1 className="meeting-title" onClick={() => navigate("/meeting")}>
+          <h1 className="meeting-title" onClick={goToMeetingFromHome}>
             모임 게시판 <span>›</span>
           </h1>
         </Col>
 
-        {showWriteButton && (
-          <>
-            <ReactPaginate
-              nextLabel=">"
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={3}
-              marginPagesDisplayed={0}
-              pageCount={Math.ceil(data?.data.length / 10)}
-              previousLabel="<"
-              pageClassName="page-item"
-              pageLinkClassName="page-link"
-              previousClassName="previous-page"
-              previousLinkClassName="page-link"
-              nextClassName="next-page"
-              nextLinkClassName="page-link"
-              breakLabel="..."
-              breakClassName="page-item"
-              breakLinkClassName="page-link"
-              containerClassName="pagination"
-              activeClassName="active"
-              renderOnZeroPageCount={null}
-              forcePage={page - 1}
-            />
-            <div className="add-button-area">
-              <Button type="button" size="md" onClick={goToCreateMeeting}>
-                글쓰기
-              </Button>
-            </div>
-          </>
-        )}
         {!mydata?.email ? (
           <div className="custom-container container">
             <p className="non-log-in-text-area">
@@ -171,6 +150,36 @@ const MeetingList = ({ showWriteButton = true }) => {
           </Col>
         )}
       </Row>
+      {showWriteButton && (
+        <>
+          <ReactPaginate
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={0}
+            pageCount={Math.ceil(data?.data.length / 10)}
+            previousLabel="<"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="previous-page"
+            previousLinkClassName="page-link"
+            nextClassName="next-page"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+            forcePage={page - 1}
+          />
+          <div className="add-button-area">
+            <Button type="button" size="md" onClick={goToCreateMeeting}>
+              글쓰기
+            </Button>
+          </div>
+        </>
+      )}
     </Container>
   );
 };

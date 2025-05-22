@@ -62,6 +62,15 @@ const Recommend = ({ previewCount }) => {
     navigate(`/books/${id}`);
   };
 
+  const goToRecommendFromHome = () => {
+    if (!mydata?.email) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else {
+      navigate("/recommend");
+    }
+  };
+
   const isLoading = userLoading || genresLoading || booksLoading;
 
   if (isLoading) {
@@ -84,7 +93,7 @@ const Recommend = ({ previewCount }) => {
   return (
     <Container className="container custom-container">
       <div className="recommend-title-home">
-        <h3 onClick={() => navigate("/recommend")}>
+        <h3 onClick={goToRecommendFromHome}>
           취향 기반 추천 도서<span>›</span>
         </h3>
       </div>

@@ -6,7 +6,7 @@ import useBooks from "../../hooks/Common/useBooks";
 import "./styles/HomePage.style.css";
 import MeetingList from "../Meeting/MeetingList";
 import Recommend from "../Recommend/Recommend";
-import Rental from "./Rental";
+import Rental from "../Rental/Rental";
 import HomeBanner from "../../components/HomeBanner/HomeBanner";
 import BestPickDuo from "../../components/BestPickDuo/BestPickDuo";
 import { Container } from "react-bootstrap";

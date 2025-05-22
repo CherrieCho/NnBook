@@ -1,4 +1,12 @@
 /* ====== 공통 ====== */
+.rental-container{
+  padding: 0;
+}
+
+.rental-home-list-row .col{
+  padding-bottom: 0;
+}
+
 
 .rental-list {
   font-family: "Paperlogy-7Bold", serif;
@@ -29,10 +37,6 @@
 
 .rental-list span {
   font-family: "Paperlogy-1Thin";
-}
-
-.rental-home-list-row .col{
-  padding-bottom: 1.5rem;
 }
 
 /* 홈에서만 쓰는 검색 기능 포함 스타일 (rental.jsx용) */
@@ -113,6 +117,10 @@
 @media (max-width: 768px) {
   .rental-search-input {
     max-width: 20ch;
+  }
+
+  .rental-home-list-row .col{
+    padding-bottom: 1.5rem;
   }
 }
 

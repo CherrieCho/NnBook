@@ -5,6 +5,10 @@ body {
   background-color: #fdfcf9;
 }
 
+.recommend-home-container {
+  padding: 0;
+}
+
 .recommend-title-home h3 {
   font-family: "Paperlogy-7Bold", serif;
   font-size: 1.5rem;
@@ -18,12 +22,14 @@ body {
 }
 
 .recommend-book-card {
+  cursor: pointer;
   flex-direction: row;
   transition: all 0.5s ease;
 }
 
 .recommend-book-card:hover .col {
-  filter: blur(2px);
+  filter: blur(1px);
+  transform: scale(0.985);
   opacity: 0.8;
 }
 

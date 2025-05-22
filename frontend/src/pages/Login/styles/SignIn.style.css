@@ -18,9 +18,10 @@
   height: 30px;
 }
 
-.signin-form {
+.sign-in-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -33,6 +34,8 @@
   color: #101010;
   border: 1px solid #e3dcd2;
   border-radius: 15px;
+  outline: none;
+  font-size: 0.75rem;
   padding-left: 1rem;
   margin-bottom: 0.5rem;
 }

@@ -4,6 +4,7 @@ body {
 }
 
 .home-meeting-list {
+  padding: 0;
   margin-bottom: 4rem;
 }
 
@@ -77,6 +78,7 @@ tbody tr {
   width: 100%;
   border-bottom: 1px solid #e3dcd2;
   padding: 0.75rem 0;
+  cursor: pointer;
 }
 
 thead tr th:first-child {

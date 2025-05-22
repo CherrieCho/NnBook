@@ -1,14 +1,52 @@
 .best-pick-duo-container {
   display: flex;
+  flex-direction: row;
+
   justify-content: center;
   width: 100%;
   margin: 6rem 0 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .best-pick-duo-container .row {
+    flex-direction: column;
+  }
+
+  .best-pick-duo-container .col {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .best-pick-today-info-area {
+    padding-bottom: 3rem;
+    border: none !important;
+  }
+
+  .best-pick-today-info {
+    padding-right: 0.5rem !important;
+  }
+  
+  .best-pick-blog-info {
+    padding-right: 0.5rem !important;
+  }
+}
+
+.best-pick-duo-today {
+  cursor: pointer;
+}
+
+.best-pick-duo-blog {
+  cursor: pointer;
 }
 
 .best-pick-duo-title {
   font-family: "Paperlogy-7Bold";
   font-size: 1.5rem;
   color: #101010;
+}
+
+.best-pick-duo-title span {
+  font-family: "Paperlogy-1Thin";
 }
 
 .best-pick-blog-info-area {
@@ -29,6 +67,10 @@
   transition: transform 0.5s ease;
 }
 
+.best-pick-today-info {
+  padding-right: 2rem;
+}
+
 .best-pick-book-title {
   font-family: "Paperlogy-6SemiBold";
   font-size: 1rem;
@@ -43,4 +85,8 @@
   font-family: "Paperlogy-6SemiBold";
   font-size: 0.75rem;
   color: #4b4b4b;
+}
+
+.best-pick-blog-info {
+  padding-right: 2rem;
 }

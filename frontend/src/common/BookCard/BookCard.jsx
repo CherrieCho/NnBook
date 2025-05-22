@@ -19,7 +19,7 @@ export default function BookCard({ book, onClick }) {
       <img
         src={book.cover?.replace("/api/image-proxy?url=", "")}
         alt={book.title}
-        className="img-fluid book-cover-img"
+        className="book-cover-img"
         onError={(e) => {
           e.target.src = "/fallback-image.png";
         }}

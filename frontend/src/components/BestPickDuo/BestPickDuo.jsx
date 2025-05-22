@@ -4,12 +4,19 @@ import useBlogBest from "../../hooks/Recommend/useBlogBest";
 import useNewSpecialBest from "../../hooks/Recommend/useNewSpecialBest";
 import { Row, Col } from "react-bootstrap";
 import useBookByID from "../../hooks/Common/useBookbyID";
+import { useNavigate } from "react-router";
 
 const BestPickDuo = () => {
+  const navigate = useNavigate();
+
   const { data: blogData } = useBlogBest();
   const { data: NewSpecialData } = useNewSpecialBest();
 
   const [itemId, setItemId] = useState(null);
+
+  const goToDetail = (id) => {
+    navigate(`/books/${id}`);
+  };
 
   useEffect(() => {
     if (NewSpecialData && NewSpecialData[0]) {
@@ -30,15 +37,15 @@ const BestPickDuo = () => {
   return (
     <div className="best-pick-duo-container">
       <Row xs={2} sm={2} md={2}>
-        <Col>
-          <h1 className="best-pick-duo-title">오늘의 책</h1>
+        <Col className="best-pick-duo-today" onClick={() => goToDetail(NewSpecialData[0].itemId)}>
+          <h1 className="best-pick-duo-title">오늘의 책 <span>›</span></h1>
           <div className="best-pick-today-info-area">
             <img
               src={NewSpecialData[0].cover.replace("/cover500/", "/coversum/")}
               alt={NewSpecialData[0].title}
-              className="best-pick-blog-book-img"
+              className="best-pick-book-img"
             />
-            <div>
+            <div className="best-pick-today-info">
               <h3 className="best-pick-book-title">
                 {NewSpecialData[0].title.split("-")[0]}
               </h3>
@@ -54,15 +61,15 @@ const BestPickDuo = () => {
             </div>
           </div>
         </Col>
-        <Col>
-          <h1 className="best-pick-duo-title">블로거 픽</h1>
+        <Col className="best-pick-duo-blog" onClick={() => goToDetail(blogData[0].itemId)}>
+          <h1 className="best-pick-duo-title">블로거 픽 <span>›</span></h1>
           <div className="best-pick-blog-info-area">
             <img
               src={blogData[0].cover.replace("/cover500/", "/coversum/")}
               alt={blogData[0].title}
               className="best-pick-book-img"
             />
-            <div>
+            <div className="best-pick-blog-info">
               <h3 className="best-pick-book-title">
                 {blogData[0].title.split("-")[0]}
               </h3>

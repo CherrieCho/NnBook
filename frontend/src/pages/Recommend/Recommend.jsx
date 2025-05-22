@@ -88,7 +88,7 @@ const Recommend = ({ previewCount }) => {
           취향 기반 추천 도서<span>›</span>
         </h3>
       </div>
-      <Row xs={3} sm={3} md={3}>
+      <Row className="recommend-book-card" xs={3} sm={3} md={3}>
         {recommended.map((book, idx) => (
           <Col>
             <RecommendBookCard book={book} />

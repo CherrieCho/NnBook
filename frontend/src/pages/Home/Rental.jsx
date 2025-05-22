@@ -51,7 +51,7 @@ export default function Rental() {
         xs={2}
         sm={3}
         md={6}
-        className="gx-1 gy-1 justify-content-center justify-content-sm-start"
+        className="rental-home-list-row"
       >
         {books.map((book) => (
           <Col key={book.itemId || book.id}>

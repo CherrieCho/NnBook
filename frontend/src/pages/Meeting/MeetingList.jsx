@@ -84,7 +84,7 @@ const MeetingList = ({ showWriteButton = true }) => {
   }
 
   return (
-    <Container className="home-meeting-list">
+    <Container className="home-meeting-list custom-container">
       <Row>
         <Col lg={12}>
           <h1 className="meeting-title" onClick={() => navigate("/meeting")}>

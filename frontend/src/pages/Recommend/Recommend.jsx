@@ -91,7 +91,7 @@ const Recommend = ({ previewCount }) => {
   console.log(recommended);
 
   return (
-    <Container className="container custom-container">
+    <Container className="recommend-home-container custom-container">
       <div className="recommend-title-home">
         <h3 onClick={goToRecommendFromHome}>
           취향 기반 추천 도서<span>›</span>

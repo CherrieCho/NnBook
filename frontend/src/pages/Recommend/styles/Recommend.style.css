@@ -5,6 +5,10 @@ body {
   background-color: #fdfcf9;
 }
 
+.recommend-home-container {
+  padding: 0;
+}
+
 .recommend-title-home h3 {
   font-family: "Paperlogy-7Bold", serif;
   font-size: 1.5rem;

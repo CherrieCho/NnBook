@@ -1,6 +1,17 @@
 .detail-container{
   margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
+} 
+
+.detail-border{
+  border: 1px solid #cbc2b6;
+  border-radius: 15px;
+  padding: 2em;
+}
+
+.bookdetail-top{
+  border-bottom: 1px solid #cbc2b6;
+  padding-bottom: 2em;
 }
 
 .book-image{
@@ -74,11 +85,6 @@
   margin-top: 6rem;
 }
 
-.bottom-subtitle{
-  display: flex;
-  justify-content: center;
-}
-
 .bottom-subtitle h2{
   font-size: 24px;
 }
@@ -101,6 +107,12 @@
   color: #4b4b4b;
 }
 
+@media (max-width: 576px) {
+  .bookdetail-area h1{
+  font-size: 28px;
+}
+}
+
 @media screen and (max-width: 738px){
   .bookdetail-area div{
     margin: 13px 0;
@@ -116,5 +128,11 @@
   .bottom-subtitle{
     justify-content: flex-start;
     margin: 1em 0;
+  }
+}
+
+@media screen and (max-width: 820px){
+  .first-bottom-row{
+    margin-top: 3rem;
   }
 }

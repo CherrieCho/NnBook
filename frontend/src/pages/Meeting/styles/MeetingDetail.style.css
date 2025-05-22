@@ -55,7 +55,7 @@ body {
   display: flex;
   justify-content: flex-end;
   padding-top: 20px;
-  margin-bottom: 200px;
+  margin-bottom: 3rem;
 }
 
 .join-button-box button {

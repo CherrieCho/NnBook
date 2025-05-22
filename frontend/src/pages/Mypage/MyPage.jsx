@@ -150,9 +150,9 @@ const MyPage = () => {
         </Row>
         <Row className="library-book">
           <Col lg={12}>
-              <h1 className="mypage-title" onClick={moveToLibrary}>
+              <h3 className="mypage-title" onClick={moveToLibrary}>
                 내 서재 <span>›</span>
-                </h1>
+                </h3>
             <div>
               {readingDataPlusBorrowed?.length > 0 && (
                 <SingleLineCarousel books={readingDataPlusBorrowed} />
@@ -162,7 +162,7 @@ const MyPage = () => {
         </Row>
         <Row className="rental-book">
           <Col lg={12}>
-            <h1 className="mypage-title">대여중인 책</h1>
+            <h3 className="mypage-title">대여중인 책</h3>
             <div>
               {borrowdata?.length > 0 && (
                 <SingleLineCarousel books={borrowdata} libraryBookStatus="borrowed"/>
@@ -172,7 +172,7 @@ const MyPage = () => {
         </Row>
         <Row className="liked-book">
           <Col lg={12}>
-            <h1 className="mypage-title">좋아요 한 책</h1>
+            <h3 className="mypage-title">좋아요 한 책</h3>
             <div>
               {likeDataPlusBorrowed?.length > 0 && (
                 <SingleLineCarousel books={likeDataPlusBorrowed} />

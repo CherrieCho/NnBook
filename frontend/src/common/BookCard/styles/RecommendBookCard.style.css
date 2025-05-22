@@ -8,10 +8,6 @@
   background-color: #e3dcd2;
 }
 
-.recommend-card-col:hover {
-  transform: scale(1.025);
-}
-
 .recommend-book-card-cover-img {
   width: fit-content;
   max-height: 150px;

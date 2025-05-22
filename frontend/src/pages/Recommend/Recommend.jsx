@@ -90,7 +90,7 @@ const Recommend = ({ previewCount }) => {
       </div>
       <Row className="recommend-book-card" xs={3} sm={3} md={3}>
         {recommended.map((book, idx) => (
-          <Col>
+          <Col className="recommend-book-card-col">
             <RecommendBookCard book={book} />
           </Col>
         ))}

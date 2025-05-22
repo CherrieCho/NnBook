@@ -4,13 +4,13 @@ body {
 }
 
 .home-meeting-list {
-  margin-bottom: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
 }
 
 .meeting-title {
-  margin: 6rem 0 1rem 0;
   font-family: "Paperlogy-7Bold", serif;
-  font-size: 1.5rem;
+  font-size: 26px;
   color: #101010;
   cursor: pointer;
 }
@@ -21,8 +21,16 @@ body {
   color: #4b4b4b;
 }
 
-.meeting-title span {
+.meeting-home-title span {
   font-family: "Paperlogy-1Thin";
+}
+
+.meeting-home-title {
+  margin: 6rem 0 1rem 0;
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 1.5rem;
+  color: #101010;
+  cursor: pointer;
 }
 
 .meeting-background {
@@ -31,7 +39,7 @@ body {
   padding: 3rem 6rem 3rem 6rem;
   border-radius: 15px;
   margin-inline: auto;
-  overflow-x: auto; 
+  overflow-x: auto;
   box-sizing: border-box;
 }
 
@@ -146,7 +154,7 @@ tbody tr td:first-child {
   color: white;
 }
 
-.add-button-area button:hover{
+.add-button-area button:hover {
   border: 1.5px solid #f6a89e;
   color: #f6a89e;
   background-color: white;
@@ -213,7 +221,7 @@ tbody tr td:first-child {
   tbody tr td {
     font-size: 0.75rem;
     padding: 0.25rem;
-    width: auto; 
+    width: auto;
   }
 
   thead tr,

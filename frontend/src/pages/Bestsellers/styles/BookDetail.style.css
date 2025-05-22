@@ -51,18 +51,22 @@
 }
 
 .detail-buttons button{
-  border: none;
   background-color: #f6a89e;
+  color: white;
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
 }
 
 .detail-buttons button:hover{
-  background-color: #d8f69e;
-  color: #4b4b4b;
+  border: 1.5px solid #f6a89e;
+  background-color: white;
+  color: #f6a89e;
 }
 
 .detail-buttons button:active{
-  background-color: #d8f69e !important;
-  color: #4b4b4b !important;
+  border: 1.5px solid #f6a89e !important;
+  background-color: white !important;
+  color: #f6a89e !important;
 }
 
 .detail-purchase{
@@ -70,7 +74,7 @@
 }
 
 .detail-purchase:hover{
-  background-color: #d8f69e !important;
+  background-color: white !important;
 }
 
 .bookdetail-bottom{

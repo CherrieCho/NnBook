@@ -3,22 +3,28 @@
   margin-bottom: 3rem;
 }
 
-.mypage-title{
+.mypage-title-area{
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.mypage-title-area p{
+  font-family: "Paperlogy-4Regular";
+}
+
+.my-data-area{
+  font-family: "Paperlogy-4Regular";
+}
+
+.mypage-title{
   font-family: "Paperlogy-7Bold", serif;
   font-size: 26px;
   font-weight: 600;
   color: #4b4b4b;
 }
 
-.rental-book {
-  margin-bottom: 100px;
-}
-
-.go-library{
-  display: flex;
-  justify-content: space-between;
+.mypage-title span{
+  font-family: "Paperlogy-1Thin";
 }
 
 .my-info{
@@ -39,15 +45,6 @@
 h2{
   font-size: 23px;
   font-weight: bold;
-}
-
-.my-lib{
-  border: none;
-  background: none;
-  text-decoration: underline;
-  font-weight: lighter;
-  font-size: 17px;
-  color: #4B4B4B;
 }
 
 .my-location{
@@ -74,4 +71,14 @@ h2{
 .my-location button:active{
   background-color: #d8f69e !important;
   color: #4b4b4b !important;
+}
+
+.library-book, .rental-book, .liked-book{
+  margin-top: 3rem;
+}
+
+@media (max-width: 576px) {
+  .mypage-container{
+    margin-top: 0;
+  }
 }

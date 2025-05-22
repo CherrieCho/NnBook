@@ -106,22 +106,30 @@ const MyPage = () => {
         <Row>
           <Col lg={12}>
             <div className="info-area">
-              <h1 className="mypage-title">내 정보</h1>
+              <div className="mypage-title-area">
+                <h1 className="mypage-title">내 정보</h1>
+                <p>내 정보와 도서 정보를 확인하고 필요한 경우 위치 정보를 변경해주세요!</p>
+              </div>
               <div className="my-info">
                 <h2>{mydata.nickname}님</h2>
-                <div>이름: {mydata.name}</div>
-                <div>이메일: {mydata.email}</div>
-                <div className="mypage-category">
-                  취향 카테고리:
-                  {genres && genres.length > 0 ? (
-                    <div className="my-genre">
-                      {genres.map((genre, index) => (
-                        <div key={index}>{genre.genre}</div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div>등록된 카테고리가 없습니다.</div>
-                  )}
+                <div className="my-data-area">
+                  <div>이름: {mydata.name}</div>
+                  <div>이메일: {mydata.email}</div>
+                  <div className="mypage-category">
+                    취향 카테고리:
+                    {genres && genres.length > 0 ? (
+                      <div className="my-genre">
+                        {genres.map((genre, index) => (
+                          <div key={index}>
+                            {genre.genre}
+                            {index !== genres.length - 1 && ', '}
+                            </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div>등록된 카테고리가 없습니다.</div>
+                    )}
+                  </div>
                 </div>
                 <div className="my-location">
                   <div>
@@ -140,14 +148,11 @@ const MyPage = () => {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className="library-book">
           <Col lg={12}>
-            <div className="go-library">
-              <h1 className="mypage-title">내 서재</h1>
-              <button onClick={moveToLibrary} className="my-lib">
-                더보기
-              </button>
-            </div>
+              <h1 className="mypage-title" onClick={moveToLibrary}>
+                내 서재 <span>›</span>
+                </h1>
             <div>
               {readingDataPlusBorrowed?.length > 0 && (
                 <SingleLineCarousel books={readingDataPlusBorrowed} />
@@ -165,7 +170,7 @@ const MyPage = () => {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className="liked-book">
           <Col lg={12}>
             <h1 className="mypage-title">좋아요 한 책</h1>
             <div>

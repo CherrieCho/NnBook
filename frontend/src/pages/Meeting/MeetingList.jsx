@@ -99,7 +99,7 @@ const MeetingList = ({ showWriteButton = true }) => {
       <Row>
         <Col lg={12}>
           <h1 className="meeting-title" onClick={goToMeetingFromHome}>
-            모임 게시판 <span>›</span>
+            모임 게시판 {showWriteButton || <span>›</span>}
           </h1>
         </Col>
 

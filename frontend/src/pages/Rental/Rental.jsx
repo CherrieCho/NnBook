@@ -50,7 +50,8 @@ export default function Rental() {
       <Row
         xs={2}
         sm={3}
-        md={6}
+        md={3}
+        lg={6}
         className="rental-home-list-row"
       >
         {books.map((book) => (

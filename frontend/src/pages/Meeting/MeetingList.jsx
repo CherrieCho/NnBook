@@ -56,8 +56,10 @@ const MeetingList = ({ showWriteButton = true }) => {
   };
 
   const navigate = useNavigate();
+
   const pageSize = 10;
   const [page, setPage] = useState(1);
+
   const { data, isLoading, isError, error } = useMeetingQuery(page, pageSize);
   const { data: mydata } = useMyInfoQuery();
   const { data: allUsers } = useAllUsersQuery();
@@ -91,44 +93,6 @@ const MeetingList = ({ showWriteButton = true }) => {
             모임 게시판 <span>›</span>
           </h1>
         </Col>
-        <Col lg={12} className="meeting-background">
-          <table className="meeting-table">
-            <thead>
-              <tr>
-                <th scope="col">제목</th>
-                <th scope="col">지역</th>
-                <th scope="col">모임 날짜</th>
-                <th scope="col">작성자</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data?.data.length === 0 ? (
-                <tr>
-                  <td>현재 등록된 모임이 없습니다.</td>
-                </tr>
-              ) : (
-                data?.data.map((meeting) => (
-                  <tr
-                    key={meeting.id}
-                    className="meeting-row"
-                    onClick={() => goToMeetingDetail(meeting.id)}
-                  >
-                    <td>{meeting.title}</td>
-                    <td>{translateKorean(meeting.location)}</td>
-                    <td>{meeting.date.slice(0, 10)}</td>
-                    <td>
-                      {allUsers?.map((users) => {
-                        if (users.email == meeting.leaderEmail) {
-                          return users.nickname;
-                        }
-                      })}
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </Col>
 
         {showWriteButton && (
           <>
@@ -159,6 +123,52 @@ const MeetingList = ({ showWriteButton = true }) => {
               </Button>
             </div>
           </>
+        )}
+        {!mydata?.email ? (
+          <div className="custom-container container">
+            <p className="non-log-in-text-area">
+              누나네 책방에 가입하시고 다양한 독서 모임에 가입해보세요!
+            </p>
+          </div>
+        ) : (
+          <Col lg={12} className="meeting-background">
+            <table className="meeting-table">
+              <thead>
+                <tr>
+                  <th scope="col">제목</th>
+                  <th scope="col">지역</th>
+                  <th scope="col">모임 날짜</th>
+                  <th scope="col">작성자</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data?.data.length === 0 ? (
+                  <tr>
+                    <td>현재 등록된 모임이 없습니다.</td>
+                  </tr>
+                ) : (
+                  data?.data.map((meeting) => (
+                    <tr
+                      key={meeting.id}
+                      className="meeting-row"
+                      onClick={() => goToMeetingDetail(meeting.id)}
+                    >
+                      <td>{meeting.title}</td>
+                      <td>{translateKorean(meeting.location)}</td>
+                      <td>{meeting.date.slice(0, 10)}</td>
+                      <td>
+                        {allUsers?.map((users) => {
+                          if (users.email == meeting.leaderEmail) {
+                            return users.nickname;
+                          }
+                        })}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </Col>
         )}
       </Row>
     </Container>

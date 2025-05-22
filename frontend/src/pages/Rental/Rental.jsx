@@ -47,13 +47,7 @@ export default function Rental() {
         </h3>
       </div>
 
-      <Row
-        xs={2}
-        sm={3}
-        md={3}
-        lg={6}
-        className="rental-home-list-row"
-      >
+      <Row xs={2} sm={3} md={3} lg={6} className="rental-home-list-row">
         {books.map((book) => (
           <Col key={book.itemId || book.id}>
             <BookCard book={book} />
@@ -61,8 +55,8 @@ export default function Rental() {
         ))}
       </Row>
       {!mydata?.email ? (
-        <p className="text-center mt-5">
-          누나네 책방에 가입하시고 책을 대여해보세요.
+        <p className="non-log-in-text-area">
+          누나네 책방에 가입하시고 책을 대여해보세요!
         </p>
       ) : (
         books.length === 0 && (

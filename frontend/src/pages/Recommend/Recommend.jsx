@@ -96,8 +96,8 @@ const Recommend = ({ previewCount }) => {
         ))}
       </Row>
       {!mydata?.email && (
-        <p className="text-center mt-5">
-          누나네 책방에 가입하시고 취향에 맞는 도서를 추천받아보세요.
+        <p className="non-log-in-text-area">
+          누나네 책방에 가입하시고 취향에 맞는 도서를 추천받아보세요!
         </p>
       )}
     </Container>

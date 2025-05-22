@@ -104,3 +104,16 @@ body,
 a {
   text-decoration: none;
 }
+
+.custom-container {
+  max-width: 1200px;
+}
+
+.non-log-in-text-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  border-radius: 15px;
+  background-color: #e3dcd2;
+}

@@ -12,7 +12,6 @@ export const useLendableBooksQuery = (page, pageSize) => {
   return useQuery({
     queryKey: ["books-lendable", page],
     queryFn: () => fetchLendableBooks(page, pageSize),
-    suspense: true,
     keepPreviousData: true,
     retry: false,
     staleTime: 1000 * 60 * 5,

@@ -12,7 +12,6 @@ export const useMeetingQuery = (page = 1, pageSize = 3) => {
   return useQuery({
     queryKey: ["meetings", page],
     queryFn: () => fetchMeeting(page, pageSize),
-    suspense: true,
     keepPreviousData: true,
   });
 };

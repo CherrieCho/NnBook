@@ -37,7 +37,11 @@ const SingleLineCarousel = ({ books, libraryBookStatus }) => {
           libraryBookStatus={libraryBookStatus}
         >
           {books?.map((book) => (
-            <CarouselCard bookID={book.bookID} key={book.bookID} libraryBookStatus={libraryBookStatus}/>
+            <CarouselCard
+              bookID={book.bookID}
+              key={book.bookID}
+              libraryBookStatus={libraryBookStatus}
+            />
           ))}
         </Carousel>
       </div>

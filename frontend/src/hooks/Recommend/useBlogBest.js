@@ -15,7 +15,6 @@ export default function useBlogBest() {
   return useQuery({
     queryKey: ["blog-best"],
     queryFn: fetchBlogBest,
-    suspense: true,
     select: (result) =>
       Array.isArray(result?.data?.item) ? result.data.item : [],
     keepPreviousData: true,

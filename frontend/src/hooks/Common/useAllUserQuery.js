@@ -10,7 +10,6 @@ export const useAllUsersQuery = () => {
   return useQuery({
     queryKey: ["allUsers"],
     queryFn: fetchAllUsers,
-    suspense: true,
     retry: 3,
   });
 };

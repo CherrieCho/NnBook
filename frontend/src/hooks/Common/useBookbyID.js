@@ -24,7 +24,6 @@ export default function useBookByID(bookID) {
   return useQuery({
     queryKey: ["bookByID", bookID],
     queryFn: () => fetchBookByID(bookID),
-    enabled: !!bookID,
     keepPreviousData: true,
     staleTime: 1000 * 60 * 5,
     retry: 5,

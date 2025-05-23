@@ -12,7 +12,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: "https://nn-book-seven.vercel.app" }));
+app.use(cors({ origin: "https://nnbook-renewal.vercel.app" }));
 // app.use(cors());
 app.use(express.json());
 

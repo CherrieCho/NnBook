@@ -10,6 +10,7 @@ const useUserGenres = (email) => {
   return useQuery({
     queryKey: ["userGenres", email],
     queryFn: () => fetchUserGenres(email),
+    suspense: true,
     enabled: !!email,
   });
 };

@@ -15,6 +15,7 @@ export default function useNewSpecialBest() {
   return useQuery({
     queryKey: ["new-special-best"],
     queryFn: fetchNewSpecialBest,
+    suspense: true,
     select: (result) =>
       Array.isArray(result?.data?.item) ? result.data.item : [],
     keepPreviousData: true,

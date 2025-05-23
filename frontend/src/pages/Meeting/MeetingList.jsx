@@ -60,7 +60,7 @@ const MeetingList = ({ showWriteButton = true }) => {
   const pageSize = 3;
   const [page, setPage] = useState(1);
 
-  const { data, isLoading, isError, error } = useMeetingQuery(page, pageSize);
+  const { data, isError, error } = useMeetingQuery(page, pageSize);
   const { data: mydata } = useMyInfoQuery();
   const { data: allUsers } = useAllUsersQuery();
 
@@ -89,10 +89,6 @@ const MeetingList = ({ showWriteButton = true }) => {
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
-
-  if (isLoading) {
-    return <div>로딩 중...</div>;
-  }
 
   return (
     <Container className="home-meeting-list container">

@@ -1,11 +1,10 @@
 import React from "react";
-import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import "./styles/Recommend.style.css";
 import { useNavigate } from "react-router-dom";
 import useRecommendedBooks from "../../hooks/Recommend/useRecommendedBooks";
 import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import useUserGenres from "../../hooks/Recommend/useUserGenres";
-import BookCard from "../../common/BookCard/BookCard";
 import RecommendBookCard from "../../common/BookCard/RecommendBookCard";
 
 const genreOptions = [
@@ -56,10 +55,6 @@ const Recommend = ({ previewCount }) => {
     data: books,
     error,
   } = useRecommendedBooks(categoryId);
-
-  const goToDetail = (id) => {
-    navigate(`/books/${id}`);
-  };
 
   const goToRecommendFromHome = () => {
     if (!mydata?.email) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom"; // 수정: react-router-dom
+import { useNavigate } from "react-router-dom"; // 수정: react-router-dom
 import "./BookCarousel.style.css";
 
 const chunkArray = (array, size) => {

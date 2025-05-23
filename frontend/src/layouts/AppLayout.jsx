@@ -26,15 +26,15 @@ const AppLayout = () => {
     window.location.href = "/";
   };
 
+  const handleLogoClick = () => {
+    window.location.href = "/";
+  };
+
   return (
     <div className="app-container">
-      <Navbar
-        expand="lg"
-        className="custom-navbar"
-        sticky="top"
-      >
+      <Navbar expand="lg" className="custom-navbar" sticky="top">
         <Container className="nav-custom-container">
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand onClick={handleLogoClick}>
             <img src={LogoImg} alt="NnBook Logo" className="navbar-logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

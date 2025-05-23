@@ -1,142 +1,144 @@
-.detail-container{
+.detail-container {
   margin-top: 3rem;
   margin-bottom: 5rem;
-} 
+}
 
-.detail-border{
+.detail-border {
   border: 1px solid #cbc2b6;
   border-radius: 15px;
   padding: 2em;
 }
 
-.bookdetail-top{
+.bookdetail-top {
   border-bottom: 1px solid #cbc2b6;
   padding-bottom: 2em;
 }
 
-.book-image{
+.book-image {
   display: flex;
   justify-content: center;
 }
 
-.book-image-cover{
+.book-image-cover {
   padding: 1em;
 }
 
-.bookdetail-area{
+.bookdetail-area {
   padding: 1em;
 }
 
-.bookdetail-area div{
+.bookdetail-area div {
   margin: 10px 0;
 }
 
-.bookdetail-area h1{
+.bookdetail-area h1 {
   font-weight: bold;
   font-size: 30px;
   margin: 12px 0;
 }
 
-.ratings{
+.ratings {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.detail-buttons{
+.detail-buttons {
   display: flex;
   gap: 1.5em;
   justify-content: flex-end;
   margin-top: 4rem;
 }
 
-.detail-buttons button{
+.detail-buttons button {
   background-color: #f6a89e;
   color: white;
   border: 1.5px solid #f6a89e;
   border-radius: 15px;
 }
 
-.detail-buttons button:hover{
+.detail-buttons button:hover {
   border: 1.5px solid #f6a89e;
   background-color: white;
   color: #f6a89e;
 }
 
-.detail-buttons button:active{
+.detail-buttons button:active {
   border: 1.5px solid #f6a89e !important;
   background-color: white !important;
   color: #f6a89e !important;
 }
 
-.detail-purchase{
+.detail-purchase {
   background-color: grey !important;
+  border: 1px solid grey !important;
 }
 
-.detail-purchase:hover{
+.detail-purchase:hover {
+  border: 1px solid #f6a89e !important;
   background-color: white !important;
 }
 
-.bookdetail-bottom{
+.bookdetail-bottom {
   margin: 2em 0;
 }
 
-.bookdetail-bottom p{
+.bookdetail-bottom p {
   line-height: 33px;
 }
 
-.first-bottom-row{
+.first-bottom-row {
   margin-top: 6rem;
 }
 
-.bottom-subtitle h2{
+.bottom-subtitle h2 {
   font-size: 24px;
 }
 
-.bookdetail-list{
+.bookdetail-list {
   list-style: none;
   padding: 0;
 }
 
-.bookdetail-list li{
+.bookdetail-list li {
   margin: 10px 0;
 }
 
-.bookdetail-list li:first-child{
+.bookdetail-list li:first-child {
   margin-top: 0;
 }
 
-.bookdetail-list a{
+.bookdetail-list a {
   text-decoration: none;
   color: #4b4b4b;
 }
 
 @media (max-width: 576px) {
-  .bookdetail-area h1{
-  font-size: 28px;
-}
+  .bookdetail-area h1 {
+    font-size: 28px;
+  }
 }
 
-@media screen and (max-width: 738px){
-  .bookdetail-area div{
+@media screen and (max-width: 738px) {
+  .bookdetail-area div {
     margin: 13px 0;
   }
 
-  .detail-buttons{
+  .detail-buttons {
     margin-top: 1em;
     justify-content: center;
   }
 }
 
-@media screen and (max-width: 991px){
-  .bottom-subtitle{
+@media screen and (max-width: 991px) {
+  .bottom-subtitle {
     justify-content: flex-start;
     margin: 1em 0;
   }
 }
 
-@media screen and (max-width: 820px){
-  .first-bottom-row{
+@media screen and (max-width: 820px) {
+  .first-bottom-row {
     margin-top: 3rem;
   }
 }

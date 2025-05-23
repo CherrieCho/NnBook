@@ -9,6 +9,7 @@ import ReactPaginate from "react-paginate";
 import { useAllUsersQuery } from "../../hooks/Common/useAllUserQuery";
 import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import { keyframes } from "@emotion/react";
+import Loading from "../../common/Loading/Loading";
 
 const RentalList = () => {
   const navigate = useNavigate();
@@ -92,7 +93,7 @@ const RentalList = () => {
     return d.toFixed(2);
   }
 
-  if (isLoading) return <p>로딩 중…</p>;
+  if (isLoading) return <Loading />;
   if (isError) {
     const firstError = bookQueries.find((q) => q.isError)?.error;
     return <p>에러 발생: {firstError?.message}</p>;

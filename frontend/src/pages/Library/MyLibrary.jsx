@@ -8,6 +8,7 @@ import { useFinishedBooksQuery } from "../../hooks/Library/useFinishedBooks";
 import { useLendedBooksQuery } from "../../hooks/Rental/useLendedBooks";
 import { useFinishedBooksBorrowQuery } from "../../hooks/Library/usedFinishedBooksForBorrowed";
 import { useReadingBooksBorrowQuery } from "../../hooks/Library/useReadingBooksForBorrowed";
+import Loading from "../../common/Loading/Loading";
 
 const MyLibrary = () => {
   const { data: mydata, isLoading, isError, error } = useMyInfoQuery();
@@ -35,7 +36,7 @@ const MyLibrary = () => {
   // console.log("fb", finisheddata);
   // console.log("lb", lendeddata);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
 
   if (isError)
     return <Alert variant="danger">불러오기 실패: {error.message}</Alert>;

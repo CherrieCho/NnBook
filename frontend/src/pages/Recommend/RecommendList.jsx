@@ -8,6 +8,7 @@ import useUserGenres from "../../hooks/Recommend/useUserGenres";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import BookCard from "../../common/BookCard/BookCard";
+import Loading from "../../common/Loading/Loading";
 
 const genreOptions = [
   { id: "1", name: "소설/시/희곡" },
@@ -77,13 +78,7 @@ const Recommend = () => {
 
   const isLoading = userLoading || genresLoading || booksLoading;
 
-  if (isLoading) {
-    return (
-      <div className="recommend-loading">
-        <Spinner animation="border" />
-      </div>
-    );
-  }
+  if (isLoading) return <Loading />;
 
   if (error) return <Alert variant="danger">{error.message}</Alert>;
 

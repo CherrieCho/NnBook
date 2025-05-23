@@ -12,6 +12,7 @@ import { useReturnMutation } from "../../hooks/Rental/useReturnMutation";
 import { useFinishedBooksBorrowQuery } from "../../hooks/Library/usedFinishedBooksForBorrowed";
 import useBookByID from "../../hooks/Common/useBookbyID";
 import { useRegisterBookLendMutation } from "../../hooks/Rental/useRegisterBookLendMutation";
+import Loading from "../Loading/Loading";
 
 
 export default function BookCard({ bookID, libraryBookStatus, email }) {
@@ -47,7 +48,7 @@ export default function BookCard({ bookID, libraryBookStatus, email }) {
     navigate(`/library/${bookID}`);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
 
   if (isError)
     return <Alert variant="danger">불러오기 실패: {error.message}</Alert>;

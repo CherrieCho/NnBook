@@ -16,6 +16,7 @@ import { useBorrowingBooksQuery } from "../../hooks/Rental/useBorrowingBooks";
 import useUserGenres from "../../hooks/Recommend/useUserGenres";
 import { useLikedBooksBorrowQuery } from "../../hooks/MyPage/useLikedBooksForBorrowed";
 import { useReadingBooksBorrowQuery } from "../../hooks/Library/useReadingBooksForBorrowed";
+import Loading from "../../common/Loading/Loading";
 
 const MyPage = () => {
   const [form, setForm] = useState({ location: "" });
@@ -95,7 +96,7 @@ const MyPage = () => {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
 
   if (isError)
     return <Alert variant="danger">불러오기 실패: {error.message}</Alert>;

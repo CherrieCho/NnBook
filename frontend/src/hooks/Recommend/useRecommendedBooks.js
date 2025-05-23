@@ -18,6 +18,7 @@ export default function useRecommendedBooks(categoryId, page, size = 40) {
   return useQuery({
     queryKey: ["recommendedBooks", categoryId, page, size],
     queryFn: () => fetchRecommendedBooks(categoryId, page, size),
+    suspense: true,
     enabled: !!categoryId,
     select: (result) =>
       Array.isArray(result?.data?.item) ? result.data.item : [],

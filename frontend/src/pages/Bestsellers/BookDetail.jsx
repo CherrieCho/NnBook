@@ -46,7 +46,7 @@ const BookDetail = () => {
     }
   };
 
-  console.log(bookinfo);
+  // console.log(bookinfo);
 
   //책 대여가능 여부
   const canBorrowBook = () => {

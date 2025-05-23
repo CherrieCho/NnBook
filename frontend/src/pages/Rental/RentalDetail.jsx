@@ -5,7 +5,7 @@ import { useLendableBooksQuery } from '../../hooks/Rental/uselendable';
 import useBookByIDs from '../../hooks/Common/useBookbyIDArray';
 import BookRentalModal from './BookRentalModal';
 import './styles/RentalDetail.style.css';
-import '/src/styles/BookRentalModal.style.css';
+import './styles/BookRentalModal.style.css';
 import { useBorrowMutation } from '../../hooks/Rental/useBorrowMutation';
 
 export default function RentalDetail() {

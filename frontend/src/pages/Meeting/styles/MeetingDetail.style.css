@@ -4,50 +4,83 @@ body {
 }
 
 .meeting-detail {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 60vh;
   border: 1px solid #e3dcd2;
-  border-radius: 4px;
+  border-radius: 15px;
   margin-top: 30px;
-  font-family: "Paperlogy-6SemiBold", serif;
-}
-
-.meeting-title-detail{
-  padding: 20px;
-  border-bottom: 1px solid #e3dcd2;
-  background-color: #e3dcd2;
-}
-
-.meeting-join-status{
-  display: flex;
-  align-items: center;
-  gap: 2em;
-}
-
-.meeting-join-status div{
-  color: #F27D6C;
-  font-weight: bold;
 }
 
 .meeting-detail h1 {
+  font-family: "Paperlogy-6SemiBold", serif;
+  font-size: 1.75rem;
   margin: 0;
-  font-size: 26px;
-  font-weight: 600;
 }
 
-.meeting-members{
+.meeting-title-detail {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 2rem 1rem 2rem;
+}
+
+.meeting-join-status {
+  display: flex;
+  align-items: flex-end;
+  gap: 2em;
+}
+
+.meeting-join-status div {
+  margin: 0;
+  display: flex;
+  color: #f27d6c;
+  font-family: "Paperlogy-4Regular", serif;
+}
+
+.meeting-members {
   margin-top: 18px;
   display: flex;
   align-items: center;
   gap: 5px;
+  justify-content: flex-end;
 }
 
-.meeting-members *{
+.meeting-members * {
   font-size: 15px;
 }
 
+.meeting-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: "Paperlogy-5Medium", serif;
+  color: #101010;
+  margin-inline: 2rem;
+  font-size: 0.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e3dcd2;
+}
+
+.meeting-detail-info-loc-date{
+  font-size: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.meeting-detail-info p {
+  margin: 0 0 0 0;
+}
+
+.meeting-detail-info span {
+  margin: 0 0 0 0.3rem;
+  font-family: "Paperlogy-4Regular", serif;
+  color: #4b4b4b;
+}
+
 .meeting-desc {
-  padding: 20px;
+  font-family: "Paperlogy-4Regular", serif;
+  padding: 1rem 2rem 1rem 2rem;
   font-size: 20px;
 }
 
@@ -59,34 +92,38 @@ body {
 }
 
 .join-button-box button {
-  border: none;
+  font-family: "Paperlogy-4Regular";
+  font-size: 0.75rem;
+  border: 1px solid #f6a89e;
+  border-radius: 15px;
   background-color: #f6a89e;
+  color: white;
 }
 
 .join-button-box button:hover,
 .join-button-box button:active,
 .join-button-box button:focus {
+  border: 1px solid #d8f69e !important;
   background-color: #d8f69e !important;
   color: #4b4b4b !important;
 }
 
 @media (max-width: 768px) {
-
-  .meeting-title-detail{
-  padding: 15px;
+  .meeting-title-detail {
+    padding: 15px;
   }
-  .meeting-join-status{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  .meeting-join-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .meeting-detail h1 {
     font-size: 23px;
   }
 
-  .meeting-members *{
-  font-size: 14px;
+  .meeting-members * {
+    font-size: 14px;
   }
 
   .meeting-desc {

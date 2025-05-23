@@ -5,62 +5,82 @@ body {
 
 .create-box {
   width: 100%;
-  /* height: 90vh; */
   padding: 20px;
   border: 1px solid #e3dcd2;
+  border-radius: 15px;
   margin-top: 3rem;
   margin-bottom: 3rem;
-  font-family: "Paperlogy-6SemiBold", serif;
   color: #4b4b4b;
 }
 
 .create-box label {
+  font-family: "Paperlogy-4Regular", serif;
+  font-size: 0.75rem;
   margin-right: 10px;
-  font-size: 22px;
-  font-weight: 500;
 }
 
-.create-box label:last-of-type {
-  margin-right: 0;
-  margin-bottom: 10px;
+.create-meeting-date-time {
+  display: flex;
+  gap: 0.5rem;
 }
 
-.create-title {
-  padding: 10px 0;
-  border-bottom: 1px solid #4b4b4b;
-  margin-bottom: 20px;
-}
-
-.create-title input {
+.create-meeting-title {
+  font-family: "Paperlogy-6SemiBold", serif;
   width: 100%;
-  padding: 0 10px;
-  border: none;
-  outline: none;
-  font-size: 24px;
-  background-color: #fdfcf9;
+  padding-block: 0.5rem;
+  padding-left: 1rem;
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: 1.75rem;
+}
+
+.create-meeting-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.create-meeting-title::placeholder {
+  color: #cec7bd;
 }
 
 #location-dropdown {
+  color: #cec7bd;
   width: 100px;
-  height: 30px;
-  margin-bottom: 20px;
   text-align: center;
+  border: 1px solid #e3dcd2;
+  padding: 0.3rem;
+  border-radius: 10px;
 }
 
 #input-date {
-  height: 30px;
-  margin-bottom: 20px;
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
+  padding: 0.3rem;
+  color: #cec7bd;
 }
 
 #input-time {
-  height: 30px;
-  margin-bottom: 20px;
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
+  padding: 0.3rem;
+  color: #cec7bd;
 }
 
 #input-email {
-  padding: 0 10px;
-  margin-bottom: 20px;
-  outline: none;
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
+  padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+}
+
+#input-email::placeholder {
+  color: #cec7bd;
+}
+
+#input-date::placeholder {
+  color: #cec7bd;
 }
 
 #input-textarea {
@@ -68,9 +88,14 @@ body {
   width: 100%;
   height: 220px;
   padding: 20px;
-  border-color: #4b4b4b;
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
   outline: none;
   resize: none;
+}
+
+#input-textarea::placeholder {
+  color: #cec7bd;
 }
 
 .button-box {
@@ -81,16 +106,23 @@ body {
 }
 
 .button-box button {
-  width: 76px !important;
-  border: none;
+  outline: none;
+  font-family: "Paperlogy-4Regular", serif;
+  font-size: 0.75rem;
+  border: 1px solid #f6a89e;
+  border-radius: 15px;
   background-color: #f6a89e;
+  color: white;
+  width: 4rem;
 }
 
 .button-box button:hover,
 .button-box button:active,
 .button-box button:focus {
+  border: #d8f69e !important;
+  outline: none;
+  color: #4b4b4b;
   background-color: #d8f69e !important;
-  color: #4b4b4b !important;
 }
 
 @media screen and (min-width: 376px) {
@@ -105,7 +137,7 @@ body {
     padding: 2em 0;
   }
 
-  .button-box button{
+  .button-box button {
     width: 100% !important;
   }
 }

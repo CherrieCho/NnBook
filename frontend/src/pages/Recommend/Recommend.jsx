@@ -43,8 +43,8 @@ const genreOptions = [
 const Recommend = ({ previewCount }) => {
   const navigate = useNavigate();
 
-  const { data: mydata, isLoading: userLoading } = useMyInfoQuery();
-  const { data: genres, isLoading: genresLoading } = useUserGenres(
+  const { data: mydata} = useMyInfoQuery();
+  const { data: genres} = useUserGenres(
     mydata?.email
   );
 
@@ -54,7 +54,6 @@ const Recommend = ({ previewCount }) => {
 
   const {
     data: books,
-    isLoading: booksLoading,
     error,
   } = useRecommendedBooks(categoryId);
 
@@ -70,16 +69,6 @@ const Recommend = ({ previewCount }) => {
       navigate("/recommend");
     }
   };
-
-  const isLoading = userLoading || genresLoading || booksLoading;
-
-  if (isLoading) {
-    return (
-      <div className="recommend-loading">
-        <Spinner animation="border" />
-      </div>
-    );
-  }
 
   if (error) return <Alert variant="danger">{error.message}</Alert>;
 

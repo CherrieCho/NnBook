@@ -21,7 +21,7 @@ const MeetingDetail = () => {
   const { data, isLoading, isError, error } = useMeetingQuery();
   //글 작성자 이메일 추출
   const leader = data?.data.find((meeting) => meeting.id == id)?.leaderEmail;
-  const { data:memberData } = useMeetingMemberQuery(leader, !!leader);
+  const { data: memberData } = useMeetingMemberQuery(leader, !!leader);
   const { data: userData } = useMyInfoQuery();
   const { data: allUsers } = useAllUsersQuery();
   const deleteMutation = useDeleteMeeting();
@@ -81,25 +81,27 @@ const MeetingDetail = () => {
   };
 
   //모입 가입
-const handleJoin = () => {
-  if(!userData?.email){
-    alert("로그인이 필요합니다.");
-    navigate("/login");
-  }else if (window.confirm("모임에 가입하시겠습니까?")) {
-    joinMeeting({
-      leaderEmail: leader,
-      memberEmail: userData?.email,
-    });
-  }
-};
+  const handleJoin = () => {
+    if (!userData?.email) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else if (window.confirm("모임에 가입하시겠습니까?")) {
+      joinMeeting({
+        leaderEmail: leader,
+        memberEmail: userData?.email,
+      });
+    }
+  };
 
   //가입 여부 확인
-  const isMember = memberData?.find((member) => member.memberEmail == userData?.email);
+  const isMember = memberData?.find(
+    (member) => member.memberEmail == userData?.email
+  );
 
   //모임 탈퇴
   const handleLeave = () => {
     if (window.confirm("정말 탈퇴 하시겠습니까?")) {
-      leaveMeeting({leaderEmail: leader, memberEmail: userData?.email});
+      leaveMeeting({ leaderEmail: leader, memberEmail: userData?.email });
     }
   };
 
@@ -115,58 +117,64 @@ const handleJoin = () => {
             <div className="meeting-title-detail">
               <div className="meeting-join-status">
                 <h1>
-                {data?.data.map((meeting) => {
-                  if (meeting.id == id) {
-                    return meeting.title;
-                  }
-                })}
-              </h1>
-              {isMember ? <div>참여중</div> : ""}
+                  {data?.data.map((meeting) => {
+                    if (meeting.id == id) {
+                      return meeting.title;
+                    }
+                  })}
+                </h1>
+                {isMember ? <div>참여중</div> : ""}
               </div>
               <div className="meeting-members">
                 <FontAwesomeIcon icon={faUsers} />
                 <div>{`참여자 ${memberData?.length}명`}</div>
               </div>
             </div>
+            <div className="meeting-detail-info">
+              <p>
+                작성자{" "}
+                <span>
+                  {data?.data.map((meeting) => {
+                    if (meeting.id == id) {
+                      return allUsers?.map((users) => {
+                        if (users.email == meeting.leaderEmail) {
+                          return users.nickname;
+                        }
+                      });
+                    }
+                  })}
+                </span>
+              </p>
+              <div className="meeting-detail-info-loc-date">
+                <p>
+                  지역{" "}
+                  <span>
+                    {data?.data.map((meeting) => {
+                      if (meeting.id == id) {
+                        return translateKorean(meeting.location);
+                      }
+                    })}
+                  </span>
+                </p>
+                <p>
+                  일시{" "}
+                  <span>
+                    {data?.data.map((meeting) => {
+                      if (meeting.id == id) {
+                        return meeting.date.slice(0, 10);
+                      }
+                    })}{" "}
+                    {data?.data.map((meeting) => {
+                      if (meeting.id == id) {
+                        return meeting.time;
+                      }
+                    })}
+                  </span>
+                </p>
+              </div>
+            </div>
             <div className="meeting-desc">
               <p>
-                지역:{" "}
-                {data?.data.map((meeting) => {
-                  if (meeting.id == id) {
-                    return translateKorean(meeting.location);
-                  }
-                })}
-              </p>
-              <p>
-                날짜:{" "}
-                {data?.data.map((meeting) => {
-                  if (meeting.id == id) {
-                    return meeting.date.slice(0, 10);
-                  }
-                })}
-              </p>
-              <p>
-                시간:{" "}
-                {data?.data.map((meeting) => {
-                  if (meeting.id == id) {
-                    return meeting.time;
-                  }
-                })}
-              </p>
-              <p>
-                작성자:{" "}
-                {data?.data.map((meeting) => {
-                  if (meeting.id == id) {
-                    return allUsers?.map((users) => {
-                      if (users.email == meeting.leaderEmail) {
-                        return users.nickname;
-                      }
-                    });
-                  }
-                })}
-              </p>
-              <p>
-                내용:{" "}
                 {data?.data.map((meeting) => {
                   if (meeting.id == id) {
                     return meeting.content;
@@ -192,8 +200,8 @@ const handleJoin = () => {
               }
 
               //해당 게시글 작성자가 아닐 경우
-              if(meeting.id == id && meeting.leaderEmail !== userData?.email) {
-                if(!isMember){
+              if (meeting.id == id && meeting.leaderEmail !== userData?.email) {
+                if (!isMember) {
                   return (
                     <Button
                       type="button"
@@ -201,19 +209,19 @@ const handleJoin = () => {
                       size="lg"
                       onClick={handleJoin}
                     >
-                      가입
+                      모임 참가
                     </Button>
                   );
-                } else{
+                } else {
                   return (
-                      <Button
-                        type="button"
-                        key={meeting.id}
-                        size="lg"
-                        onClick={handleLeave}
-                      >
-                        탈퇴
-                      </Button>
+                    <Button
+                      type="button"
+                      key={meeting.id}
+                      size="lg"
+                      onClick={handleLeave}
+                    >
+                      모임 탈퇴
+                    </Button>
                   );
                 }
               }

@@ -18,6 +18,7 @@ export default function useBookByIDs(bookIDs) {
       queryKey: ["bookByID", id],
       queryFn: () =>
         fetchBookByID(id).then((res) => res.data.item?.[0] || null),
+      suspense: true,
       enabled: !!id,
       keepPreviousData: true,
       staleTime: 1000 * 60 * 5,

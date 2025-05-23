@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookCarousel from "../../components/BookCarousel/BookCarousel";
 import SearchBar, { categories } from "../../components/SearchBar/SearchBar";
@@ -10,13 +10,14 @@ import HomeBanner from "../../components/HomeBanner/HomeBanner";
 import BestPickDuo from "../../components/BestPickDuo/BestPickDuo";
 import { Container } from "react-bootstrap";
 import Rental from "../Rental/Rental";
+import Loading from "../../common/Loading/Loading";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const navigate = useNavigate();
 
-  const { data: books = [], isLoading, error } = useBooks();
+  const { data: books = [], error } = useBooks();
 
   // categoryId -> categoryName 변환용
   const categoryMap = Object.fromEntries(categories.map((c) => [c.id, c.name]));
@@ -36,30 +37,31 @@ const HomePage = () => {
 
   return (
     <Container className="container custom-container">
-      <HomeBanner />
+      <Suspense fallback={<Loading />}>
+        <HomeBanner />
 
-      <BestPickDuo />
+        <BestPickDuo />
 
-      <h3
-        className="homepage-bestseller-title"
-        onClick={() => navigate("/books")}
-      >
-        베스트 셀러 <span>›</span>
-      </h3>
-      {isLoading && <p>로딩 중…</p>}
-      {error && <p>에러 발생: {error.message}</p>}
+        <h3
+          className="homepage-bestseller-title"
+          onClick={() => navigate("/books")}
+        >
+          베스트 셀러 <span>›</span>
+        </h3>
+        {error && <p>에러 발생: {error.message}</p>}
 
-      {filteredBooks.length > 0 ? (
-        <BookCarousel books={filteredBooks} />
-      ) : (
-        !isLoading && <p>검색 결과가 없습니다.</p>
-      )}
+        {filteredBooks.length > 0 ? (
+          <BookCarousel books={filteredBooks} />
+        ) : (
+          !isLoading && <p>검색 결과가 없습니다.</p>
+        )}
 
-      <Recommend previewCount={3} />
+        <Recommend previewCount={3} />
 
-      <Rental />
+        <Rental />
 
-      <MeetingList showWriteButton={false} />
+        <MeetingList showWriteButton={false} />
+      </Suspense>
     </Container>
   );
 };

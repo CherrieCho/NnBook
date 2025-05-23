@@ -43,10 +43,8 @@ const genreOptions = [
 const Recommend = ({ previewCount }) => {
   const navigate = useNavigate();
 
-  const { data: mydata, isLoading: userLoading } = useMyInfoQuery();
-  const { data: genres, isLoading: genresLoading } = useUserGenres(
-    mydata?.email
-  );
+  const { data: mydata } = useMyInfoQuery();
+  const { data: genres } = useUserGenres(mydata?.email);
 
   const genreName = genres?.[0]?.genre || null;
   const matchedGenre = genreOptions.find((option) => option.name === genreName);
@@ -70,16 +68,6 @@ const Recommend = ({ previewCount }) => {
       navigate("/recommend");
     }
   };
-
-  const isLoading = userLoading || genresLoading || booksLoading;
-
-  if (isLoading) {
-    return (
-      <div className="recommend-loading">
-        <Spinner animation="border" />
-      </div>
-    );
-  }
 
   if (error) return <Alert variant="danger">{error.message}</Alert>;
 

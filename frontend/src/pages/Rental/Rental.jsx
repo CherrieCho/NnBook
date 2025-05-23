@@ -10,7 +10,7 @@ import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 export default function Rental() {
   const navigate = useNavigate();
 
-  const { data: mydata, isLoading: userLoading } = useMyInfoQuery();
+  const { data: mydata } = useMyInfoQuery();
   // 대여 가능 도서 ID 목록 불러오기
   const { data: lendabledata } = useLendableBooksQuery();
   const lendableBooks = lendabledata?.data || [];
@@ -19,7 +19,6 @@ export default function Rental() {
 
   // 각 ID에 해당하는 도서 정보 요청
   const bookQueries = useBookByIDs(bookIds);
-  const isLoading = bookQueries.some((q) => q.isLoading);
   const isError = bookQueries.some((q) => q.isError);
 
   const books = bookQueries
@@ -27,7 +26,6 @@ export default function Rental() {
     .map((q) => q.data)
     .slice(0, 6); // 홈에서는 6개만 표시
 
-  if (isLoading) return <p>로딩 중…</p>;
   if (isError) {
     const firstError = bookQueries.find((q) => q.isError)?.error;
     return <p>에러 발생: {firstError?.message}</p>;

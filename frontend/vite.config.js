@@ -6,9 +6,6 @@ const PORT = process.env.PORT || 8080;
 
 export default defineConfig({
   plugins: [react()],
-  ssr: {
-    noExternal: ["swiper"],
-  },
   server: {
     proxy: {
       "/api/image-proxy": {

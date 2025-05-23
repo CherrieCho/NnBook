@@ -27,24 +27,24 @@ const SingleLineCarousel = ({ books, libraryBookStatus }) => {
 
   return (
     <div>
-      <div>
-        <Carousel
-          infinite={false}
-          centerMode={true}
-          itemClass="book-slider p-1"
-          containerClass="carousel-container"
-          responsive={responsive}
-          libraryBookStatus={libraryBookStatus}
-        >
-          {books?.map((book) => (
-            <CarouselCard
-              bookID={book.bookID}
-              key={book.bookID}
-              libraryBookStatus={libraryBookStatus}
-            />
-          ))}
-        </Carousel>
-      </div>
+        <div>
+          <Carousel
+            infinite={false}
+            centerMode={true}
+            itemClass="book-slider p-1"
+            containerClass="carousel-container"
+            responsive={responsive}
+            libraryBookStatus={libraryBookStatus}
+          >
+            {books?.map((book) => (
+              <CarouselCard
+                bookID={book.bookID}
+                key={book.bookID}
+                libraryBookStatus={libraryBookStatus}
+              />
+            ))}
+          </Carousel>
+        </div>
     </div>
   );
 };

@@ -22,6 +22,7 @@ export default function useSearchBook(query, categoryId, page, size = 40) {
   return useQuery({
     queryKey: ["book-search", query, categoryId, page, size],
     queryFn: () => fetchSearchBook(query, categoryId, page, size),
+    suspense: true,
     select: (result) => result.data.item,
     enabled: !!query,
     keepPreviousData: true,

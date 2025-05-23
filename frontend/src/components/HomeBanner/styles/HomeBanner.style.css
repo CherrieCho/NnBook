@@ -1,7 +1,39 @@
 .home-banner-container {
+  display: flex;
   max-width: 1200px;
-  height: 300px;
-  background-image: url("../../../assets/Sample-Banner1.png");
-  background-size: cover;
-  background-position: center;
+  height: auto;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.swiper- swiper-pagination {
+  position: absolute;
+  text-align: center;
+  transition: 300ms opacity;
+  transform: translate3d(0, 0, 0);
+  z-index: 10;
+}
+
+.swiper-pagination-bullet {
+  width: 0.25rem !important;
+  height: 0.25rem !important;
+  display: inline-block;
+  border-radius: var(--swiper-pagination-bullet-border-radius, 50%);
+  background: var(--swiper-pagination-bullet-inactive-color, #000);
+  opacity: var(--swiper-pagination-bullet-inactive-opacity, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+  opacity: var(--swiper-pagination-bullet-opacity, 1);
+  background: #d8f69e !important;
 }

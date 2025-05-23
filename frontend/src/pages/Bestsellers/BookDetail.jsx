@@ -11,6 +11,7 @@ import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import { useAddToLibraryMutation } from "../../hooks/Library/useAddToLibraryMutation";
 import { useLendableBooksQuery } from "../../hooks/Rental/uselendable";
 import BookRentalModal from "../Rental/BookRentalModal";
+import Loading from "../../common/Loading/Loading.jsx";
 
 const BookDetail = () => {
   const navigate = useNavigate();
@@ -82,7 +83,7 @@ const BookDetail = () => {
     canBorrowBook();
   }, [canBorrow]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
 
   if (error)
     return <Alert variant="danger">불러오기 실패: {error.message}</Alert>;

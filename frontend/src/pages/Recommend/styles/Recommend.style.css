@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Paperlogy-5Medium", serif;
+  background-color: #fdfcf9;
+}
+
+.recommend-home-container {
+  padding: 0;
+}
+
+.recommend-title-home h3 {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 1.5rem;
+  color: #101010;
+  margin: 6rem 0 2rem 0;
+  cursor: pointer;
+}
+
+.recommend-title-home span {
+  font-family: "Paperlogy-1Thin";
+}
+
+.recommend-book-card {
+  cursor: pointer;
+  flex-direction: row;
+  transition: all 0.5s ease;
+}
+
+.recommend-book-card:hover .col {
+  filter: blur(1px);
+  transform: scale(0.985);
+  opacity: 0.8;
+}
+
+.recommend-book-card:hover .col:hover {
+  transform: scale(1.025);
+  opacity: 1;
+  filter: blur(0px) !important;
+}
+
+@media (max-width: 768px) {
+  .recommend-book-card {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .recommend-book-card .col {
+    width: 100%;
+    max-width: 100%;
+  }
+}

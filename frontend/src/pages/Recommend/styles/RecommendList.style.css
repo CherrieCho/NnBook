@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Paperlogy-5Medium", serif;
+  background-color: #fdfcf9;
+}
+
+.recommend-section {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  padding: 0 1rem;
+}
+
+.recommend-section h1 {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 26px;
+  color: #4b4b4b;
+}
+
+.rental-title{
+    font-family: "Paperlogy-7Bold", serif;
+    font-size: 26px;
+    color: #4b4b4b;
+}
+
+.recommend-card {
+  background-color: #ffffff;
+  border: 1px solid #e3dcd2;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.recommend-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.recommend-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  object-fit: cover;
+}
+
+.recommend-card-title {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.4;
+}

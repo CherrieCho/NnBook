@@ -6,6 +6,7 @@ import {
   fetchAllMembers,
   fetchTotalMeetingCount,
   deleteMeetingById,
+  deleteMember,
 } from "../models/meetingModel.js";
 
 //모임 추가
@@ -81,5 +82,16 @@ export const getAllMembers = async (req, res) => {
   } catch (error) {
     console.error("조회 실패:", error);
     res.status(500).json({ message: "조회 중 오류 발생" });
+  }
+};
+
+//모임 탈퇴
+export const leaveMeeting = async (req, res) => {
+  try {
+    const { leaderEmail, memberEmail } = req.body;
+    await deleteMember(leaderEmail, memberEmail);
+    res.status(200).json({ message: "삭제 성공" });
+  } catch (err) {
+    res.status(500).json({ message: "삭제 중 오류 발생", error: err.message });
   }
 };

@@ -1,5 +1,3 @@
-# 누나네 책방
+# 누나네 책방 - Renewal
 
-Product Owner - 유지형  
-Scrum Master - 윤준혁  
-Developers - 이민지, 조채은, 김태율
+Developers - 유지형, 조채은

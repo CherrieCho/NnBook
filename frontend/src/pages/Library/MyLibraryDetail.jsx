@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import "../../styles/MyLibraryDetail.style.css";
-import useBookByID from "../../hooks/useBookbyID";
+import "./styles/MyLibraryDetail.style.css";
+import useBookByID from "../../hooks/Common/useBookbyID";
 import { useParams } from "react-router";
-import { useLikeBookMutation } from "../../hooks/useLikeBookMutation";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
-import { useLikedBooksQuery } from "../../hooks/useLikedBooks"; 
+import { useLikeBookMutation } from "../../hooks/MyPage/useLikeBookMutation";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
+import { useLikedBooksQuery } from "../../hooks/MyPage/useLikedBooks";
+import { useProgressMutation } from "../../hooks/Library/useProgressMutation";
+import { useProgressDataQuery } from "../../hooks/Library/useProgressData";
+import { useFinishBookMutation } from "../../hooks/Library/useFinishBookMutation";
+import { useFinishedBooksQuery } from "../../hooks/Library/useFinishedBooks";
 
 const MyLibraryDetail = () => {
   const [entries, setEntries] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [currentPageSum, setCurrentPageSum] = useState(0);
   const [progress, setProgress] = useState(0);
 
   const [inputDateTime, setInputDateTime] = useState("");
   const [inputPages, setInputPages] = useState("");
   const [inputTotal, setInputTotal] = useState("");
+  const [likeStatus, setLikeStatus] = useState(null); // 클릭 시 임시 저장
 
   const [showMinusPageModal, setShowMinusPageModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
@@ -23,28 +27,36 @@ const MyLibraryDetail = () => {
   const [showCompleteProgressBar, setShowCompleteProgressBar] = useState(false);
   const [showValidationMessage, setShowValidationMessage] = useState(false);
 
-  const [likeStatus, setLikeStatus] = useState(null); // 클릭 시 임시 저장
-
   const { bookID } = useParams();
   const numericBookID = Number(bookID);
 
   const { data: book, isLoading, error } = useBookByID(bookID);
   const { data: mydata } = useMyInfoQuery();
-  const { data: likedBooks } = useLikedBooksQuery(); // ✅ 좋아요 목록 가져오기
-
-  const isLiked = likedBooks?.some(book => Number(book.bookID) === numericBookID); // ✅ 서버 기반 판단
-
+  const { data: likedBooks } = useLikedBooksQuery(); // 좋아요 목록 가져오기
+  const { data: finishedBooks } = useFinishedBooksQuery();
+  const { mutate: addProgress } = useProgressMutation();
   const { mutate: likeBook } = useLikeBookMutation();
+  const { mutate: finishBook } = useFinishBookMutation();
+
+  const {
+    data: progressData,
+    isLoading: progressLoading,
+    error: progressError,
+  } = useProgressDataQuery({ bookID: Number(bookID) });
+
+  const isLiked = likedBooks?.some(
+    (book) => Number(book.bookID) === numericBookID
+  ); // 서버 기반 판단
+
+  const isCompleted = finishedBooks?.some(
+    (book) => Number(book.bookID) === numericBookID
+  );
 
   useEffect(() => {
     if (book && book?.subInfo?.itemPage) {
       setTotalPages(parseInt(book?.subInfo?.itemPage, 10));
     }
   }, [book]);
-
-  if (isLoading) return <p>로딩 중…</p>;
-  if (error) return <p>오류: {error.message}</p>;
-  if (!book) return <p>책을 찾을 수 없습니다.</p>;
 
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
@@ -59,43 +71,88 @@ const MyLibraryDetail = () => {
     return date.toLocaleString("ko-KR", options);
   };
 
+  //진척도 추가하기
   const handleAddEntry = () => {
     const readPages = parseInt(inputPages, 10);
     const total = totalPages > 0 ? totalPages : parseInt(inputTotal, 10);
+
+    if (!inputDateTime) {
+      alert("날짜를 선택해주세요.");
+      return;
+    }
+
+    if (!readPages) {
+      alert("읽은 페이지 수를 입력해주세요.");
+      return;
+    }
+
+    if (!total) {
+      alert("전체 페이지 수를 입력해주세요.");
+      return;
+    }
 
     const isDuplicateDate = entries.some(
       (entry) => entry.date === inputDateTime
     );
 
-    if (!readPages || !total || !inputDateTime || isDuplicateDate) return;
+    if (isDuplicateDate) {
+      alert("이미 해당 날짜에 기록이 있습니다.");
+      return;
+    }
 
-    const newSum = currentPageSum + readPages;
-
-    if (newSum > total) {
-      setShowOverPageModal(true);
+    const latestDate =
+      progressData?.length > 0
+        ? new Date(progressData[progressData.length - 1].readAt)
+        : null;
+    const inputDate = new Date(inputDateTime);
+    if (latestDate && inputDate < latestDate) {
+      alert("기록한 날짜보다 이전 날짜는 기록할 수 없어요.");
       return;
     }
 
     if (readPages < 0) {
-      setShowMinusPageModal(true);
+      alert("읽은 페이지 수는 1쪽 이상이어야 해요.");
+      return;
+    }
+
+    //페이지 누적치(데이터에서 불러오기)
+    const SumOfPages =
+      progressData?.length > 0 && progressData[progressData.length - 1]?.pageSum
+        ? progressData[progressData.length - 1].pageSum
+        : 0;
+    const newSum = SumOfPages + readPages;
+
+    if (newSum > total) {
+      alert("총 페이지 수를 초과했어요.");
       return;
     }
 
     const percent = Math.min(Math.round((newSum / total) * 100), 100);
 
     setEntries([...entries, { date: inputDateTime, pages: readPages }]);
-    setCurrentPageSum(newSum);
     if (totalPages === 0) setTotalPages(total);
     setProgress(percent);
+
+    //서버에 전송
+    addProgress({
+      bookID: Number(bookID),
+      pageNow: readPages,
+      pageSum: newSum,
+      progressPercent: percent,
+      readAt: inputDateTime,
+    });
 
     if (newSum === total) {
       setShowCompleteModal(true);
       setShowCompleteProgressBar(true);
     }
-
-    setInputDateTime("");
-    setInputPages("");
   };
+
+  //진척도 퍼센트
+  const getPercent =
+    Array.isArray(progressData) && progressData.length > 0
+      ? progressData[progressData.length - 1].progressPercent
+      : 0;
 
   const isTotalPagesInputDisabled =
     totalPages > 0 || (book && book?.subInfo?.itemPage);
@@ -105,9 +162,25 @@ const MyLibraryDetail = () => {
       setShowValidationMessage(true);
       return;
     }
-    setLikeStatus(status);
-    likeBook({ bookID: numericBookID });
+    if (status === "like") {
+      setLikeStatus(status);
+      likeBook({ bookID: numericBookID });
+      finishBook({ bookID: numericBookID });
+    } else if (status === "dislike") {
+      finishBook({ bookID: numericBookID });
+    }
   };
+
+  // console.log(entries)
+  // console.log("겟해온거", progressData)
+
+  // console.log(book);
+  // console.log("lll", likedBooks);
+
+  if (isLoading) return <p>로딩 중…</p>;
+  if (error) return <p>오류: {error.message}</p>;
+  if (progressError) return <p>진척도 정보 오류: {progressError.message}</p>;
+  if (!book) return <p>책을 찾을 수 없습니다.</p>;
 
   return (
     <div className="libraryDetailContainer">
@@ -132,7 +205,13 @@ const MyLibraryDetail = () => {
               {isLiked !== undefined && (
                 <div className="libraryDetailBoxStroke libraryDetailRAL">
                   <div className="libraryDetailLike">
-                    {isLiked ? "👍 Like" : "😃 Please Rate!"}
+                    {isCompleted
+                      ? likedBooks.some(
+                          (book) => Number(book.bookID) === numericBookID
+                        )
+                        ? "👍 Like"
+                        : "👎 Dislike"
+                      : "😃 Please Rate!"}
                   </div>
                 </div>
               )}
@@ -145,12 +224,12 @@ const MyLibraryDetail = () => {
                 showCompleteProgressBar ? "CompleteProgressBar" : ""
               }`}
               role="progressbar"
-              style={{ width: `${progress}%` }}
-              aria-valuenow={progress}
+              style={{ width: `${getPercent}%` }}
+              aria-valuenow={getPercent}
               aria-valuemin="0"
               aria-valuemax="100"
             >
-              <p className="libraryDetailProgressPercent">{progress}%</p>
+              <p className="libraryDetailProgressPercent">{getPercent}%</p>
             </div>
           </div>
 
@@ -159,18 +238,32 @@ const MyLibraryDetail = () => {
               <h6>날짜</h6>
               <h6>진척도</h6>
             </div>
-            <div className="libraryDetailProgressList">
-              <ul>
-                {entries.map((entry, idx) => (
-                  <li key={idx}>{formatDate(entry.date)}</li>
-                ))}
-              </ul>
-              <ul>
-                {entries.map((entry, idx) => (
-                  <li key={idx}>{entry.pages} 페이지</li>
-                ))}
-              </ul>
-            </div>
+
+            {/* 조건부 렌더링 */}
+            {progressLoading ? (
+              <div className="libraryDetailProgressList">
+                <p>진척도 데이터를 불러오고 있어요...</p>
+              </div>
+            ) : progressError ? (
+              <div className="libraryDetailProgressList">
+                <p className="text-danger">
+                  진척도 불러오기 실패: {progressError.message}
+                </p>
+              </div>
+            ) : (
+              <div className="libraryDetailProgressList">
+                <ul>
+                  {progressData?.map((progress, idx) => (
+                    <li key={idx}>{formatDate(progress.readAt)}</li>
+                  ))}
+                </ul>
+                <ul>
+                  {progressData?.map((progress, idx) => (
+                    <li key={idx}>{progress.pageSum} 페이지</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 

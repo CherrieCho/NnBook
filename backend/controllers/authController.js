@@ -26,8 +26,25 @@ export const checkEmail = async (req, res) => {
 };
 //회원가입
 export const register = async (req, res) => {
-  const { email, name, nickname, password, location, genres } = req.body;
-  console.log("회원가입 요청", { email, name, nickname, location, genres });
+  const {
+    email,
+    name,
+    nickname,
+    password,
+    location,
+    city,
+    genres,
+    latitude,
+    longitude,
+  } = req.body;
+  console.log("회원가입 요청", {
+    email,
+    name,
+    nickname,
+    location,
+    city,
+    genres,
+  });
 
   try {
     const existingUser = await findUserByEmail(email);
@@ -39,7 +56,16 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("🔐 비밀번호 해시 완료");
-    await createUser(email, name, nickname, hashedPassword, location);
+    await createUser(
+      email,
+      name,
+      nickname,
+      hashedPassword,
+      location,
+      city,
+      latitude,
+      longitude
+    );
 
     //관심장르 설정
     await Promise.all(
@@ -116,11 +142,11 @@ export const getMyInfo = async (req, res) => {
 //위치 변경
 export const changeLocation = async (req, res) => {
   const { email } = req.user; // 토큰에서 이메일
-  const { location } = req.body; // 요청 본문에서 새 위치
+  const { location, city, latitude, longitude } = req.body; // 요청 본문에서 새 위치
 
   try {
-    await changeLocationInfo(email, location);
-    res.status(200).json({ message: "변경 완료", location });
+    await changeLocationInfo(location, city, latitude, longitude, email);
+    res.status(200).json({ message: "변경 완료", location, city });
   } catch (error) {
     console.error("위치 변경 에러:", error);
     res.status(500).json({ message: "서버 에러" });

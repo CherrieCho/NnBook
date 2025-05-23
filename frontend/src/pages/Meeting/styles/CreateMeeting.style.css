@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.create-box {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #e3dcd2;
+  border-radius: 15px;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  color: #4b4b4b;
+}
+
+.create-box label {
+  font-family: "Paperlogy-4Regular", serif;
+  font-size: 0.75rem;
+  margin-right: 10px;
+}
+
+.create-meeting-date-time {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.create-meeting-title {
+  font-family: "Paperlogy-6SemiBold", serif;
+  width: 100%;
+  padding-block: 0.5rem;
+  padding-left: 1rem;
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: 1.75rem;
+}
+
+.create-meeting-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.create-meeting-title::placeholder {
+  color: #cec7bd;
+}
+
+#location-dropdown {
+  color: #cec7bd;
+  width: 100px;
+  text-align: center;
+  border: 1px solid #e3dcd2;
+  padding: 0.3rem;
+  border-radius: 10px;
+}
+
+#input-date {
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
+  padding: 0.3rem;
+  color: #cec7bd;
+}
+
+#input-time {
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
+  padding: 0.3rem;
+  color: #cec7bd;
+}
+
+#input-email {
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
+  padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+}
+
+#input-email::placeholder {
+  color: #cec7bd;
+}
+
+#input-date::placeholder {
+  color: #cec7bd;
+}
+
+#input-textarea {
+  display: block;
+  width: 100%;
+  height: 220px;
+  padding: 20px;
+  border: 1px solid #e3dcd2;
+  border-radius: 10px;
+  outline: none;
+  resize: none;
+}
+
+#input-textarea::placeholder {
+  color: #cec7bd;
+}
+
+.button-box {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2em;
+  padding-right: 0;
+}
+
+.button-box button {
+  outline: none;
+  font-family: "Paperlogy-4Regular", serif;
+  font-size: 0.75rem;
+  border: 1px solid #f6a89e;
+  border-radius: 15px;
+  background-color: #f6a89e;
+  color: white;
+  width: 4rem;
+}
+
+.button-box button:hover,
+.button-box button:active,
+.button-box button:focus {
+  border: #d8f69e !important;
+  outline: none;
+  color: #4b4b4b;
+  background-color: #d8f69e !important;
+}
+
+@media screen and (min-width: 376px) {
+  #input-textarea {
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .button-box {
+    justify-content: center;
+    padding: 2em 0;
+  }
+
+  .button-box button {
+    width: 100% !important;
+  }
+}

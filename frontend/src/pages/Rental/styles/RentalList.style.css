@@ -1,0 +1,156 @@
+/* ====== 공통 ====== */
+.rental-container{
+  padding: 0;
+}
+
+.rental-list-container{
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.rental-home-list-row .col{
+  padding-bottom: 0;
+}
+
+
+.rental-list {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 26px;
+  color: #4b4b4b;
+  margin-top: 30px;
+  margin-bottom: 35px;
+}
+
+.rental-list-page {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 26px;
+  color: #4b4b4b;
+}
+
+.rental-list-sub{
+  font-family: "Paperlogy-4Regular";
+  margin: 0;
+}
+
+.rental-home-title h3 {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 1.5rem;
+  margin: 6rem 0 2rem 0;
+  cursor: pointer;
+  color: #101010;
+}
+
+.rental-list span {
+  font-family: "Paperlogy-1Thin";
+}
+
+/* 홈에서만 쓰는 검색 기능 포함 스타일 (rental.jsx용) */
+.rental-search {
+  background-color: #e3dcd2 !important;
+  border-color: #e3dcd2 !important;
+  color: #333 !important;
+}
+
+.rental-search:hover,
+.rental-search:focus {
+  background-color: #d8c8bf !important;
+  border-color: #d8c8bf !important;
+  color: #222 !important;
+}
+
+.rental-search-input {
+  width: 100%;
+  max-width: 100%;
+}
+
+.distance-text {
+  text-align: center;
+}
+
+.rental-title-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rental-distance-button {
+  font-family: "Paperlogy-6SemiBold";
+  background-color: #f6a89e;
+  color: white;
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
+  transition: background-color 0.3s;
+}
+
+.rental-distance-button:hover{
+  border: 1.5px solid #f6a89e;
+  background-color: white;
+  color: #f6a89e;
+}
+
+.rental-distance-button:active {
+  border: 1.5px solid #f6a89e !important;
+  background-color: white !important;
+  color: #f6a89e !important;
+}
+
+
+.sort-distance-button{
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em 0;
+}
+
+.distance-info{
+  margin: 0.5em 0;
+  
+}
+
+/* more 링크 */
+.more-link {
+  font-size: 17px;
+  text-decoration: underline;
+  color: #333;
+  cursor: pointer;
+}
+
+.rental-auth {
+  display: block;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .rental-search-input {
+    max-width: 20ch;
+  }
+
+  .rental-home-list-row .col{
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .rental-search-input {
+    max-width: 20ch;
+    margin-left: 0.5rem;
+  }
+
+  .justify-content-center {
+    justify-content: center !important;
+  }
+
+  .book-cover-img {
+    max-height: 200px;
+    height: auto;
+    object-fit: cover;
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .book-cover-img + h6,
+  .book-cover-img + h6 + p {
+    text-align: center;
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+  }
+}

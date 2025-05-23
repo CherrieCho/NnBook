@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Card, Alert } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useLendableBooksQuery } from '../../hooks/uselendable';
-import useBookByIDs from '../../hooks/useBookbyIDArray';
+import { useLendableBooksQuery } from '../../hooks/Rental/uselendable';
+import useBookByIDs from '../../hooks/Common/useBookbyIDArray';
 import BookRentalModal from './BookRentalModal';
-import '../../styles/RentalDetail.style.css';
+import './styles/RentalDetail.style.css';
 import '/src/styles/BookRentalModal.style.css';
-import { useBorrowMutation } from '../../hooks/useBorrowMutation';
+import { useBorrowMutation } from '../../hooks/Rental/useBorrowMutation';
 
 export default function RentalDetail() {
   const { bookId } = useParams(); 
@@ -14,7 +14,8 @@ export default function RentalDetail() {
 
   const { mutate: borrowBook } = useBorrowMutation();
   const { data: lendabledata } = useLendableBooksQuery();
-  const bookIds = lendabledata?.map(item => item.bookId) || [];
+  const lendableBooks = lendabledata?.data || [];
+  const bookIds = lendableBooks?.map((item) => item.bookId) || [];
   const bookQueries = useBookByIDs(bookIds);
 
   const isLoading = bookQueries.some(q => q.isLoading);
@@ -75,7 +76,7 @@ export default function RentalDetail() {
                 <p><strong>저자:</strong> {book.author}</p>
                 <p><strong>출판사:</strong> {book.publisher}</p>
                 <p><strong>대여자 위치:</strong> {
-                  lendabledata?.find(ld => ld.bookId === book.itemId || ld.bookId === book.id)?.location || '알 수 없음'
+                  lendableBooks?.find(ld => ld.bookId === book.itemId || ld.bookId === book.id)?.location || '알 수 없음'
                 }</p>
                 <hr />
                 <p className="book-detail-desc">{book.description}</p>

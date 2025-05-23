@@ -1,0 +1,125 @@
+.footer {
+  background-color: #fdfcf9;
+  height: 150px;
+  border-top: 1px solid #e3dcd2;
+  color: #b9b3ab;
+}
+
+.footer-top-area {
+  font-family: "Paperlogy-4Regular";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e3dcd2;
+  font-size: 0.75rem;
+  padding-block: 1rem;
+  gap: 3rem;
+}
+
+.footer-top-area-hidden {
+  display: flex;
+  gap: 3rem;
+}
+
+.footer-bottom-area {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-top-area p {
+  margin: 0;
+}
+
+.footer-logo-area {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-logo-img {
+  height: 60px;
+}
+
+.footer-customer-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-customer {
+  color: #b9b3ab;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.footer-button {
+  font-family: "Paperlogy-3Light";
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 15px;
+  width: 10rem;
+  color: #b9b3ab;
+  border: none;
+  background-color: rgba(227, 220, 210, 0.3);
+}
+
+.footer-button span {
+  font-family: "Paperlogy-1Thin";
+}
+
+.footer-copyright-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-self: flex-end;
+}
+
+.footer-copyright {
+  font-family: "Paperlogy-3Light";
+  font-size: 0.75rem;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .footer-top-area {
+    font-size: 0.75rem;
+    gap: 2rem;
+  }
+
+  .footer-logo-img {
+    height: 50px;
+  }
+
+  .footer-customer-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-customer {
+    font-size: 0.8rem;
+  }
+
+  .footer-button {
+    font-size: 0.6rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.6rem;
+  }
+
+  .footer-top-area-hidden {
+    display: none;
+  }
+}

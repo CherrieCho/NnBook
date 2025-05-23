@@ -1,0 +1,35 @@
+@media (max-width: 768px) {
+  .custom-container {
+    padding-inline: 1rem;
+  }
+}
+
+.homepage-bestseller-title {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 1.5rem;
+  color: #101010;
+  margin: 6rem 0 2rem 0;
+  cursor: pointer;
+}
+
+.homepage-bestseller-title span {
+  font-family: "Paperlogy-1Thin";
+}
+
+.btn-custom {
+  font-family: "Paperlogy-6SemiBold";
+  background-color: #f6a89e;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  margin-right: 12px;
+  border-radius: 0.375rem;
+  margin-bottom: 4rem;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn-custom:hover {
+  background-color: #d8f69e;
+  color: #4b4b4b;
+}

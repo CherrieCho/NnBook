@@ -1,0 +1,33 @@
+.custom-navbar {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  background-color: #ffffff !important;
+  padding: 0;
+  border-bottom: 1px solid #f6a89e;
+}
+
+.nav-custom-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.navbar-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  cursor: pointer !important;
+}
+
+.nav-menu {
+  font-family: "Paperlogy-4Regular";
+  color: #101010;
+  font-size: 0.75rem;
+  margin-left: 1rem;
+  cursor: pointer !important;
+}

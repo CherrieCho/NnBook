@@ -5,12 +5,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router";
-import { useMeetingQuery } from "../../hooks/useMeetingQuery";
-import "../../styles/MeetingList.style.css";
-import { useMyInfoQuery } from "../../hooks/useMyInfoQuery";
-import { useAllUsersQuery } from "../../hooks/useAllUserQuery";
+import { useMeetingQuery } from "../../hooks/Meeting/useMeetingQuery";
+import "./styles/MeetingList.style.css";
+import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
+import { useAllUsersQuery } from "../../hooks/Common/useAllUserQuery";
+import Loading from "../../common/Loading/Loading.jsx";
 
-const MeetingList = () => {
+const MeetingList = ({ showWriteButton = true }) => {
   const translateKorean = (location) => {
     switch (location) {
       case "seoul":
@@ -56,12 +57,15 @@ const MeetingList = () => {
   };
 
   const navigate = useNavigate();
-  const pageSize = 10;
-  const [page, setPage] = useState(1);
-  const { data, isLoading, isError, error } = useMeetingQuery(page, pageSize);
-  const { data: mydata } = useMyInfoQuery();
-  const { data: allUsers } = useAllUsersQuery();
 
+  const pageSize = 3;
+  const [page, setPage] = useState(1);
+
+  const { data, isLoading: meetingLoading, isError, error } = useMeetingQuery(page, pageSize);
+  const { data: mydata, isLoading: myLoading } = useMyInfoQuery();
+  const { data: allUsers, isLoading: usersLoading } = useAllUsersQuery();
+
+  const isLoading = meetingLoading|| myLoading || usersLoading;
 
   const goToCreateMeeting = () => {
     if (!mydata?.email) {
@@ -76,72 +80,107 @@ const MeetingList = () => {
     navigate(`/meeting/${id}`);
   };
 
+  const goToMeetingFromHome = () => {
+    if (!mydata?.email) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else {
+      navigate("/meeting");
+    }
+  };
+
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
 
-
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <Loading />;
   }
 
   return (
-    <Container className="home-meeting-list">
+    <Container className="home-meeting-list container">
       <Row>
         <Col lg={12}>
-          <h1 className="meeting-title" onClick={() => navigate("/meeting")}>
-            모임 게시판
-          </h1>
+          {showWriteButton ? (
+            <h3 className="meeting-title" onClick={goToMeetingFromHome}>
+              모임 게시판
+            </h3>
+          ) : (
+            <>
+              <h3 className="meeting-home-title" onClick={goToMeetingFromHome}>
+                모임 게시판 <span>›</span>
+              </h3>
+            </>
+          )}
+          {showWriteButton && (
+            <p className="meeting-title-description">
+              직접 독서 모임을 개최하여 다양한 사람들과 책과 자신의 생각을
+              공유해보세요!
+            </p>
+          )}
         </Col>
-        <Col lg={12}>
-          <table className="meeting-table">
-            <thead>
-              <tr>
-                <th scope="col">제목</th>
-                <th scope="col">지역</th>
-                <th scope="col">작성자</th>
-                <th scope="col">모임 날짜</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data?.data.length === 0 ? (
+
+        {!mydata?.email ? (
+          <div className="custom-container container">
+            <p className="non-log-in-text-area">
+              누나네 책방에 가입하시고 다양한 독서 모임에 가입해보세요!
+            </p>
+          </div>
+        ) : (
+          <Col lg={12} className="meeting-background">
+            <table className="meeting-table">
+              <thead>
                 <tr>
-                  <td>현재 등록된 모임이 없습니다.</td>
+                  <th scope="col">제목</th>
+                  <th scope="col">지역</th>
+                  <th scope="col">모임 날짜</th>
+                  <th scope="col">작성자</th>
                 </tr>
-              ) : (
-                data?.data.map((meeting) => (
-                  <tr
-                    key={meeting.id}
-                    className="meeting-row"
-                    onClick={() => goToMeetingDetail(meeting.id)}
-                  >
-                    <td>{meeting.title}</td>
-                    <td>{translateKorean(meeting.location)}</td>
-                    <td>
-                      {allUsers?.map((users) => {
-                        if (users.email == meeting.leaderEmail) {
-                          return users.nickname;
-                        }
-                      })}
-                    </td>
-                    <td>{meeting.date.slice(0, 10)}</td>
+              </thead>
+              <tbody>
+                {data?.data.length === 0 ? (
+                  <tr>
+                    <td>현재 등록된 모임이 없습니다.</td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : (
+                  data?.data.map((meeting) => (
+                    <tr
+                      key={meeting.id}
+                      className="meeting-row"
+                      onClick={() => goToMeetingDetail(meeting.id)}
+                    >
+                      <td>{meeting.title}</td>
+                      <td>{translateKorean(meeting.location)}</td>
+                      <td>{meeting.date.slice(0, 10)}</td>
+                      <td>
+                        {allUsers?.map((users) => {
+                          if (users.email == meeting.leaderEmail) {
+                            return users.nickname;
+                          }
+                        })}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </Col>
+        )}
+      </Row>
+      {showWriteButton && (
+        <>
           <ReactPaginate
             nextLabel=">"
             onPageChange={handlePageClick}
             pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
+            marginPagesDisplayed={0}
             pageCount={Math.ceil(data?.data.length / 10)}
             previousLabel="<"
             pageClassName="page-item"
             pageLinkClassName="page-link"
-            previousClassName="page-item"
+            previousClassName="previous-page"
             previousLinkClassName="page-link"
-            nextClassName="page-item"
+            nextClassName="next-page"
             nextLinkClassName="page-link"
             breakLabel="..."
             breakClassName="page-item"
@@ -156,8 +195,8 @@ const MeetingList = () => {
               글쓰기
             </Button>
           </div>
-        </Col>
-      </Row>
+        </>
+      )}
     </Container>
   );
 };

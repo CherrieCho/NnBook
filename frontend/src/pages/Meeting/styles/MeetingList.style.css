@@ -1,0 +1,231 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.home-meeting-list {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.meeting-title {
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 26px;
+  color: #101010;
+  cursor: pointer;
+}
+
+.meeting-title-description {
+  font-family: "Paperlogy-3Light", serif;
+  font-size: 1rem;
+  color: #4b4b4b;
+}
+
+.meeting-home-title span {
+  font-family: "Paperlogy-1Thin";
+}
+
+.meeting-home-title {
+  margin: 6rem 0 1rem 0;
+  font-family: "Paperlogy-7Bold", serif;
+  font-size: 1.5rem;
+  color: #101010;
+  cursor: pointer;
+}
+
+.meeting-background {
+  background-color: rgba(227, 220, 210, 0.3);
+  margin-top: 2rem;
+  padding: 3rem 6rem 3rem 6rem;
+  border-radius: 15px;
+  margin-inline: auto;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .meeting-background {
+    padding: 2rem 1rem 2rem 1rem;
+  }
+
+  thead tr {
+    font-size: 0.9em;
+  }
+
+  tbody tr {
+    font-size: 0.75em;
+  }
+}
+
+.meeting-table {
+  min-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-collapse: collapse;
+  color: #4b4b4b;
+}
+
+thead {
+  font-family: "Paperlogy-6SemiBold";
+  font-size: 1rem;
+  color: #101010;
+  width: 100%;
+}
+
+tbody {
+  font-family: "Paperlogy-4Regular";
+  font-size: 1rem;
+  color: #4b4b4b;
+  width: 100%;
+}
+
+thead tr {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border-bottom: 1.5px solid #cbc2b6;
+  padding-bottom: 0.75rem;
+}
+
+tbody tr {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border-bottom: 1px solid #e3dcd2;
+  padding: 0.75rem 0;
+  cursor: pointer;
+}
+
+thead tr th:first-child {
+  text-align: center;
+}
+
+tbody tr td:nth-child(2) {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+tbody tr td:first-child {
+  padding-left: 0.75rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+tbody tr td:last-child {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+thead tr th:nth-child(2),
+thead tr th:nth-child(3),
+thead tr th:last-child,
+tbody tr td:nth-child(2),
+tbody tr td:nth-child(3),
+tbody tr td:last-child {
+  width: 30%;
+  text-align: center;
+}
+
+thead tr th:first-child,
+tbody tr td:first-child {
+  width: 45%;
+  text-align: center;
+}
+
+.meeting-row:hover td {
+  color: #f6a89e;
+}
+
+.add-button-area {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.add-button-area button {
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
+  background-color: #f6a89e;
+  color: white;
+}
+
+.add-button-area button:hover {
+  border: 1.5px solid #f6a89e;
+  color: #f6a89e;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.add-button-area button:active {
+  border: 1.5px solid #f6a89e !important;
+  color: #f6a89e !important;
+  background-color: white !important;
+  border-radius: 15px !important;
+}
+
+.pagination {
+  justify-content: center;
+  margin: 2em 0;
+}
+
+.page-item,
+.previous-page,
+.next-page {
+  padding: 0 10px;
+}
+
+.page-item a {
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
+  color: #f6a89e;
+}
+
+.previous-page a,
+.next-page a {
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
+  color: #f6a89e;
+}
+
+.page-item a:hover,
+.page-item a:active,
+.page-item a:focus {
+  background-color: #f6a89e;
+  border: 1.5px solid #f6a89e;
+  color: white;
+  font-weight: bold;
+}
+
+.page-item.active a {
+  background-color: #f6a89e;
+  border: 1.5px solid #f6a89e;
+  color: white;
+  font-weight: bold;
+}
+
+.page-item.disabled a {
+  color: #f6a89e;
+}
+
+@media screen and (min-width: 768px) {
+  .page-item {
+    padding: 0 15px;
+  }
+
+  thead tr th,
+  tbody tr td {
+    font-size: 0.75rem;
+    padding: 0.25rem;
+    width: auto;
+  }
+
+  thead tr,
+  tbody tr {
+    flex-wrap: nowrap;
+  }
+}

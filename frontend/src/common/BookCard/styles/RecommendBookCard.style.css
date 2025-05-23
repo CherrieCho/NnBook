@@ -1,0 +1,41 @@
+.recommend-card-col {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  padding: 1.5rem;
+  border-radius: 15px;
+  transition: 0.5s ease;
+  background-color: #e3dcd2;
+}
+
+.recommend-book-card-cover-img {
+  width: fit-content;
+  max-height: 150px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.recommend-book-card-info-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.recommend-book-card-title {
+  font-family: "Paperlogy-6SemiBold";
+  font-size: 0.75rem;
+  color: #101010;
+}
+
+.recommend-book-card-author {
+  font-family: "Paperlogy-4Regular";
+  font-size: 10px;
+  color: #4b4b4b;
+}
+
+.recommend-book-card-description {
+  font-family: "Paperlogy-4Regular";
+  font-size: 10px;
+  margin: 0;
+  color: #4b4b4b;
+}

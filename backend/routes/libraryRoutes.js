@@ -4,9 +4,14 @@ import {
   addReading,
   getFinished,
   getLendedBooks,
-  // changeToFinished,
+  changeToFinished,
   changeToLiked,
   getLikedBooks,
+  addProgress,
+  getProgress,
+  getFinishedForBorrowed,
+  getLikedBooksForBorrowed,
+  getReadingForBorrowed,
 } from "../controllers/libraryController.js";
 import { verifyToken } from "../middlewares/veryfyToken.js";
 
@@ -18,13 +23,22 @@ const router = express.Router();
 // 책 내서재에 추가하기(읽는중상태로 감) - 상세페이지에서 내가 추가할경우 ownerEmail == holderEmail, 내가 빌린 책일경우 owner != holder
 //책 다읽음 상태로 변경
 //책 좋아요하기
+//책 진척도 기록하기
+//진척도 불러오기
 router.get("/reading", verifyToken, getReading);
 router.post("/reading", addReading);
 router.get("/finished", verifyToken, getFinished);
-// router.patch("/finished", verifyToken, changeToFinished);
+router.patch("/finished", verifyToken, changeToFinished);
 router.get("/lended", verifyToken, getLendedBooks);
 router.get("/liked", verifyToken, getLikedBooks);
 router.patch("/liked", verifyToken, changeToLiked);
+router.post("/pages", verifyToken, addProgress);
+router.get("/pages", verifyToken, getProgress);
+
+//빌린책 테이블에서 불러오기
+router.get("/readingborrow", verifyToken, getReadingForBorrowed);
+router.get("/finishedborrow", verifyToken, getFinishedForBorrowed);
+router.get("/likedborrow", verifyToken, getLikedBooksForBorrowed);
 
 router.get("/reading", (req, res) => {
   const { ownerEmail, holderEmail } = req.query;
@@ -41,10 +55,10 @@ router.get("/finished", (req, res) => {
   res.json({ message: "조회 성공", email });
 });
 
-// router.patch("/finished", (req, res) => {
-//   const { bookID } = req.body;
-//   res.status(201).json({ message: "다 읽은 책으로 변경됨", bookID });
-// });
+router.patch("/finished", (req, res) => {
+  const { bookID } = req.body;
+  res.status(201).json({ message: "다 읽은 책으로 변경됨", bookID });
+});
 
 router.get("/lended", (req, res) => {
   const { ownerEmail } = req.query;

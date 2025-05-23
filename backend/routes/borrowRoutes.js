@@ -4,6 +4,8 @@ import {
   getAllBookLend,
   borrowBook,
   getBorrowingBook,
+  getMyLendable,
+  returnBook,
 } from "../controllers/borrowController.js";
 import { verifyToken } from "../middlewares/veryfyToken.js";
 
@@ -14,9 +16,11 @@ const router = express.Router();
 //대여신청(신청하면 바로 대여될 수 있게 > isBorrowed = true, 그리고 대여가능목록에서 삭제)
 //내가 대여중인 도서 조회
 router.post("/booklend", verifyToken, addBookLend);
-router.get("/lendables", getAllBookLend);
+router.get("/lendables", verifyToken, getAllBookLend);
 router.post("/borrowreq", verifyToken, borrowBook);
 router.get("/borrowing", verifyToken, getBorrowingBook);
+router.get("/mybooklendable", verifyToken, getMyLendable);
+router.patch("/returnbook", verifyToken, returnBook);
 
 router.post("/booklend", (req, res) => {
   const { bookID, ownerEmail, location, startDate, endDate } = req.body;

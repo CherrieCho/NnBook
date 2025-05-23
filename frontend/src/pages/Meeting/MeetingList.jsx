@@ -9,6 +9,7 @@ import { useMeetingQuery } from "../../hooks/Meeting/useMeetingQuery";
 import "./styles/MeetingList.style.css";
 import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import { useAllUsersQuery } from "../../hooks/Common/useAllUserQuery";
+import Loading from "../../common/Loading/Loading.jsx";
 
 const MeetingList = ({ showWriteButton = true }) => {
   const translateKorean = (location) => {
@@ -60,9 +61,11 @@ const MeetingList = ({ showWriteButton = true }) => {
   const pageSize = 3;
   const [page, setPage] = useState(1);
 
-  const { data, isError, error } = useMeetingQuery(page, pageSize);
-  const { data: mydata } = useMyInfoQuery();
-  const { data: allUsers } = useAllUsersQuery();
+  const { data, isLoading: meetingLoading, isError, error } = useMeetingQuery(page, pageSize);
+  const { data: mydata, isLoading: myLoading } = useMyInfoQuery();
+  const { data: allUsers, isLoading: usersLoading } = useAllUsersQuery();
+
+  const isLoading = meetingLoading|| myLoading || usersLoading;
 
   const goToCreateMeeting = () => {
     if (!mydata?.email) {
@@ -89,6 +92,10 @@ const MeetingList = ({ showWriteButton = true }) => {
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Container className="home-meeting-list container">

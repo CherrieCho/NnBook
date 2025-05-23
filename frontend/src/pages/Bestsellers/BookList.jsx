@@ -32,9 +32,9 @@ const BookList = () => {
     error: searchError,
   } = useSearchBook(query, categoryId, page, PAGE_SIZE);
 
-  console.log("베스트", bestsellerBooks)
-  console.log("검색", searchedBooks)
-  console.log("페이지", page)
+  // console.log("베스트", bestsellerBooks)
+  // console.log("검색", searchedBooks)
+  // console.log("페이지", page)
 
   //검색
   const handleSearch = (q, c) => {

@@ -61,7 +61,7 @@ const MyPage = () => {
           );
           const data = await response.json();
           const address = data.address;
-          console.log(address);
+          // console.log(address);
           const province = address.province || "";
           const city = address.city || address.county || address.state || "";
           const borough =

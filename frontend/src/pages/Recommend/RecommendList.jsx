@@ -87,7 +87,7 @@ const Recommend = () => {
 
   if (error) return <Alert variant="danger">{error.message}</Alert>;
 
-  console.log(books);
+  // console.log(books);
 
   return (
     <Container className="book-list-container py-4">
@@ -102,7 +102,7 @@ const Recommend = () => {
         className="gx-1 gy-1 justify-content-center justify-content-sm-start"
       >
         {books?.map((book, idx) => (
-          <BookCard book={book} />
+          <BookCard book={book} key={idx} />
         ))}
       </Row>
       <ReactPaginate

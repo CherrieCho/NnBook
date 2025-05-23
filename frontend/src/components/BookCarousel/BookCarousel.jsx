@@ -36,7 +36,7 @@ const BookCarousel = ({ books }) => {
   const topChunks = groupedBooks.filter((_, i) => i % 2 === 0);
   const bottomChunks = groupedBooks.filter((_, i) => i % 2 === 1);
 
-  console.log("tt", topChunks);
+  // console.log("tt", topChunks);
 
   return (
     <div className="bestseller-book-carousel-wrapper">

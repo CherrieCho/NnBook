@@ -174,8 +174,8 @@ const MyLibraryDetail = () => {
   // console.log(entries)
   // console.log("겟해온거", progressData)
 
-  console.log(book);
-  console.log("lll", likedBooks);
+  // console.log(book);
+  // console.log("lll", likedBooks);
 
   if (isLoading) return <p>로딩 중…</p>;
   if (error) return <p>오류: {error.message}</p>;

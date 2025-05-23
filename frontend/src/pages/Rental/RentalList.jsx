@@ -8,6 +8,7 @@ import useBookByIDs from "../../hooks/Common/useBookbyIDArray";
 import ReactPaginate from "react-paginate";
 import { useAllUsersQuery } from "../../hooks/Common/useAllUserQuery";
 import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
+import { keyframes } from "@emotion/react";
 
 const RentalList = () => {
   const navigate = useNavigate();
@@ -123,8 +124,8 @@ const RentalList = () => {
           lg={5}
           className="gx-1 gy-1 justify-content-center justify-content-sm-start"
         >
-          {displayBooks.map((book) => (
-            <div className="mb-3 text-center">
+          {displayBooks.map((book, idx) => (
+            <div className="mb-3 text-center" key={idx}>
               <BookCard book={book} />
               <p className="distance-info">
                 {book.distance !== null

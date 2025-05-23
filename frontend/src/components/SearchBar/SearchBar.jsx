@@ -41,7 +41,7 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSearch = () => {
     if (typeof onSearch === "function") {
-      console.log("🔍 검색 요청 상태:", { query, categoryId });
+      // console.log("🔍 검색 요청 상태:", { query, categoryId });
       onSearch(query, categoryId);
     } else {
       console.warn("onSearch 함수가 정의되지 않았습니다.");

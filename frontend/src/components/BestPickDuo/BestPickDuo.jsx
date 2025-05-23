@@ -30,9 +30,9 @@ const BestPickDuo = () => {
     return null;
   }
 
-  console.log("blog", blogData);
-  console.log("new", NewSpecialData);
-  console.log("new", bookbyidData);
+  // console.log("blog", blogData);
+  // console.log("new", NewSpecialData);
+  // console.log("new", bookbyidData);
 
   return (
     <div className="best-pick-duo-container">

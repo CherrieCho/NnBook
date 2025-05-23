@@ -42,7 +42,7 @@ export default function Rental() {
     }
   };
 
-  console.log(lendableBooks);
+  // console.log(lendableBooks);
 
   return (
     <Container className="rental-container">

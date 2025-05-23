@@ -88,7 +88,7 @@ const Recommend = ({ previewCount }) => {
     ? books.slice(0, previewCount || books.length)
     : [];
 
-  console.log(recommended);
+  // console.log(recommended);
 
   return (
     <Container className="recommend-home-container custom-container">
@@ -99,7 +99,7 @@ const Recommend = ({ previewCount }) => {
       </div>
       <Row className="recommend-book-card" xs={3} sm={3} md={3}>
         {recommended.map((book, idx) => (
-          <Col className="recommend-book-card-col">
+          <Col className="recommend-book-card-col" key={idx}>
             <RecommendBookCard book={book} />
           </Col>
         ))}

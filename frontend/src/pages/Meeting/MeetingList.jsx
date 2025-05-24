@@ -107,9 +107,9 @@ const MeetingList = ({ showWriteButton = true }) => {
   }
 
   return (
-    <Container
+    <div
       className={`home-meeting-list custom-container${
-        showWriteButton ? "meeting-container" : ""
+        showWriteButton ? "meeting-container container" : ""
       }`}
     >
 
@@ -156,8 +156,8 @@ const MeetingList = ({ showWriteButton = true }) => {
                   onClick={() => goToMeetingDetail(meeting.id)}
                 >
                   <div className="meeting-row-title">
-                    <p>[{translateKorean(meeting.location)}]</p>
-                    <p>{meeting.title}</p>
+                    <p className="meeting-row-location">[{translateKorean(meeting.location)}]</p>
+                    <p className="meeting-row-list-title">{meeting.title}</p>
                   </div>
                   <div className="meeting-row-info-area">
                     <p className="meeting-row-date">{meeting.date.slice(0, 10)}</p>
@@ -204,7 +204,7 @@ const MeetingList = ({ showWriteButton = true }) => {
           </div>
         </>
       )}
-    </Container>
+    </div>
   );
 };
 

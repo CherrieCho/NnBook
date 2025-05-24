@@ -72,18 +72,27 @@ body {
   padding-inline: 1.5rem;
 }
 
-.meeting-row:hover {
+.meeting-row:hover * {
   color: #f6a89e;
 }
 
 .meeting-row-title {
+  display: flex;
+  align-items: center;
   font-family: "Paperlogy-6SemiBold", serif;
   display: flex;
   gap: 0.25rem;
   font-size: 1.25rem;
 }
 
-.meeting-row-title p {
+.meeting-row-list-title {
+  font-family: "Paperlogy-5Medium", serif;
+  color: #101010;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.meeting-row-location {
   color: #101010;
   margin: 0;
 }
@@ -211,7 +220,7 @@ body {
     flex-direction: column;
     font-size: 1rem;
   }
-  
+
   .meeting-row-title p {
     font-size: 1rem;
   }

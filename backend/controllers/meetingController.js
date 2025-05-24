@@ -6,6 +6,7 @@ import {
   fetchAllMembers,
   deleteMeetingById,
   deleteMember,
+  fetchSingleMeeting,
 } from "../models/meetingModel.js";
 
 //모임 추가
@@ -47,6 +48,18 @@ export const getAllMeetings = async (req, res) => {
 
     const { rows, totalCount } = await fetchAllMeetings(page, pageSize);
     res.status(200).json({ data: rows, totalCount });
+  } catch (error) {
+    console.error("모임 조회 실패:", error);
+    res.status(500).json({ message: "서버 오류, 조회 실패" });
+  }
+};
+
+//개별 모임 조회
+export const getSingleMeeting = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const meetingDetail = await fetchSingleMeeting(id);
+    res.status(200).json(meetingDetail);
   } catch (error) {
     console.error("모임 조회 실패:", error);
     res.status(500).json({ message: "서버 오류, 조회 실패" });

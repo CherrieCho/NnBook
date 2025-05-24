@@ -46,6 +46,12 @@ export const fetchAllMeetings = async (page = 1, pageSize = 3) => {
   return { rows, totalCount };
 };
 
+//개별 모임 조회
+export const fetchSingleMeeting = async (id) => {
+  const [rows] = await db.query("SELECT * FROM bookclub WHERE id = ?", [id]);
+  return rows;
+};
+
 export const addNewMember = async (leaderEmail, memberEmail) => {
   const [result] = await db.query(
     "INSERT INTO bookclubmember (leaderEmail, memberEmail) VALUES (?, ?)",

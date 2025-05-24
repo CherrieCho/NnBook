@@ -28,7 +28,7 @@ const RentalList = () => {
   };
 
   //대여가능한 도서
-  const { data: lendabledata } = useLendableBooksQuery(page, pageSize);
+  const { data: lendabledata, isLoading } = useLendableBooksQuery(page, pageSize);
   //응답으로 받아온 데이터 중에서 data 부분이랑 totalCount부분 분리
   const lendableBooks = lendabledata?.data || [];
   const totalCount = lendabledata?.totalCount || 0;
@@ -36,7 +36,7 @@ const RentalList = () => {
   const bookIds = lendableBooks?.map((item) => item.bookId) || [];
   const bookQueries = useBookByIDs(bookIds);
 
-  const isLoading = bookQueries.some((q) => q.isLoading);
+  // const isLoading = bookQueries.some((q) => q.isLoading);
   const isError = bookQueries.some((q) => q.isError);
 
   const books = bookQueries
@@ -136,8 +136,8 @@ const RentalList = () => {
             </div>
           ))}
         </Row>
-        {displayBooks.length === 0 && (
-          <p className="text-center mt-5">검색 결과가 없습니다.</p>
+        {!isLoading && displayBooks.length === 0 && (
+          <p className="text-center mt-5">대여 가능한 도서가 없습니다.</p>
         )}
 
         <ReactPaginate

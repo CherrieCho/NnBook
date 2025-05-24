@@ -10,6 +10,7 @@ import { useProgressMutation } from "../../hooks/Library/useProgressMutation";
 import { useProgressDataQuery } from "../../hooks/Library/useProgressData";
 import { useFinishBookMutation } from "../../hooks/Library/useFinishBookMutation";
 import { useFinishedBooksQuery } from "../../hooks/Library/useFinishedBooks";
+import Loading from "../../common/Loading/Loading";
 
 const MyLibraryDetail = () => {
   const [entries, setEntries] = useState([]);
@@ -177,7 +178,7 @@ const MyLibraryDetail = () => {
   // console.log(book);
   // console.log("lll", likedBooks);
 
-  if (isLoading) return <p>로딩 중…</p>;
+  if (isLoading) return <Loading />;
   if (error) return <p>오류: {error.message}</p>;
   if (progressError) return <p>진척도 정보 오류: {progressError.message}</p>;
   if (!book) return <p>책을 찾을 수 없습니다.</p>;

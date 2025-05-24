@@ -4,7 +4,6 @@ import {
   fetchAllMeetings,
   addNewMember,
   fetchAllMembers,
-  fetchTotalMeetingCount,
   deleteMeetingById,
   deleteMember,
 } from "../models/meetingModel.js";
@@ -44,11 +43,10 @@ export const deleteMeeting = async (req, res) => {
 export const getAllMeetings = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.pageSize) || 10;
+    const pageSize = parseInt(req.query.pageSize) || 3;
 
-    const meetings = await fetchAllMeetings(page, pageSize);
-    const total = await fetchTotalMeetingCount();
-    res.json({ data: meetings, total });
+    const { rows, totalCount } = await fetchAllMeetings(page, pageSize);
+    res.status(200).json({ data: rows, totalCount });
   } catch (error) {
     console.error("모임 조회 실패:", error);
     res.status(500).json({ message: "서버 오류, 조회 실패" });

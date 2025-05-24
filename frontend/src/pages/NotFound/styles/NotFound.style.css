@@ -1,0 +1,45 @@
+.not-found-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-text-title {
+  font-family: "Paperlogy-9Black";
+  font-size: 8rem;
+  color: #101010;
+  margin: 0;
+}
+
+.not-found-text-sub {
+  font-family: "Paperlogy-5Medium";
+  font-size: 1.5rem;
+  color: #4b4b4b;
+  margin: 0 0 4rem 0;
+}
+
+.not-found-btn {
+  font-family: "Paperlogy-4Regular", serif;
+  font-size: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
+  background-color: #f6a89e;
+  color: white;
+  margin-bottom: 6rem;
+  transition: all 0.5s;
+}
+
+.not-found-btn:hover {
+  font-family: "Paperlogy-4Regular", serif;
+  font-size: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
+  background-color: #ffffff;
+  color: #f6a89e;
+  margin-bottom: 6rem;
+}

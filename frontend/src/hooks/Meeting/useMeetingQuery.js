@@ -5,10 +5,10 @@ const fetchMeeting = async (page, pageSize) => {
   const res = await axiosMeetingDB.get("/view", {
     params: { page, pageSize },
   });
-  return res.data;
+  return res.data; // 맥엔드 controller에서 설정한 response{ data, totalCount }
 };
 
-export const useMeetingQuery = (page = 1, pageSize = 3) => {
+export const useMeetingQuery = (page, pageSize) => {
   return useQuery({
     queryKey: ["meetings", page],
     queryFn: () => fetchMeeting(page, pageSize),

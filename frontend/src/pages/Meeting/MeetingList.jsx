@@ -72,6 +72,10 @@ const MeetingList = ({ showWriteButton = true }) => {
   const { data: allUsers, isLoading: usersLoading } = useAllUsersQuery();
   const isLoading = meetingLoading || myLoading || usersLoading;
 
+  //응답으로 받아온 데이터 중에서 data 부분이랑 totalCount부분 분리
+  const meetingList = data?.data || [];
+  const totalCount = data?.totalCount || 0;
+
   const goToCreateMeeting = () => {
     if (!mydata?.email) {
       alert("로그인이 필요합니다.");
@@ -97,6 +101,8 @@ const MeetingList = ({ showWriteButton = true }) => {
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
+
+  console.log(data)
 
   if (isLoading) {
     return <Loading />;
@@ -168,42 +174,6 @@ const MeetingList = ({ showWriteButton = true }) => {
                 </div>
               ))
             )}
-            {/* <table className="meeting-table">
-              <thead>
-                <tr>
-                  <th scope="col">제목</th>
-                  <th scope="col">지역</th>
-                  <th scope="col">모임 날짜</th>
-                  <th scope="col">작성자</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data?.data.length === 0 ? (
-                  <tr>
-                    <td>현재 등록된 모임이 없습니다.</td>
-                  </tr>
-                ) : (
-                  data?.data.map((meeting) => (
-                    <tr
-                      key={meeting.id}
-                      className="meeting-row"
-                      onClick={() => goToMeetingDetail(meeting.id)}
-                    >
-                      <td>{meeting.title}</td>
-                      <td>{translateKorean(meeting.location)}</td>
-                      <td>{meeting.date.slice(0, 10)}</td>
-                      <td>
-                        {allUsers?.map((users) => {
-                          if (users.email == meeting.leaderEmail) {
-                            return users.nickname;
-                          }
-                        })}
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table> */}
           </div>
         )}
       {showWriteButton && (
@@ -213,7 +183,7 @@ const MeetingList = ({ showWriteButton = true }) => {
             onPageChange={handlePageClick}
             pageRangeDisplayed={3}
             marginPagesDisplayed={0}
-            pageCount={Math.ceil(data?.data.length / 10)}
+            pageCount={Math.ceil(totalCount / pageSize)}
             previousLabel="<"
             pageClassName="page-item"
             pageLinkClassName="page-link"

@@ -16,7 +16,7 @@ import { useLendableSingleBookQuery } from "../../hooks/Rental/useLendableSingle
 const BookDetail = () => {
   const navigate = useNavigate();
 
-  const [canBorrow, setCanBorrow] = useState("");
+  const [cantBorrow, setcantBorrow] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   const { bookID } = useParams();
@@ -47,12 +47,12 @@ const BookDetail = () => {
   };
 
   //책 대여가능 여부
-  const canBorrowBook = () => {
-    const lendableBook = lendabledata?.filter((item) => item.bookId == bookID);
+  const cantBorrowBook = () => {
+    const lendableBook = lendabledata?.filter((item) => item?.bookId == bookID);
     if (lendableBook?.length === 0) {
-      setCanBorrow(true);
+      setcantBorrow(true);
     } else {
-      setCanBorrow("");
+      setcantBorrow("");
     }
   };
 
@@ -77,11 +77,11 @@ const BookDetail = () => {
   };
 
   // console.log("정보", bookinfo)
-  // console.log("대여등록된거", lendabledata)
+  // console.log("대여등록된거", lendabledata?.filter((item) => item.bookId == bookID))
 
   useEffect(() => {
-    canBorrowBook();
-  }, [canBorrow]);
+    cantBorrowBook();
+  }, [lendabledata, bookID]);
 
   if (isLoading) return <Loading />;
 
@@ -113,7 +113,7 @@ const BookDetail = () => {
                 <Button variant="primary" onClick={addToLibrary}>
                   내 서재 추가
                 </Button>
-                {canBorrow ? (
+                {cantBorrow ? (
                   <OverlayTrigger
                     placement="bottom"
                     delay={{ show: 100, hide: 100 }}

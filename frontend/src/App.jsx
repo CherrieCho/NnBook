@@ -16,7 +16,6 @@ import NotFound from "./pages/NotFound/NotFound";
 import RentalDetail from "./pages/Rental/RentalDetail";
 import RentalList from "./pages/Rental/RentalList";
 import BookDetail from "./pages/Bestsellers/BookDetail";
-import LikeList from "./pages/Mypage/LikeList";
 import MyPage from "./pages/Mypage/MyPage";
 import "./styles/App.css";
 
@@ -36,14 +35,6 @@ function App() {
             element={
               <PrivateRoute>
                 <MyPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="mypage/likes"
-            element={
-              <PrivateRoute>
-                <LikeList />
               </PrivateRoute>
             }
           />

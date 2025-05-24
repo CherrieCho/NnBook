@@ -27,7 +27,7 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
   const rentInfo = lendableBooks?.find((rent) => rent.bookId === book.itemId);
 
   // console.log(lendableBooks);
-  // console.log("r", rentInfo);
+  console.log("r", rentInfo);
   // console.log("b", book);
 
   return (
@@ -51,16 +51,16 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
               lng={rentInfo?.longitude}
               onLocationSelect={setLocation}
             />
-            <p>대여 장소 : {rentInfo?.location || "정보 없음"}</p>
+            <p className="rental-place-text"><span>대여 장소</span> {rentInfo?.location || "정보 없음"}</p>
           </Col>
         </Row>
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
+        <Button className="rental-cancel-btn" onClick={onClose}>
           취소
         </Button>
-        <Button className="rental-detail" onClick={startBorrowing}>
+        <Button className="rental-btn" onClick={startBorrowing}>
           대여 신청
         </Button>
       </Modal.Footer>

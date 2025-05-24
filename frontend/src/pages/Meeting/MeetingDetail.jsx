@@ -15,6 +15,7 @@ import { useJoinMeeting } from "../../hooks/Meeting/useJoinMeeting";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useLeaveMeeting } from "../../hooks/Meeting/useLeaveMeeting";
+import Loading from "../../common/Loading/Loading";
 
 const MeetingDetail = () => {
   let { id } = useParams();
@@ -106,7 +107,7 @@ const MeetingDetail = () => {
   };
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <Loading />;
   }
 
   return (

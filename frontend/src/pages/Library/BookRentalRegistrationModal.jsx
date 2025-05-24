@@ -5,6 +5,7 @@ import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import { useRegisterBookLendMutation } from "../../hooks/Rental/useRegisterBookLendMutation";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import "./styles/BookRentalRegistrationModal.style.css";
 
 const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
   const [rentalDate, setRentalDate] = useState(new Date());
@@ -50,21 +51,25 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
               {book.title?.split(" - ")[0].split(" (")[0]}
             </h2>
             <hr />
-            <p>대여 가능 날짜:</p>
-            <DatePicker
-              selected={rentalDate}
-              onChange={(date) => setRentalDate(date)}
-              dateFormat="yyyy-MM-dd"
-              className="form-control"
-              placeholderText="날짜를 선택하세요"
-            />
-            <p>대여 희망 장소:</p>
-            <Button
-              variant="outline-primary"
-              onClick={() => setIsMapVisible(!isMapVisible)}
-            >
-              약속 장소 선택
-            </Button>
+            <div className="rental-registration-date-area">
+              <p>대여 가능 날짜</p>
+              <DatePicker
+                selected={rentalDate}
+                onChange={(date) => setRentalDate(date)}
+                dateFormat="yyyy-MM-dd"
+                className="rental-registration-datepicker"
+                placeholderText="날짜를 선택하세요"
+              />
+            </div>
+            <div className="rental-registration-place-area">
+              <p>대여 희망 장소</p>
+              <Button
+                className="rental-registration-place-btn"
+                onClick={() => setIsMapVisible(!isMapVisible)}
+              >
+                약속 장소 선택
+              </Button>
+            </div>
             {isMapVisible && (
               <>
                 <Map
@@ -74,7 +79,7 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
                 />
                 <input
                   type="text"
-                  className="form-control mt-2"
+                  className="rental-registration-place-input"
                   placeholder="핀을 움직여 장소를 설정하고, 약속 장소명을 입력해주세요~!"
                   maxLength={15}
                   value={placeName}
@@ -87,10 +92,10 @@ const BookRentalRegistrationModal = ({ show, book, onClose, onSubmit }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
+        <Button className="rental-registration-cancel-btn" onClick={onClose}>
           취소
         </Button>
-        <Button className="rental-register-detail" onClick={handleRegisterLend}>
+        <Button className="rental-registration-btn" onClick={handleRegisterLend}>
           대여 등록
         </Button>
       </Modal.Footer>

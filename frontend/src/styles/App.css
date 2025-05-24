@@ -116,4 +116,6 @@ a {
   height: 5rem;
   border-radius: 15px;
   background-color: #e3dcd2;
+  text-align: center;
+  padding-inline: 4rem;
 }

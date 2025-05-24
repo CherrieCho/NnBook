@@ -2,6 +2,8 @@
   display: flex;
   max-width: 1200px;
   height: auto;
+  margin-top: 1rem;
+  border-radius: 15px;
 }
 
 .swiper-slide {
@@ -10,10 +12,23 @@
   align-items: center;
 }
 
+@media screen and (max-width: 842px) {
+  
+  .swiper-slide {
+    min-height: 200px !important;
+  }
+
+  .swiper-slide img {
+    min-height: 200px !important;
+  }
+
+}
+
 .swiper-slide img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 15px;
 }
 
 .swiper- swiper-pagination {

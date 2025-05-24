@@ -1,0 +1,43 @@
+.rental-place-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Paperlogy-4Regular", serif;
+  font-size: 1rem;
+  color: #101010;
+  margin: 0;
+}
+.rental-place-text span {
+  font-family: "Paperlogy-6SemiBold", serif;
+  color: #4b4b4b;
+}
+
+.rental-btn {
+  font-family: "Paperlogy-4Regular", serif;
+  border: 1.5px solid #f6a89e;
+  border-radius: 15px;
+  background-color: #f6a89e;
+  color: white;
+}
+
+.rental-btn:hover {
+  border: 1.5px solid #f6a89e;
+  color: #f6a89e;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.rental-cancel-btn {
+  font-family: "Paperlogy-4Regular", serif;
+  border: 1.5px solid grey;
+  border-radius: 15px;
+  background-color: grey;
+  color: white;
+}
+
+.rental-cancel-btn {
+  border: 1.5px solid grey;
+  color: grey;
+  background-color: white;
+  border-radius: 15px;
+}

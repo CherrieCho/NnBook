@@ -16,12 +16,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useLeaveMeeting } from "../../hooks/Meeting/useLeaveMeeting";
 import Loading from "../../common/Loading/Loading";
+import { useSingleMeetingQuery } from "../../hooks/Meeting/useSingleMeeting";
+import { Alert } from "react-bootstrap";
 
 const MeetingDetail = () => {
   let { id } = useParams();
-  const { data, isLoading, isError, error } = useMeetingQuery();
-  //글 작성자 이메일 추출
-  const leader = data?.data.find((meeting) => meeting.id == id)?.leaderEmail;
+  const { data } = useMeetingQuery();
+  const { data: meetingDetailData, isLoading, isError, error } = useSingleMeetingQuery(id);
+    //글 작성자 이메일 추출
+  const leader = meetingDetailData?.[0]?.leaderEmail;
   const { data: memberData } = useMeetingMemberQuery(leader, !!leader);
   const { data: userData } = useMyInfoQuery();
   const { data: allUsers } = useAllUsersQuery();
@@ -29,6 +32,9 @@ const MeetingDetail = () => {
   const { mutate: leaveMeeting } = useLeaveMeeting();
   const { mutate: joinMeeting } = useJoinMeeting();
   const navigate = useNavigate();
+
+  // console.log(meetingDetailData)
+  // console.log(leader)
 
   const translateKorean = (location) => {
     switch (location) {
@@ -110,6 +116,10 @@ const MeetingDetail = () => {
     return <Loading />;
   }
 
+  if (isError){
+    return <Alert variant="danger">불러오기 실패: {error.message}</Alert>;
+  }
+
   return (
     <Container>
       <Row>
@@ -118,7 +128,7 @@ const MeetingDetail = () => {
             <div className="meeting-title-detail">
               <div className="meeting-join-status">
                 <h1>
-                  {data?.data.map((meeting) => {
+                  {meetingDetailData?.map((meeting) => {
                     if (meeting.id == id) {
                       return meeting.title;
                     }
@@ -135,7 +145,7 @@ const MeetingDetail = () => {
               <p>
                 작성자{" "}
                 <span>
-                  {data?.data.map((meeting) => {
+                  {meetingDetailData?.map((meeting) => {
                     if (meeting.id == id) {
                       return allUsers?.map((users) => {
                         if (users.email == meeting.leaderEmail) {
@@ -150,7 +160,7 @@ const MeetingDetail = () => {
                 <p>
                   지역{" "}
                   <span>
-                    {data?.data.map((meeting) => {
+                    {meetingDetailData?.map((meeting) => {
                       if (meeting.id == id) {
                         return translateKorean(meeting.location);
                       }
@@ -160,12 +170,12 @@ const MeetingDetail = () => {
                 <p>
                   일시{" "}
                   <span>
-                    {data?.data.map((meeting) => {
+                    {meetingDetailData?.map((meeting) => {
                       if (meeting.id == id) {
                         return meeting.date.slice(0, 10);
                       }
                     })}{" "}
-                    {data?.data.map((meeting) => {
+                    {meetingDetailData?.map((meeting) => {
                       if (meeting.id == id) {
                         return meeting.time.slice(0, 5);
                       }
@@ -176,7 +186,7 @@ const MeetingDetail = () => {
             </div>
             <div className="meeting-desc">
               <p>
-                {data?.data.map((meeting) => {
+                {meetingDetailData?.map((meeting) => {
                   if (meeting.id == id) {
                     return meeting.content;
                   }
@@ -185,7 +195,7 @@ const MeetingDetail = () => {
             </div>
           </div>
           <div className="join-button-box">
-            {data?.data.map((meeting) => {
+            {meetingDetailData?.map((meeting) => {
               //해당 게시글 작성자일 경우
               if (meeting.id == id && meeting.leaderEmail === userData?.email) {
                 return (

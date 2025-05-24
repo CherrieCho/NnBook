@@ -64,6 +64,15 @@ export const fetchAllBookLend = async (email, page = 1, pageSize = 10) => {
   return { rows, totalCount };
 };
 
+//대여가능도서 조회(개별)
+export const fetchSingleBookLend = async (email, bookID) => {
+  const [rows] = await db.query(
+    `SELECT * FROM registerbooklend WHERE ownerEmail != ? AND bookId = ?`,
+    [email, bookID]
+  );
+  return rows;
+};
+
 //내가 대여등록한 도서 조회
 export const fetchMyBookLend = async (email) => {
   const [rows] = await db.query(

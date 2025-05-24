@@ -9,9 +9,9 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
 import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import { useAddToLibraryMutation } from "../../hooks/Library/useAddToLibraryMutation";
-import { useLendableBooksQuery } from "../../hooks/Rental/uselendable";
 import BookRentalModal from "../Rental/BookRentalModal";
 import Loading from "../../common/Loading/Loading.jsx";
+import { useLendableSingleBookQuery } from "../../hooks/Rental/useLendableSingleBook.js";
 
 const BookDetail = () => {
   const navigate = useNavigate();
@@ -20,8 +20,7 @@ const BookDetail = () => {
   const [showModal, setShowModal] = useState(false);
 
   const { bookID } = useParams();
-  const { data: lendabledata } = useLendableBooksQuery();
-  const lendableBooks = lendabledata?.data || [];
+  const { data: lendabledata } = useLendableSingleBookQuery(bookID);
   const { data: bookinfo, isLoading, error } = useBookByID(bookID);
   const value = bookinfo?.subInfo?.ratingInfo.ratingScore;
   //내정보 가져오는 훅, 내서재에 추가하는 훅
@@ -47,11 +46,9 @@ const BookDetail = () => {
     }
   };
 
-  // console.log(bookinfo);
-
   //책 대여가능 여부
   const canBorrowBook = () => {
-    const lendableBook = lendableBooks?.filter((item) => item.bookId == bookID);
+    const lendableBook = lendabledata?.filter((item) => item.bookId == bookID);
     if (lendableBook?.length === 0) {
       setCanBorrow(true);
     } else {
@@ -78,6 +75,9 @@ const BookDetail = () => {
     console.log("대여 신청된 도서:", book);
     // 여기에 실제 대여 처리 API 호출 추가 가능
   };
+
+  // console.log("정보", bookinfo)
+  // console.log("대여등록된거", lendabledata)
 
   useEffect(() => {
     canBorrowBook();

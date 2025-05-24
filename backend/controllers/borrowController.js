@@ -10,6 +10,7 @@ import {
   addBorrowBook,
   changeBorrow,
   changeBorrowStatus,
+  fetchSingleBookLend,
 } from "../models/borrowModel.js";
 
 import { findReadingBooks, findFinishedBooks } from "../models/libraryModel.js";
@@ -38,6 +39,19 @@ export const getAllBookLend = async (req, res) => {
   try {
     const { rows, totalCount } = await fetchAllBookLend(email, page, pageSize);
     res.status(200).json({ data: rows, totalCount });
+  } catch (error) {
+    console.error("❌ 도서 조회 실패:", error);
+    res.status(500).json({ message: "서버 오류, 조회 실패" });
+  }
+};
+
+//대여가능 도서 조회(개별)
+export const getSingleBookLend = async (req, res) => {
+  const { bookID } = req.query;
+  const email = req.user?.email; //토큰에서 가져오기
+  try {
+    const lendableSingleBook = await fetchSingleBookLend(email, bookID);
+    res.status(200).json(lendableSingleBook);
   } catch (error) {
     console.error("❌ 도서 조회 실패:", error);
     res.status(500).json({ message: "서버 오류, 조회 실패" });

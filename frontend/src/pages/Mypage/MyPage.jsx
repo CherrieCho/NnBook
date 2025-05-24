@@ -109,22 +109,31 @@ const MyPage = () => {
             <div className="info-area">
               <div className="mypage-title-area">
                 <h1 className="mypage-title">내 정보</h1>
-                <p>내 정보와 도서 정보를 확인하고 필요한 경우 위치 정보를 변경해주세요!</p>
+                <p>
+                  내 정보와 도서 정보를 확인하고 필요한 경우 위치 정보를 변경해
+                  주세요!
+                </p>
               </div>
               <div className="my-info">
                 <h2>{mydata.nickname}님</h2>
                 <div className="my-data-area">
-                  <div>이름: {mydata.name}</div>
-                  <div>이메일: {mydata.email}</div>
+                  <div>
+                    <span>이름 </span>
+                    {mydata.name}
+                  </div>
+                  <div>
+                    <span>이메일 </span>
+                    {mydata.email}
+                  </div>
                   <div className="mypage-category">
-                    취향 카테고리:
+                    <span>취향 카테고리 </span>
                     {genres && genres.length > 0 ? (
                       <div className="my-genre">
                         {genres.map((genre, index) => (
                           <div key={index}>
                             {genre.genre}
-                            {index !== genres.length - 1 && ', '}
-                            </div>
+                            {index !== genres.length - 1 && ", "}
+                          </div>
                         ))}
                       </div>
                     ) : (
@@ -136,14 +145,12 @@ const MyPage = () => {
                   <div>
                     <FontAwesomeIcon
                       icon={faLocationDot}
-                      style={{ color: "#4B4B4B" }}
+                      className="location-icon"
                     />
                     <span>{mydata.location}</span>
                     <span>{mydata.city}</span>
                   </div>
-                  <Button onClick={getLocation}>
-                    지역 변경
-                  </Button>
+                  <Button onClick={getLocation}>지역 변경</Button>
                 </div>
               </div>
             </div>
@@ -151,10 +158,10 @@ const MyPage = () => {
         </Row>
         <Row className="library-book">
           <Col lg={12}>
-              <h3 className="mypage-title" onClick={moveToLibrary}>
-                내 서재 <span>›</span>
-                </h3>
-            <div>
+            <h3 className="mypage-list-title" onClick={moveToLibrary}>
+              내 서재 <span>›</span>
+            </h3>
+            <div className="mypage-list-area">
               {readingDataPlusBorrowed?.length > 0 && (
                 <SingleLineCarousel books={readingDataPlusBorrowed} />
               )}
@@ -163,18 +170,21 @@ const MyPage = () => {
         </Row>
         <Row className="rental-book">
           <Col lg={12}>
-            <h3 className="mypage-title">대여중인 책</h3>
-            <div>
-              {borrowdata?.length > 0 && (
-                <SingleLineCarousel books={borrowdata} libraryBookStatus="borrowed"/>
-              )}
+            <h3 className="mypage-list-title">대여중인 책</h3>
+            <div className="mypage-list-area">
+              {borrowdata?.length > 0 ? (
+                <SingleLineCarousel
+                  books={borrowdata}
+                  libraryBookStatus="borrowed"
+                />
+              ): (<p className="mypage-no-rental">대여 중인 책이 없습니다.</p>)}
             </div>
           </Col>
         </Row>
         <Row className="liked-book">
           <Col lg={12}>
-            <h3 className="mypage-title">좋아요 한 책</h3>
-            <div>
+            <h3 className="mypage-list-title">좋아요 한 책</h3>
+            <div className="mypage-list-area">
               {likeDataPlusBorrowed?.length > 0 && (
                 <SingleLineCarousel books={likeDataPlusBorrowed} />
               )}

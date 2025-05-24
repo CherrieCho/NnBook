@@ -10,6 +10,7 @@ import "./styles/MeetingList.style.css";
 import { useMyInfoQuery } from "../../hooks/Common/useMyInfoQuery";
 import { useAllUsersQuery } from "../../hooks/Common/useAllUserQuery";
 import Loading from "../../common/Loading/Loading.jsx";
+import { useMeetingMemberQuery } from "../../hooks/Meeting/useMeetingMembers.js";
 
 const MeetingList = ({ showWriteButton = true }) => {
   const translateKorean = (location) => {
@@ -61,11 +62,15 @@ const MeetingList = ({ showWriteButton = true }) => {
   const pageSize = 3;
   const [page, setPage] = useState(1);
 
-  const { data, isLoading: meetingLoading, isError, error } = useMeetingQuery(page, pageSize);
+  const {
+    data,
+    isLoading: meetingLoading,
+    isError,
+    error,
+  } = useMeetingQuery(page, pageSize);
   const { data: mydata, isLoading: myLoading } = useMyInfoQuery();
   const { data: allUsers, isLoading: usersLoading } = useAllUsersQuery();
-
-  const isLoading = meetingLoading|| myLoading || usersLoading;
+  const isLoading = meetingLoading || myLoading || usersLoading;
 
   const goToCreateMeeting = () => {
     if (!mydata?.email) {
@@ -98,16 +103,23 @@ const MeetingList = ({ showWriteButton = true }) => {
   }
 
   return (
-    <Container className="home-meeting-list container">
-      <Row>
-        <Col lg={12}>
+    <Container
+      className={`home-meeting-list custom-container${
+        showWriteButton ? "meeting-container" : ""
+      }`}
+    >
+
+        <div className={`${showWriteButton ? "" : "home-meeting-col"}`}>
           {showWriteButton ? (
             <h3 className="meeting-title" onClick={goToMeetingFromHome}>
               모임 게시판
             </h3>
           ) : (
             <>
-              <h3 className="meeting-home-title" onClick={goToMeetingFromHome}>
+              <h3
+                className="meeting-home-title home-meeting-col"
+                onClick={goToMeetingFromHome}
+              >
                 모임 게시판 <span>›</span>
               </h3>
             </>
@@ -115,20 +127,48 @@ const MeetingList = ({ showWriteButton = true }) => {
           {showWriteButton && (
             <p className="meeting-title-description">
               직접 독서 모임을 개최하여 다양한 사람들과 책과 자신의 생각을
-              공유해보세요!
+              공유해 보세요!
             </p>
           )}
-        </Col>
+        </div>
 
         {!mydata?.email ? (
-          <div className="custom-container container">
+          <div className="meeting-home-container-back">
             <p className="non-log-in-text-area">
               누나네 책방에 가입하시고 다양한 독서 모임에 가입해보세요!
             </p>
           </div>
         ) : (
-          <Col lg={12} className="meeting-background">
-            <table className="meeting-table">
+          <div className="meeting-background">
+            {data?.data.length === 0 ? (
+              <div className="meeting-none">
+                <p>현재 등록된 모임이 없습니다.</p>
+              </div>
+            ) : (
+              data?.data.map((meeting) => (
+                <div
+                  key={meeting.id}
+                  className="meeting-row"
+                  onClick={() => goToMeetingDetail(meeting.id)}
+                >
+                  <div className="meeting-row-title">
+                    <p>[{translateKorean(meeting.location)}]</p>
+                    <p>{meeting.title}</p>
+                  </div>
+                  <div className="meeting-row-info-area">
+                    <p className="meeting-row-date">{meeting.date.slice(0, 10)}</p>
+                    <p className="meeting-row-user">
+                      {allUsers?.map((users) => {
+                        if (users.email == meeting.leaderEmail) {
+                          return users.nickname;
+                        }
+                      })}
+                    </p>
+                  </div>
+                </div>
+              ))
+            )}
+            {/* <table className="meeting-table">
               <thead>
                 <tr>
                   <th scope="col">제목</th>
@@ -163,10 +203,9 @@ const MeetingList = ({ showWriteButton = true }) => {
                   ))
                 )}
               </tbody>
-            </table>
-          </Col>
+            </table> */}
+          </div>
         )}
-      </Row>
       {showWriteButton && (
         <>
           <ReactPaginate

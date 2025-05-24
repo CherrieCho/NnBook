@@ -8,11 +8,25 @@ body {
   padding-bottom: 3rem;
 }
 
+.meeting-container {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  padding-inline: 0.75rem;
+}
+
 .meeting-title {
   font-family: "Paperlogy-7Bold", serif;
-  font-size: 26px;
+  font-size: 1.75rem;
   color: #101010;
   cursor: pointer;
+}
+
+.home-meeting-col {
+  padding: 0;
+}
+
+.meeting-home-container-back {
+  padding: 0;
 }
 
 .meeting-title-description {
@@ -34,110 +48,63 @@ body {
 }
 
 .meeting-background {
-  background-color: rgba(227, 220, 210, 0.3);
-  margin-top: 2rem;
-  padding: 3rem 6rem 3rem 6rem;
-  border-radius: 15px;
-  margin-inline: auto;
-  overflow-x: auto;
-  box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .meeting-background {
-    padding: 2rem 1rem 2rem 1rem;
-  }
-
-  thead tr {
-    font-size: 0.9em;
-  }
-
-  tbody tr {
-    font-size: 0.75em;
-  }
-}
-
-.meeting-table {
-  min-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-collapse: collapse;
-  color: #4b4b4b;
+  background-color: rgba(227, 220, 210, 0.3);
+  margin-top: 2rem;
+  padding: 3rem 6rem 4rem 6rem;
+  border-radius: 15px;
+  margin-inline: auto;
+  box-sizing: border-box;
 }
 
-thead {
-  font-family: "Paperlogy-6SemiBold";
-  font-size: 1rem;
-  color: #101010;
-  width: 100%;
-}
-
-tbody {
-  font-family: "Paperlogy-4Regular";
-  font-size: 1rem;
-  color: #4b4b4b;
-  width: 100%;
-}
-
-thead tr {
+.meeting-row {
   display: flex;
-  justify-content: space-around;
-  width: 100%;
+  flex-direction: column;
   border-bottom: 1.5px solid #cbc2b6;
-  padding-bottom: 0.75rem;
-}
-
-tbody tr {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  border-bottom: 1px solid #e3dcd2;
-  padding: 0.75rem 0;
   cursor: pointer;
+  padding: 1rem 2rem 1rem 2rem;
+  min-width: 1000px;
 }
 
-thead tr th:first-child {
-  text-align: center;
-}
-
-tbody tr td:nth-child(2) {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-tbody tr td:first-child {
-  padding-left: 0.75rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-tbody tr td:last-child {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-thead tr th:nth-child(2),
-thead tr th:nth-child(3),
-thead tr th:last-child,
-tbody tr td:nth-child(2),
-tbody tr td:nth-child(3),
-tbody tr td:last-child {
-  width: 30%;
-  text-align: center;
-}
-
-thead tr th:first-child,
-tbody tr td:first-child {
-  width: 45%;
-  text-align: center;
-}
-
-.meeting-row:hover td {
+.meeting-row:hover {
   color: #f6a89e;
+}
+
+.meeting-row-title {
+  font-family: "Paperlogy-6SemiBold", serif;
+
+  display: flex;
+  gap: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.meeting-row-title p {
+  color: #101010;
+  margin: 0;
+}
+
+.meeting-row-user {
+  color: #4b4b4b;
+  margin: 0;
+}
+
+.meeting-row-date {
+  margin: 0;
+}
+
+.meeting-row-info-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.meeting-none {
+  font-family: "Paperlogy-4Regular", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4b4b4b;
 }
 
 .add-button-area {
@@ -148,6 +115,7 @@ tbody tr td:first-child {
 }
 
 .add-button-area button {
+  font-family: "Paperlogy-4Regular", serif;
   border: 1.5px solid #f6a89e;
   border-radius: 15px;
   background-color: #f6a89e;
@@ -212,20 +180,42 @@ tbody tr td:first-child {
   color: #f6a89e;
 }
 
-@media screen and (min-width: 768px) {
+@media (max-width: 1200px) {
+  .meeting-row {
+    min-width: 850px;
+  }
+}
+@media (max-width: 1000px) {
+  .meeting-row {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .meeting-row {
+    padding: 1rem 1rem 1rem 1rem;
+    min-width: 300px;
+  }
+
+  .meeting-background {
+    padding: 2rem 1rem 3rem 1rem;
+  }
+
+  thead tr {
+    font-size: 0.9em;
+  }
+
+  tbody tr {
+    font-size: 0.75em;
+  }
+
   .page-item {
     padding: 0 15px;
   }
 
   thead tr th,
   tbody tr td {
-    font-size: 0.75rem;
     padding: 0.25rem;
     width: auto;
-  }
-
-  thead tr,
-  tbody tr {
-    flex-wrap: nowrap;
   }
 }

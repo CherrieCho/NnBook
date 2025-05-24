@@ -12,6 +12,7 @@ const Map = ({ lat, lng, onLocationSelect }) => {
   const containerStyle = {
     width: "100%",
     height: "300px",
+    marginBlock: "1rem",
   };
 
   const handleMarkerDragEnd = (e) => {

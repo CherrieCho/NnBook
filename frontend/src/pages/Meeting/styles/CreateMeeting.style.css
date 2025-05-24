@@ -11,6 +11,7 @@ body {
   margin-top: 3rem;
   margin-bottom: 3rem;
   color: #4b4b4b;
+  background-color: rgba(227, 220, 210, 0.3);
 }
 
 .create-box label {

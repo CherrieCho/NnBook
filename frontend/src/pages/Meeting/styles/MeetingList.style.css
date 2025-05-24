@@ -9,6 +9,9 @@ body {
 }
 
 .meeting-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-top: 2rem;
   padding-bottom: 3rem;
   padding-inline: 0.75rem;
@@ -50,13 +53,13 @@ body {
 .meeting-background {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: 100%;
   background-color: rgba(227, 220, 210, 0.3);
   margin-top: 2rem;
-  padding: 3rem 6rem 4rem 6rem;
+  padding: 2rem 1.5rem 3rem 1.5rem;
   border-radius: 15px;
-  margin-inline: auto;
-  box-sizing: border-box;
 }
 
 .meeting-row {
@@ -64,8 +67,9 @@ body {
   flex-direction: column;
   border-bottom: 1.5px solid #cbc2b6;
   cursor: pointer;
-  padding: 1rem 2rem 1rem 2rem;
   min-width: 1000px;
+  padding-block: 1rem;
+  padding-inline: 1.5rem;
 }
 
 .meeting-row:hover {
@@ -74,7 +78,6 @@ body {
 
 .meeting-row-title {
   font-family: "Paperlogy-6SemiBold", serif;
-
   display: flex;
   gap: 0.25rem;
   font-size: 1.25rem;
@@ -105,6 +108,7 @@ body {
   justify-content: center;
   align-items: center;
   color: #4b4b4b;
+  margin: 0;
 }
 
 .add-button-area {
@@ -183,39 +187,32 @@ body {
 @media (max-width: 1200px) {
   .meeting-row {
     min-width: 850px;
+    max-width: 850px;
   }
 }
 @media (max-width: 1000px) {
   .meeting-row {
     min-width: 600px;
+    max-width: 600px;
   }
 }
 
 @media (max-width: 768px) {
   .meeting-row {
-    padding: 1rem 1rem 1rem 1rem;
     min-width: 300px;
+    max-width: 300px;
   }
 
   .meeting-background {
     padding: 2rem 1rem 3rem 1rem;
   }
 
-  thead tr {
-    font-size: 0.9em;
+  .meeting-row-title {
+    flex-direction: column;
+    font-size: 1rem;
   }
-
-  tbody tr {
-    font-size: 0.75em;
-  }
-
-  .page-item {
-    padding: 0 15px;
-  }
-
-  thead tr th,
-  tbody tr td {
-    padding: 0.25rem;
-    width: auto;
+  
+  .meeting-row-title p {
+    font-size: 1rem;
   }
 }

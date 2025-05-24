@@ -192,6 +192,7 @@ const MyLibraryDetail = () => {
               <img
                 src={book.cover}
                 alt={book.title ? book.title.split(" - ")[0] : ""}
+                className="library-detail-book-img"
               />
             </div>
             <div className="libraryDetailInfoText">
@@ -337,7 +338,7 @@ const MyLibraryDetail = () => {
           </Modal.Body>
           <Modal.Footer>
             <Button
-              variant="primary"
+              className="library-detail-btn"
               onClick={() => setShowCompleteModal(false)}
             >
               확인

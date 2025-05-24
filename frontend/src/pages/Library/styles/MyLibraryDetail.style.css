@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   margin-top: 4rem;
-  height: 100vh;
   color: #4b4b4b;
 }
 
@@ -23,13 +22,17 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  width: 50vw;
+  width: 60vw;
 }
 
 .libraryDetailBookInfo {
   display: flex;
   border-bottom: 1px solid rgba(227, 220, 210, 1);
   padding-bottom: 1.5rem;
+}
+
+.library-detail-book-img {
+  height: 300px;
 }
 
 .libraryDetailInfoText {
@@ -40,8 +43,9 @@
   margin-left: 2rem;
 }
 
-.libraryDetailRAL{
+.libraryDetailRAL {
   display: flex;
+  width: fit-content;
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
@@ -132,6 +136,7 @@
 }
 
 .libraryDetailProgressList li {
+  font-size: 0.75rem;
   padding-block: 0.5rem;
   border-bottom: 1px solid rgba(227, 220, 210, 0.3);
 }
@@ -162,8 +167,9 @@
 
 .libraryInputArea {
   display: flex;
-  width: 50vw;
+  width: 60vw;
   margin-top: 1rem;
+  margin-bottom: 4rem;
   gap: 0.5rem;
 }
 
@@ -183,9 +189,60 @@
   box-shadow: 0 0 0 0.25rem rgba(216, 246, 146, 0.3) !important;
 }
 
+.library-detail-btn {
+  font-family: "Paperlogy-4Regular";
+  background-color: #f6a89e;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.library-detail-btn:hover {
+  background-color: #fff;
+  color: #f6a89e;
+  border: 1px solid #f6a89e;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
+@media (max-width: 768px) {
+  .libraryDetailProgressList li {
+    font-size: 0.75rem;
+  }
+
+  .library-detail-book-img {
+    width: 100%;
+  }
+
+  .libraryDetailBookInfo {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .libraryDetailRAL {
+    width: 100%;
+    padding: 0.75rem;
+    margin-inline: 0rem;
+    background-color: #ffffff;
+  }
+
+  .libraryDetailInfoText {
+    border-left: none;
+    margin-left: 0rem;
+  }
+
+  .libraryDetailInfoText div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

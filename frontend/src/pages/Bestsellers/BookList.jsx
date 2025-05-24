@@ -65,7 +65,7 @@ const BookList = () => {
         {error && <Alert variant="danger">에러 발생: {error.message}</Alert>}
 
         <Row
-          xs={1}
+          xs={2}
           sm={3}
           md={4}
           lg={5}

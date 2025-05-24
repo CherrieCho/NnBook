@@ -90,7 +90,7 @@ const Recommend = () => {
         <h3 onClick={() => navigate("/recommend")}>취향 기반 추천 도서</h3>
       </div>
       <Row
-        xs={1}
+        xs={2}
         sm={3}
         md={4}
         lg={5}

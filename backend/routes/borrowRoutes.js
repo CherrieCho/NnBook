@@ -6,6 +6,7 @@ import {
   getBorrowingBook,
   getMyLendable,
   returnBook,
+  getSingleBookLend,
 } from "../controllers/borrowController.js";
 import { verifyToken } from "../middlewares/veryfyToken.js";
 
@@ -17,6 +18,7 @@ const router = express.Router();
 //내가 대여중인 도서 조회
 router.post("/booklend", verifyToken, addBookLend);
 router.get("/lendables", verifyToken, getAllBookLend);
+router.get("/lendablebook", verifyToken, getSingleBookLend);
 router.post("/borrowreq", verifyToken, borrowBook);
 router.get("/borrowing", verifyToken, getBorrowingBook);
 router.get("/mybooklendable", verifyToken, getMyLendable);

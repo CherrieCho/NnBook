@@ -102,8 +102,6 @@ const MeetingList = ({ showWriteButton = true }) => {
     setPage(selected + 1);
   };
 
-  console.log(data)
-
   if (isLoading) {
     return <Loading />;
   }

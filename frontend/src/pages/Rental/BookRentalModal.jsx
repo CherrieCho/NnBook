@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Modal, Button, Row, Col, Card } from "react-bootstrap";
 import Map from "../../components/Map/Map";
-import { useLendableBooksQuery } from "../../hooks/Rental/uselendable";
 import { useBorrowMutation } from "../../hooks/Rental/useBorrowMutation";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { useLendableSingleBookQuery } from "../../hooks/Rental/useLendableSingleBook";
 
 export default function BookRentalModal({ show, book, onClose, onSubmit }) {
   const navigate = useNavigate();
+  const { bookID } = useParams();
 
-  const { data: lendabledata } = useLendableBooksQuery();
-  const lendableBooks = lendabledata?.data || [];
+  const { data: lendabledata } = useLendableSingleBookQuery(bookID);
+
   const { mutate: borrowBook } = useBorrowMutation();
 
   const [location, setLocation] = useState(null);
@@ -17,17 +18,17 @@ export default function BookRentalModal({ show, book, onClose, onSubmit }) {
   const [placeName, setPlaceName] = useState("");
 
   //ownerEmail 뽑기
-  const owner = lendableBooks?.find((rent) => rent?.bookId === book.itemId)?.ownerEmail;
+  const owner = lendabledata?.find((rent) => rent?.bookId === book.itemId)?.ownerEmail;
 
   const startBorrowing = () => {
     borrowBook({ bookId: book.itemId, owner: owner });
     navigate("/mypage");
   };
 
-  const rentInfo = lendableBooks?.find((rent) => rent.bookId === book.itemId);
+  const rentInfo = lendabledata?.find((rent) => rent.bookId === book.itemId);
 
-  // console.log(lendableBooks);
-  console.log("r", rentInfo);
+  // console.log(lendabledata);
+  // console.log("r", rentInfo);
   // console.log("b", book);
 
   return (

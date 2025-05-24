@@ -6,6 +6,7 @@ import {
   getAllMembers,
   deleteMeeting,
   leaveMeeting,
+  getSingleMeeting,
 } from "../controllers/meetingController.js";
 
 const router = express.Router();
@@ -22,6 +23,7 @@ router.post("/join", joinMeeting);
 router.get("/members", getAllMembers);
 router.delete("/leave", leaveMeeting);
 router.delete("/:id", deleteMeeting);
+router.get("/view/:id", getSingleMeeting);
 
 router.post("/create", (req, res) => {
   const { leaderEmail, location, date, time, bookID, title } = req.body;

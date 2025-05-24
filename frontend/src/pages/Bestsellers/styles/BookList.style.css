@@ -62,11 +62,11 @@
 @media (max-width: 768px) {
   .book-list-title-area{
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 1.5em;
   }
   .book-list-title, .book-list-sub{
-    text-align: center;
+    text-align: left;
   }
   .book-search-input {
     max-width: 20ch;

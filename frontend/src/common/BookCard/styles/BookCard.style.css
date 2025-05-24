@@ -19,7 +19,7 @@
 }
 
 .book-cover-img {
-  width: fit-content;
+  width: auto;
   max-height: 200px;
   object-fit: cover;
   box-shadow: 0 0 10px rgba(75, 75, 75, 0.3);

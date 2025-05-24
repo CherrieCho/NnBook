@@ -119,7 +119,7 @@ const RentalList = () => {
           </Col>
         </Row>
         <Row
-          xs={1}
+          xs={2}
           sm={3}
           md={4}
           lg={5}

@@ -8,6 +8,10 @@
 }
 
 @media (max-width: 768px) {
+  .best-pick-duo-container {
+    margin: 3rem 0 2rem 0 !important;
+  }
+
   .best-pick-duo-container .row {
     flex-direction: column;
   }
@@ -27,6 +31,10 @@
   
   .best-pick-blog-info {
     padding-right: 0.5rem !important;
+  }
+
+  .best-pick-duo-blog {
+    padding-left: 0.75rem !important;
   }
 }
 

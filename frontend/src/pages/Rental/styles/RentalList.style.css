@@ -12,23 +12,16 @@
   padding-bottom: 0;
 }
 
-
-.rental-list {
-  font-family: "Paperlogy-7Bold", serif;
-  font-size: 26px;
-  color: #4b4b4b;
-  margin-top: 30px;
-  margin-bottom: 35px;
-}
-
 .rental-list-page {
   font-family: "Paperlogy-7Bold", serif;
-  font-size: 26px;
-  color: #4b4b4b;
+  font-size: 1.75rem;
+  color: #101010;
 }
 
 .rental-list-sub{
-  font-family: "Paperlogy-4Regular";
+  font-family: "Paperlogy-3Light", serif;
+  color: #4b4b4b;
+  font-size: 1rem;
   margin: 0;
 }
 
@@ -74,7 +67,7 @@
 }
 
 .rental-distance-button {
-  font-family: "Paperlogy-6SemiBold";
+  font-family: "Paperlogy-4Regular", serif;
   background-color: #f6a89e;
   color: white;
   border: 1.5px solid #f6a89e;
@@ -98,7 +91,7 @@
 .sort-distance-button{
   display: flex;
   justify-content: flex-end;
-  margin: 2em 0;
+  margin: 0 0 4rem 0;
 }
 
 .distance-info{

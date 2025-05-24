@@ -29,5 +29,20 @@
   color: #101010;
   font-size: 0.75rem;
   margin-left: 1rem;
+  text-align: left;
   cursor: pointer !important;
+}
+
+.navbar-toggler {
+  border: none !important;
+  font-size: 1rem !important;
+  color: #4b4b4b;
+}
+
+.navbar-toggler:hover {
+  box-shadow: none !important;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none !important;
 }

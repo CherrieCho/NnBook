@@ -43,7 +43,7 @@ export default function Rental() {
   // console.log(lendableBooks);
 
   return (
-    <Container className="rental-container">
+    <Container className="rental-container custom-container">
       <div className="rental-home-title">
         <h3 className="rental-list" onClick={goToRentalFromHome}>
           대여 가능 도서 목록 <span>›</span>

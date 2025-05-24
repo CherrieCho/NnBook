@@ -4,9 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
-import banner1 from "../../assets/Sample-Banner1.png";
-import banner2 from "../../assets/Sample-Banner2.png";
-import banner3 from "../../assets/Sample-Banner3.png";
+import banner1 from "../../assets/Banner1.png";
+import banner2 from "../../assets/Banner2.png";
+import banner3 from "../../assets/Banner3.png";
 
 const HomeBanner = () => {
   return (

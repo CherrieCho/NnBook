@@ -1,89 +1,130 @@
-.mypage-container{
+.mypage-container {
   margin-bottom: 3rem;
 }
 
-.mypage-title-area{
+.mypage-title-area {
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-.mypage-title-area p{
-  font-family: "Paperlogy-4Regular";
-}
-
-.my-data-area{
-  font-family: "Paperlogy-4Regular";
-}
-
-.mypage-title{
-  font-family: "Paperlogy-6SemiBold";
-  font-size: 20px;
-  font-weight: 600;
+.mypage-title-area p {
+  font-family: "Paperlogy-3Light";
   color: #4b4b4b;
 }
 
-.mypage-title span{
+.my-data-area {
+  font-family: "Paperlogy-4Regular";
+}
+
+.my-data-area div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.my-data-area span {
+  font-family: "Paperlogy-6SemiBold";
+}
+
+.mypage-title {
+  font-family: "Paperlogy-7Bold";
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #101010;
+}
+
+.mypage-title span {
   font-family: "Paperlogy-1Thin";
 }
 
-.my-info{
+.mypage-list-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #101010;
+}
+
+.mypage-list-title span {
+  font-family: "Paperlogy-1Thin";
+}
+
+.my-info {
   border: 1px solid #e3dcd2;
   border-radius: 20px;
   padding: 2em;
 }
 
-.mypage-category{
+.mypage-category {
   display: flex;
 }
 
-.my-genre{
+.my-genre {
   display: flex;
   gap: 5px;
 }
 
-h2{
+h2 {
   font-size: 23px;
   font-weight: bold;
 }
 
-.my-location{
+.location-icon {
+  color: crimson;
+}
+
+.my-location {
   margin-top: 1em;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.my-location span{
+.my-location span {
   margin-left: 8px;
 }
 
-.my-location button{
+.my-location button {
+  font-family: "Paperlogy-4Regular";
   border: 1.5px solid #f6a89e;
   border-radius: 15px;
   background-color: #f6a89e;
   color: white;
 }
 
-.my-location button:hover{
+.my-location button:hover {
   border: 1.5px solid #f6a89e;
   color: #f6a89e;
   background-color: white;
   border-radius: 15px;
 }
 
-.my-location button:active{
+.my-location button:active {
   border: 1.5px solid #f6a89e !important;
   color: #f6a89e !important;
   background-color: white !important;
   border-radius: 15px !important;
 }
 
-.library-book, .rental-book, .liked-book{
+.library-book,
+.rental-book,
+.liked-book {
   margin-top: 3rem;
 }
 
+.mypage-list-area {
+  min-height: 50px;
+  margin-top: 1rem;
+  border-block: 1.5px solid #e3dcd2;
+}
+
+.mypage-no-rental {
+  font-family: "Paperlogy-4Regular";
+  color: #4b4b4b;
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+}
+
 @media (max-width: 576px) {
-  .mypage-container{
+  .mypage-container {
     margin-top: 0;
   }
 }

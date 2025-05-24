@@ -42,11 +42,12 @@ const MyLibrary = () => {
     return <Alert variant="danger">불러오기 실패: {error.message}</Alert>;
 
   return (
-    <div className="libraryContainer container">
-      <h1 className="libraryNameTitle">{mydata.nickname}님의 서재</h1>
+    <div className="library-container container">
+      <h1 className="library-name-title">{mydata.nickname}님의 서재</h1>
+      <p className="library-title-description">나의 도서 기록을 확인하고 다른 독서인들에게 책을 대여해 주는 건 어떨까요?</p>
       <div className="section mt-3">
-        <h3 className="libraryTitle mb-3">읽고 있는 도서</h3>
-        <div className="libraryBoxStroke libraryBookList">
+        <h3 className="library-title mb-3">읽고 있는 도서</h3>
+        <div className="library-box-stroke library-book-list">
           <div>
             {readingDataPlusBorrowed?.length > 0 && (
               <SingleLineCarousel books={readingDataPlusBorrowed} />
@@ -55,8 +56,8 @@ const MyLibrary = () => {
         </div>
       </div>
       <div className="section mt-5">
-        <h3 className="libraryTitle mb-3">완독 도서</h3>
-        <div className="libraryBoxStroke libraryBookList">
+        <h3 className="library-title mb-3">완독 도서</h3>
+        <div className="library-box-stroke library-book-list">
           <div>
             {finishedDataPlusBorrowed?.length > 0 && (
               <SingleLineCarousel books={finishedDataPlusBorrowed} libraryBookStatus="finished"/>
@@ -65,8 +66,8 @@ const MyLibrary = () => {
         </div>
       </div>
       <div className="section mt-5">
-        <h3 className="libraryTitle mb-3">빌려준 도서</h3>
-        <div className="libraryBoxStroke libraryBookList">
+        <h3 className="library-title mb-3">빌려준 도서</h3>
+        <div className="library-box-stroke library-book-list">
           <div>
             {lendeddata?.length > 0 && (
               <SingleLineCarousel books={lendeddata} />

@@ -1,8 +1,8 @@
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
-const PORT = process.env.PORT || 8080;
-// const PORT = process.env.PORT || 5050;
+// const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5050;
 
 const options = {
   swaggerDefinition: {

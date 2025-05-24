@@ -13,6 +13,7 @@ body {
   margin-top: 30px;
 }
 
+
 .meeting-detail h1 {
   font-family: "Paperlogy-6SemiBold", serif;
   font-size: 1.75rem;
@@ -22,7 +23,7 @@ body {
 .meeting-title-detail {
   display: flex;
   justify-content: space-between;
-  margin: 2rem 2rem 1rem 2rem;
+  margin: 2rem 1rem 1rem 1rem;
 }
 
 .meeting-join-status {
@@ -62,7 +63,7 @@ body {
   border-bottom: 1px solid #e3dcd2;
 }
 
-.meeting-detail-info-loc-date{
+.meeting-detail-info-loc-date {
   font-size: 1rem;
   display: flex;
   gap: 1rem;
@@ -110,23 +111,25 @@ body {
 
 @media (max-width: 768px) {
   .meeting-title-detail {
-    padding: 15px;
+    flex-direction: column;
+    padding: 1rem 1rem 0 1rem;
+    margin: 2rem 1rem 0rem 1rem;
   }
   .meeting-join-status {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-
+  
   .meeting-detail h1 {
-    font-size: 23px;
+    font-size: 1.25rem;
   }
-
+  
   .meeting-members * {
-    font-size: 14px;
+    font-size: 0.75rem;
   }
-
+  
   .meeting-desc {
-    font-size: 18px;
+    font-size: 1rem;
   }
 }

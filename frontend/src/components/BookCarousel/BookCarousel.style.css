@@ -50,8 +50,10 @@
 }
 
 .bestseller-book-img {
+  display: block;
   width: fit-content;
   max-height: 200px;
+  min-height: 200px;
   object-fit: cover;
   box-shadow: 0 0 10px rgba(75, 75, 75, 0.3);
   transition: transform 0.5s ease;

@@ -133,6 +133,11 @@ body {
 }
 
 @media screen and (max-width: 576px) {
+  .create-meeting-title {
+    font-size: 1.5rem;
+  }
+
+
   .button-box {
     justify-content: center;
     padding: 2em 0;

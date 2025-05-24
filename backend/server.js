@@ -2,8 +2,8 @@
 import app from "./app.js";
 import { specs, swaggerUi } from "./swagger.js";
 
-const PORT = process.env.PORT || 8080;
-// const PORT = process.env.PORT || 5050;
+// const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5050;
 
 app.use(
   "/api-docs",

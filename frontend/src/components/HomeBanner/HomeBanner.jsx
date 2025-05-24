@@ -7,6 +7,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import banner1 from "../../assets/Banner1.png";
 import banner2 from "../../assets/Banner2.png";
 import banner3 from "../../assets/Banner3.png";
+import { Link } from "react-router";
 
 const HomeBanner = () => {
   return (
@@ -22,13 +23,19 @@ const HomeBanner = () => {
         }}
       >
         <SwiperSlide>
-          <img src={banner1} />
+          <Link to={"/books/362922298"}>
+            <img src={banner1} />
+          </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={banner2} />
+          <Link to={"/books/361141292"}>
+            <img src={banner2} />
+          </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={banner3} />
+          <Link to={"/books/362863268"}>
+            <img src={banner3} />
+          </Link>
         </SwiperSlide>
       </Swiper>
     </div>

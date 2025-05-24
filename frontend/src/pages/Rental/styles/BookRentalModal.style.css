@@ -35,7 +35,7 @@
   color: white;
 }
 
-.rental-cancel-btn {
+.rental-cancel-btn:hover {
   border: 1.5px solid grey;
   color: grey;
   background-color: white;

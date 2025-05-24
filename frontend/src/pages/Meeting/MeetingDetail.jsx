@@ -167,7 +167,7 @@ const MeetingDetail = () => {
                     })}{" "}
                     {data?.data.map((meeting) => {
                       if (meeting.id == id) {
-                        return meeting.time;
+                        return meeting.time.slice(0, 5);
                       }
                     })}
                   </span>

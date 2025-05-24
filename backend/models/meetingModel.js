@@ -28,18 +28,22 @@ export const deleteMeetingById = async (id) => {
   return result;
 };
 
-export const fetchAllMeetings = async (page, pageSize) => {
+// 전체 모임 조회 (페이지네이션 반영)
+export const fetchAllMeetings = async (page = 1, pageSize = 3) => {
   const offset = (page - 1) * pageSize;
-  const [rows] = await db.query(
-    "SELECT * FROM bookclub ORDER BY date DESC, time DESC LIMIT ? OFFSET ?",
-    [pageSize, offset]
-  );
-  return rows;
-};
 
-export const fetchTotalMeetingCount = async () => {
-  const [rows] = await db.query("SELECT COUNT(*) AS total FROM bookclub");
-  return rows[0].total;
+  const rowsQuery = `
+    SELECT * FROM bookclub 
+    ORDER BY date DESC, time DESC 
+    LIMIT ? OFFSET ?
+  `;
+  const countQuery = `SELECT COUNT(*) AS total FROM bookclub`;
+
+  const [rows] = await db.query(rowsQuery, [pageSize, offset]);
+  const [countResult] = await db.query(countQuery);
+  const totalCount = countResult[0]?.total || 0;
+
+  return { rows, totalCount };
 };
 
 export const addNewMember = async (leaderEmail, memberEmail) => {

@@ -29,6 +29,7 @@
 }
 
 .footer-top-area p {
+  cursor: pointer;
   margin: 0;
 }
 
@@ -88,6 +89,53 @@
   padding: 0;
 }
 
+.footer-dev-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.footer-dev-btn {
+  font-family: "Paperlogy-3Light";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 15px;
+  color: #a29d96;
+  border: none;
+  background-color: rgba(227, 220, 210, 0.3);
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.footer-dev-btn span{
+  font-family: "Paperlogy-1Thin";
+}
+
+.footer-dev-btn:hover {
+  outline: none;
+  border-radius: 15px;
+  background-color: #f6a89e;
+  color: white;
+}
+
+.footer-dev-btn:hover .footer-github-icon{
+  color: white;
+}
+
+.footer-github-icon {
+  color: #a29d96;
+  height: 1.25rem;
+  transition: all 0.5s;
+}
+
+
+
 @media (max-width: 768px) {
   .footer-top-area {
     font-size: 0.75rem;
@@ -112,6 +160,7 @@
   }
 
   .footer-button {
+    cursor: pointer;
     font-size: 0.6rem;
   }
 

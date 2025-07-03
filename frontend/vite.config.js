@@ -9,13 +9,13 @@ export default defineConfig({
   server: {
     proxy: {
       "/api/image-proxy": {
-        target: `https://nnbook-production-863f.up.railway.app:${PORT}`,
+        target: `https://nnlibrary-server-production.up.railway.app:${PORT}`,
         changeOrigin: true,
       },
       // 추가 백엔드 api
       "/api": {
         //target: "https://www.aladin.co.kr",
-        target: `https://nnbook-production-863f.up.railway.app:${PORT}`,
+        target: `https://nnlibrary-server-production.up.railway.app:${PORT}`,
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, "/ttb/api"),
       },

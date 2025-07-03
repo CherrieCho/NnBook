@@ -23,6 +23,6 @@ app.use(
 
 app.listen(PORT, () => {
   console.log(
-    `서버 열림! https://nnbook-production-863f.up.railway.app:${PORT}`
+    `서버 열림! https://nnlibrary-server-production.up.railway.app:${PORT}`
   );
 });

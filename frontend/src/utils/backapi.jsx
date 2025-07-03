@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: `https://nnbook-production-863f.up.railway.app/api`, 
+  baseURL: `https://nnlibrary-server-production.up.railway.app/api`,
   headers: { "Content-Type": "application/json" },
   timeout: 5000,
 });
@@ -10,7 +10,7 @@ export default axios.create({
 // const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 // export default axios.create({
-//   baseURL: `${BACKEND_URL}/api`, 
+//   baseURL: `${BACKEND_URL}/api`,
 //   headers: { "Content-Type": "application/json" },
 //   timeout: 5000,
 // });

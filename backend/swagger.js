@@ -14,7 +14,7 @@ const options = {
     },
     servers: [
       {
-        url: `https://nnbook-production-863f.up.railway.app:${PORT}`,
+        url: `https://nnlibrary-server-production.up.railway.app:${PORT}`,
         description: "배포 서버",
       },
     ],

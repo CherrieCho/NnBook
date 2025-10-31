@@ -14,6 +14,7 @@
   font-size: 0.75rem;
   padding-block: 1rem;
   gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .footer-top-area-hidden {
@@ -113,7 +114,7 @@
   transition: all 0.5s;
 }
 
-.footer-dev-btn span{
+.footer-dev-btn span {
   font-family: "Paperlogy-1Thin";
 }
 
@@ -124,7 +125,7 @@
   color: white;
 }
 
-.footer-dev-btn:hover .footer-github-icon{
+.footer-dev-btn:hover .footer-github-icon {
   color: white;
 }
 
@@ -134,12 +135,11 @@
   transition: all 0.5s;
 }
 
-
-
 @media (max-width: 768px) {
   .footer-top-area {
     font-size: 0.75rem;
     gap: 2rem;
+    flex-wrap: wrap;
   }
 
   .footer-logo-img {
@@ -170,5 +170,9 @@
 
   .footer-top-area-hidden {
     display: none;
+  }
+
+  .footer-bottom-area {
+    flex-direction: column;
   }
 }

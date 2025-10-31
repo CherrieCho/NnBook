@@ -1,8 +1,9 @@
 .footer {
   background-color: #fdfcf9;
-  height: 150px;
   border-top: 1px solid #e3dcd2;
   color: #b9b3ab;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-top-area {
@@ -23,7 +24,6 @@
 }
 
 .footer-bottom-area {
-  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -174,5 +174,9 @@
 
   .footer-bottom-area {
     flex-direction: column;
+  }
+
+  .footer-bottom-area > div {
+    gap: 1em;
   }
 }

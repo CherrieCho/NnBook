@@ -5,6 +5,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0));
+  padding-top: 0;
 }
 
 .footer-top-area {
@@ -188,5 +189,9 @@
   .footer-bottom-area > * {
     flex: 0 0 auto; /* 고정 비율 해제 */
     width: 100%;
+  }
+
+  .footer-bottom-area > div {
+    padding: 16px 0;
   }
 }

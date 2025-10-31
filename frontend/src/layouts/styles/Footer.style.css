@@ -2,8 +2,9 @@
   background-color: #fdfcf9;
   border-top: 1px solid #e3dcd2;
   color: #b9b3ab;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0));
 }
 
 .footer-top-area {
@@ -23,15 +24,22 @@
   gap: 3rem;
 }
 
+.footer-top-area p {
+  cursor: pointer;
+  margin: 0;
+}
+
 .footer-bottom-area {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+  padding: 16px 0;
 }
 
-.footer-top-area p {
-  cursor: pointer;
-  margin: 0;
+.footer-bottom-area > * {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .footer-logo-area {
@@ -81,7 +89,6 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  align-self: flex-end;
 }
 
 .footer-copyright {
@@ -174,9 +181,12 @@
 
   .footer-bottom-area {
     flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
   }
 
-  .footer-bottom-area > div {
-    gap: 1em;
+  .footer-bottom-area > * {
+    flex: 0 0 auto; /* 고정 비율 해제 */
+    width: 100%;
   }
 }

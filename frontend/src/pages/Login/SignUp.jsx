@@ -139,6 +139,11 @@ function SignUp() {
       return;
     }
 
+    if (!form.location || !form.city) {
+      alert("'위치 검색' 버튼을 눌러 위치를 가져와주세요.");
+      return;
+    }
+
     try {
       await authApi.post("/auth/register", {
         email: form.email,
@@ -281,7 +286,9 @@ function SignUp() {
             위치 검색
           </button>
         </div>
-        <button className="sign-up-btn" type="submit">회원가입</button>
+        <button className="sign-up-btn" type="submit">
+          회원가입
+        </button>
       </form>
     </div>
   );
